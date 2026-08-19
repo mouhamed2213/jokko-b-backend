@@ -5,6 +5,8 @@ import { logger } from "../config/logger.js";
 import { prisma } from "../config/prisma.js";
 import { AuthRequest } from "../middlewares/auth.middleware.js";
 import { AuthService } from "../services/auth.service.js";
+import { AuthController } from "../modules/auth/auth.controller.js";
+
 import { NotFoundError } from "../utils/errors.js";
 import { env } from "../config/env-config.js";
 
@@ -153,15 +155,4 @@ export const forgotPassword = async (req: Request, res: Response) => {
   });
 };
 
-export const me = async (req: AuthRequest, res: Response, next: NextFunction) => {
-  try {
-    const shopId = req.user!.shopId;
-    const userId = req.user!.userId;
-
-    const me = await AuthService.getMe(userId, shopId);
-
-    return res.status(200).json({ message: "ok", me });
-  } catch (e) {
-    next(e);
-  }
-};
+export const me = AuthController.me;

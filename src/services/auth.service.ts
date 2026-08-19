@@ -1,8 +1,12 @@
 import { prisma } from "../config/prisma.js";
 import { NotFoundError } from "../utils/errors.js";
+import { AuthService as DomainAuthService } from "../modules/auth/auth.service.js";
 
 export const AuthService = {
-  getMe: async (userId: number, shopId: number) => {
+  getMe: DomainAuthService.getMe,
+
+    getMeLegacy: async (userId: number, shopId: number) => {
+
     const user = await prisma.user.findUnique({
       where: {
         id: userId,

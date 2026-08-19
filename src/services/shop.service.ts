@@ -15,10 +15,14 @@ import {
   UnauthorizedError,
 } from "../utils/errors.js";
 import { env } from "../config/env-config.js";
+import { ShopService as DomainShopService } from "../modules/shop/shop.service.js";
+
 import { getFullStorageUrl } from "../utils/file-upload.js";
 import { LOGO_BUCKET } from "../config/storage.config.js";
 
 export const ShopService = {
+  switchShop: DomainShopService.switchShop,
+
   createShop: async (
     shopName: string,
     ownerName: string,
@@ -290,7 +294,8 @@ export const ShopService = {
   },
 
   // Switch to another shop
-  switchShop: async (
+    switchShopLegacy: async (
+
     shopOwnerId: number,
     shopData: {
       userId: number; // should retrieve from the jwt
