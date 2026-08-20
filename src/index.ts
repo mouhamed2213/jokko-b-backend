@@ -32,6 +32,7 @@ app.use(
   cors({
     origin: env.frontendUrl,
     // origin: "*",
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   }),
 );
@@ -80,6 +81,6 @@ app.use(ErrorHandler);
 
 app.listen(env.port, () => {
   logger.info(`✅ Jokko Business API démarrée sur ${env.server}:${env.port}`);
-  logger.info(`📁 Uploads servis sur ${env.server}:${env.port}/uploads/`);
-  logger.info(`🌍 Environnement : ${env.mode}`);
+   logger.info(`🌍 Frontend server : ${env.frontendUrl}`);
+   logger.info(`🌍 Environnement : ${env.mode}`);
 });
