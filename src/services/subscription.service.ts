@@ -2,6 +2,7 @@ import { prisma } from "../config/prisma.js";
 import { Prisma } from "../database/prisma/generated/prisma/client.js";
 import { dateManagement } from "../helpers/dates.js";
 import { NotFoundError } from "../utils/errors.js";
+import { SubscriptionService as DomainSubscriptionService } from "../modules/subscription/subscription.service.js";
 
 type SubscriptionWithPlan = Prisma.SubscriptionGetPayload<{
   include: {
@@ -18,8 +19,12 @@ type SubscriptionWithPlan = Prisma.SubscriptionGetPayload<{
 }>;
 
 export const SubscriptionService = {
+  currentSubscription: DomainSubscriptionService.currentSubscription,
+  assertCanCreateSecondaryShop:
+    DomainSubscriptionService.assertCanCreateSecondaryShop,
 
-  currentSubscription: async (shopId: number , shopOwnerId: number) => {
+  currentSubscriptionLegacy: async (shopId: number, shopOwnerId: number) => {
+
     let subscription: SubscriptionWithPlan | null =
       await prisma.subscription.findFirst({
         where: {
