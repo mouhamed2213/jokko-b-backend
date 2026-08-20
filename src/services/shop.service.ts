@@ -19,6 +19,7 @@ import { ShopService as DomainShopService } from "../modules/shop/shop.service.j
 
 import { getFullStorageUrl } from "../utils/file-upload.js";
 import { LOGO_BUCKET } from "../config/storage.config.js";
+import { SubscriptionService as DomainSubscriptionService } from "../modules/subscription/subscription.service.js";
 
 export const ShopService = {
   switchShop: DomainShopService.switchShop,
@@ -124,29 +125,21 @@ export const ShopService = {
     },
   ) => {
     try {
-      // Actor those who is currently connected. it can be an admin or a Employe
-      const actor = await prisma.user.findUnique({
-        where: { id: actorId },
-        select: { id: true, role: true },
-      });
-
-      if (actor?.role !== "ADMIN") {
-        throw new ForbiddenError(
-          `Seul l'administrateur peut crée une nouvelle boutique`,
+      const eligibility =
+        await DomainSubscriptionService.assertCanCreateSecondaryShop(
+          ownerId,
+          actorId,
         );
-      }
 
-      // verifiy the shop owner and poermission to create a new shop
       const shopOwner = await prisma.user.findUnique({
         where: { id: ownerId },
-        include: {
-          shop: { include: { subscriptions: { include: { plan: true } } } },
-        },
+        select: { id: true, shop: { select: { id: true } } },
       });
 
       if (!shopOwner) {
         throw new NotFoundError("User not found");
       }
+
       const checkIsEmailExist = await prisma.user.findUnique({
         where: { email: shopData.email },
       });
@@ -154,32 +147,8 @@ export const ShopService = {
         throw new ConflictError("Cette address mail exist déja");
       }
 
-      const plan = shopOwner.shop.subscriptions[0].plan;
-      const subcription = shopOwner.shop.subscriptions[0].status;
-      const planCode = shopOwner.shop.subscriptions[0].plan.code;
-      const endDate = shopOwner.shop.subscriptions[0].endDate;
-
-      if (planCode !== "PREMIUM" && planCode !== "PRO") {
-        throw new ForbiddenError(
-          `Cette abonnement  ne contient l'option multi-boutique`,
-        );
-      }
-      if (subcription === "TRIAL") {
-        throw new ForbiddenError(
-          `Le plan d'essai ne permet  pas de créer une nouvelle boutique`,
-        );
-      }
-
-      const ownedShops = await prisma.shopOwner.count({
-        where: { userId: ownerId },
-      });
-
-      const maxStores = plan.maxStores ?? 1;
-      if (ownedShops >= maxStores) {
-        throw new UnauthorizedError(
-          `Limite de boutiques atteinte (${maxStores})`,
-        );
-      }
+      const planCode = eligibility.planCode;
+      const endDate = eligibility.endDate;
 
       //  create
       const newShop = await prisma.$transaction(async (tx) => {
