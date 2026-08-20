@@ -2,18 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { env } from "../config/env-config.js";
 import { logger } from "../config/logger.js";
-import { PlanType } from "../database/prisma/generated/prisma/enums.js";
+import type { AuthTokenPayload } from "../modules/auth/auth.dto.js";
 import { UnauthorizedError } from "../utils/errors.js";
 
 export interface AuthRequest extends Request {
-  user?: {
-    ownerId: number;
-    userId: number;
-    shopId: number;
-    email: string;
-    planType: PlanType;
-    role: string;
-  };
+  user?: AuthTokenPayload;
 }
 
 export const protect = (
@@ -41,15 +34,11 @@ export const protect = (
         .status(401)
         .json({ message: "Accès non autorisé : token manquant" });
     }
-    const decoded = jwt.verify(token, env.secret.jwt as string) as {
-      ownerId: number;
 
-      userId: number;
-      shopId: number;
-      email: string;
-      planType: PlanType;
-      role: string;
-    };
+    const decoded = jwt.verify(
+      token,
+      env.secret.jwt as string,
+    ) as AuthTokenPayload;
 
     req.user = decoded;
     next();
@@ -83,16 +72,12 @@ export const protectSuperAdmin = (
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       throw new UnauthorizedError("Forbidenn");
-
-      // return res.status(401).json({ message: "Accès non autorisé" });
     }
 
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, env.secret.jwt) as {
-      ownerId: number;
       userId: number;
       email: string;
-      planType: PlanType;
       role: string;
     };
 
@@ -100,10 +85,16 @@ export const protectSuperAdmin = (
       throw new UnauthorizedError("Forbidenn");
     }
 
-    req.user = { ...decoded, shopId: 0 };
+    req.user = {
+      ownerId: 0,
+      userId: decoded.userId,
+      shopId: 0,
+      email: decoded.email,
+      role: decoded.role,
+    };
     next();
-  } catch (e) {
+  } catch (error) {
     logger.warn("Attemp to login as admin failed");
-    throw e
+    throw error;
   }
 };
