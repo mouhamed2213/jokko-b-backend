@@ -1,8 +1,7 @@
-# Install the Nix/Apt packages (e.g. NodeJS, Yarn)
-[phases.setup]
-nixpkgsArchive = 'e7c4226d1d92f33ad854d6da4f7e519e77690b8e73f93496881f8c539174d9df'
+[phases.setup] 
+nixpkgsArchive = "e7c4226d1d92f33ad854d6da4f7e519e77690b8e73f93496881f8c539174d9df"
+nixPkgs = ["nodejs_22"]
 
-# Install the language/framework dependencies 
 [phases.install]
 cmds = ["npm ci"]
 
