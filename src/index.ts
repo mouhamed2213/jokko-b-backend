@@ -30,8 +30,8 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://jokko-b-frontend.vercel.app",
-    // origin: "*",
+    // origin: env.frontendUrl,
+    origin: "*",
     credentials: true,
   }),
 );
