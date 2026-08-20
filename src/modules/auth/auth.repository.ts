@@ -26,4 +26,27 @@ export const AuthRepository = {
       },
     });
   },
+
+  findUserForLogin: async (email: string) => {
+    return prisma.user.findUnique({
+      where: { email },
+      include: {
+        shop: {
+          select: {
+            status: true,
+            name: true,
+            subscriptions: {
+              select: { plan: { select: { code: true } } },
+            },
+          },
+        },
+      },
+    });
+  },
+
+  findShopOwner: async (shopId: number) => {
+    return prisma.shopOwner.findFirst({
+      where: { shopId },
+    });
+  },
 };

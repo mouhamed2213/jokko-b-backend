@@ -5,12 +5,12 @@ export const AuthSchemas = {
   login: (input: unknown): LoginDto => {
     const body = input as Partial<LoginDto>;
 
-    if (!body.email || typeof body.email !== "string") {
-      throw new BadRequestError("Email obligatoire");
+    if (!body.email || !body.password) {
+      throw new BadRequestError("Email et mot de passe obligatoires");
     }
 
-    if (!body.password || typeof body.password !== "string") {
-      throw new BadRequestError("Mot de passe obligatoire");
+    if (typeof body.email !== "string" || typeof body.password !== "string") {
+      throw new BadRequestError("Email et mot de passe obligatoires");
     }
 
     return {
