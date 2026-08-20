@@ -6,6 +6,8 @@ import { logger } from "../config/logger.js";
 import { prisma } from "../config/prisma.js";
 import { AuthRequest } from "../middlewares/auth.middleware.js";
 import { ShopService } from "../services/shop.service.js";
+import { ShopController } from "../modules/shop/shop.controller.js";
+
 import { UnauthorizedError } from "../utils/errors.js";
 import {   UploadService } from "../modules/uploads/upload.service.js";
 import {
@@ -74,29 +76,7 @@ export const getShops = async (
 };
 
 // switch to secondary shop
-export const switchShop = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const shopData = req.body;
-    const ownerId = req.user?.ownerId;
-    const userId = req.user?.userId;
-
-    const { token, user } = await ShopService.switchShop(
-      ownerId as number,
-      shopData,
-    );
-
-    return res
-      .status(200)
-      .json({ message: "Liste des boutiques", token, user });
-  } catch (e) {
-    logger.warn("Error while switching to shops");
-    next(e);
-  }
-};
+export const switchShop = ShopController.switchShop;
 
 export const createShop = async (req: Request, res: Response) => {
   try {
