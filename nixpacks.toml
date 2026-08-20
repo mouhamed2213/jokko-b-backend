@@ -1,5 +1,5 @@
 [phases.setup] 
-nixpkgsArchive = "e7c4226d1d92f33ad854d6da4f7e519e77690b8e73f93496881f8c539174d9df"
+nixpkgsArchive = "51ad838b03a05b1de6f9f2a0fffecee64a9788ee"
 nixPkgs = ["nodejs_22"]
 
 [phases.install]
