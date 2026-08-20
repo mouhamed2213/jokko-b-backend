@@ -9,7 +9,7 @@
     "dev": " cross-env NODE_ENV=development tsx   watch src/index.ts",
     "dev:noEmit": "tsc --noEmit  --watch",
     "build": "tsc",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start:dev": "cross-env NODE_ENV=production node dist/index.js",
     "postinstall": " dotenv -e .env.development.local prisma generate",
     "db:generate": " dotenv -e .env.development.local prisma generate",
     "db:push": "prisma db push",
@@ -20,7 +20,8 @@
     "deploy:local": "npx dotenv-cli -e .env.production.local -- npx prisma migrate deploy",
     "db:status": "npx dotenv-cli -e .env.production.local -- npx prisma migrate status",
     "RUN ON PRODUCTION": "PRODUCTION SCRIPT",
-    "prod:build":"tsc -- npx prisma migrate deploy"
+    "prod:build": "tsc",
+    "post:deployment" : "npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
