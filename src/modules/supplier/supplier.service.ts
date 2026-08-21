@@ -1,6 +1,8 @@
 import { prisma } from "../../config/prisma.js";
 import { CashService } from "../cash/cash.service.js";
 import { ProcurementService } from "../procurement/procurement.service.js";
+import { PaymentService } from "../payment/payment.service.js";
+
 import {
   AppError,
   ForbiddenError,
@@ -134,43 +136,5 @@ export const SupplierService = {
     supplierId: number,
     debtId: number,
     data: CreateSupplierPaymentDto,
-  ) => {
-    const supplier = await assertSupplier(supplierId, shopId);
-    const debt = await SupplierRepository.findDebtByIdAndSupplier(
-      debtId,
-      supplierId,
-    );
-
-    if (!debt) throw new NotFoundError("Ressource introuvable");
-    if (debt.status === "PAID" || data.amount > debt.remaining) {
-      throw new AppError("Opération financière impossible", 400);
-    }
-
-    return prisma.$transaction(async (tx) => {
-      const payment = await SupplierRepository.createPayment(tx, debtId, data);
-      const remaining = debt.remaining - data.amount;
-      const updatedDebt = await SupplierRepository.updateDebt(tx, debtId, {
-        paidAmount: debt.paidAmount + data.amount,
-        remaining,
-        status: remaining <= 0 ? "PAID" : "PARTIAL",
-      });
-
-      await CashService.recordOut(
-        {
-          shopId,
-          amount: data.amount,
-          label: `Paiement fournisseur — ${supplier.name}`,
-          reference: String(supplierId),
-          paymentMethod: data.paymentMethod,
-        },
-        tx,
-      );
-
-      return {
-        payment,
-        debtStatus: updatedDebt.status,
-        remaining: updatedDebt.remaining,
-      };
-    });
-  },
+  ) => PaymentService.addSupplierPayment(shopId, supplierId, debtId, data),
 };
