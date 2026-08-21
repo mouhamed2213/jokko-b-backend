@@ -83,6 +83,12 @@ const record = async (
 };
 
 export const CashService = {
+  assertOpen: async (shopId: number, db: any = prisma) => {
+    const register = await CashRepository.findOpenRegister(shopId, db);
+    if (!register) throw new BadRequestError("Opération impossible");
+    return register;
+  },
+
   recordIn: async (
     input: CashRecordInput,
     db: any = prisma,
