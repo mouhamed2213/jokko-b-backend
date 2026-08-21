@@ -1,4 +1,4 @@
-import { UploadService } from "../uploads/upload.service.js";
+import { UploadService } from "../upload/upload.service.js";
 import { ForbiddenError, NotFoundError, UnauthorizedError } from "../../utils/errors.js";
 import { getFullStorageUrl, cleanPath, validateFile } from "../../utils/file-upload.js";
 import { PlanChecker } from "../../services/plan-checker.service.js";

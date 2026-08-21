@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { env } from "../../config/env-config.js";
 import { LOGO_BUCKET } from "../../config/storage.config.js";
 import { SubscriptionService } from "../subscription/subscription.service.js";
-import { UploadService } from "../uploads/upload.service.js";
+import { UploadService } from "../upload/upload.service.js";
 import {
   ConflictError,
   ForbiddenError,
