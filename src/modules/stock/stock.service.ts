@@ -1,6 +1,7 @@
 import { prisma } from "../../config/prisma.js";
 import { ProcurementService } from "../procurement/procurement.service.js";
-import { sendNotificationToShop } from "../../controllers/notification.controller.js";
+import { NotificationService } from "../notification/notification.service.js";
+
 import { AppError, BadRequestError, NotFoundError } from "../../utils/errors.js";
 import type {
   StockEntryDto,
@@ -124,14 +125,14 @@ export const StockService = {
     });
 
     if (result.updatedProduct.quantity === 0) {
-      sendNotificationToShop(shopId, "stock_alert", {
+      NotificationService.sendToShop(shopId, "stock_alert", {
         type: "out_of_stock",
         outOfStock: [{ id: result.updatedProduct.id, name: result.updatedProduct.name, quantity: 0 }],
         lowStock: [],
         total: 1,
       });
     } else if (result.updatedProduct.quantity <= product.alertThreshold) {
-      sendNotificationToShop(shopId, "stock_alert", {
+      NotificationService.sendToShop(shopId, "stock_alert", {
         type: "low_stock",
         lowStock: [{
           id: result.updatedProduct.id,

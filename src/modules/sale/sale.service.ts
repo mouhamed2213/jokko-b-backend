@@ -1,6 +1,7 @@
 import { prisma } from "../../config/prisma.js";
 import { CashService } from "../cash/cash.service.js";
-import { sendNotificationToShop } from "../../controllers/notification.controller.js";
+import { NotificationService } from "../notification/notification.service.js";
+
 import {
   BadRequestError,
   ForbiddenError,
@@ -181,7 +182,7 @@ export const SaleService = {
     });
 
     if (result.alertsEnabled && (result.lowStock.length > 0 || result.outOfStock.length > 0)) {
-      sendNotificationToShop(shopId, "stock_alert", {
+      NotificationService.sendToShop(shopId, "stock_alert", {
         type: "after_sale",
         invoiceNumber: result.invoiceNumber,
         lowStock: result.lowStock,
