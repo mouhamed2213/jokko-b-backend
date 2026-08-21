@@ -94,7 +94,7 @@ export const protectSuperAdmin = (
     };
     next();
   } catch (error) {
-    logger.warn("Attemp to login as admin failed");
-    throw error;
+    logger.warn("Tentative d’accès Super Admin échouée");
+    return res.status(401).json({ message: "Token invalide ou expiré" });
   }
 };

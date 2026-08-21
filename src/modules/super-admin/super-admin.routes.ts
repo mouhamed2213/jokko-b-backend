@@ -1,25 +1,28 @@
 import { Router } from "express";
-import { SuperAdminShopController } from "./controllers/super-admin.controller";
+import { protectSuperAdmin } from "../../middlewares/auth.middleware.js";
+import { SuperAdminController } from "./super-admin.controller.js";
 
 const router = Router();
 
-router.get("/stats", SuperAdminShopController.getStats);
-router.get("/shops", SuperAdminShopController.listShops);
-router.get("/shops/:id", SuperAdminShopController.getShopDetail);
+router.use(protectSuperAdmin);
 
-// Subscription management
+router.get("/stats", SuperAdminController.getStats);
+router.get("/shops", SuperAdminController.listShops);
+router.get("/shops/:id", SuperAdminController.getShopDetail);
+router.patch("/shops/:shopId/status", SuperAdminController.updateShopStatus);
 
-router.post("/subscription", SuperAdminShopController.subscription);
-
+router.post("/subscription", SuperAdminController.changePlan);
 router.patch(
   "/shops/:shopId/subscription/status",
-  SuperAdminShopController.updateSubscriptionStatus,
+  SuperAdminController.updateSubscriptionStatus,
 );
 router.patch(
   "/shops/:shopId/subscription/extend",
-  SuperAdminShopController.extendTrialPeriod,
+  SuperAdminController.extendSubscription,
 );
 
-export default router;
+router.get("/users", SuperAdminController.listUsers);
+router.get("/users/:userId", SuperAdminController.getUserDetail);
+router.patch("/users/:userId/status", SuperAdminController.updateUserStatus);
 
-// git
+export default router;
