@@ -4,6 +4,7 @@ import { prisma } from "../config/prisma.js";
 import { AuthRequest } from "../middlewares/auth.middleware.js";
 import { SaleService } from "../services/sale.service.js";
 import { BadRequestError, UnauthorizedError } from "../utils/errors.js";
+import { CashService } from "../modules/cash/cash.service.js";
 
 // ── Helpers ───────────────────────────────────────────────────
 export function getSaleStatus(paid: number, total: number) {
@@ -49,26 +50,11 @@ export async function recordCashIn(
   paymentMethod = "CASH",
 ) {
   if (amount <= 0) return;
-  const cashRegister = await prisma.cashRegister.findFirst({
-    where: { shopId, status: "OPEN" },
-  });
-  if (!cashRegister) return;
-  await prisma.$transaction([
-    prisma.cashTransaction.create({
-      data: {
-        cashRegisterId: cashRegister.id,
-        type: "IN",
-        amount,
-        label,
-        reference,
-        paymentMethod,
-      },
-    }),
-    prisma.cashRegister.update({
-      where: { id: cashRegister.id },
-      data: { totalIn: { increment: amount } },
-    }),
-  ]);
+  await CashService.recordIn(
+    { shopId, amount, label, reference, paymentMethod },
+    undefined,
+    { required: false },
+  );
 }
 
 // ── Décaissement correctif en caisse ─────────────────────────
@@ -80,26 +66,11 @@ async function recordCashOut(
   paymentMethod = "CASH",
 ) {
   if (amount <= 0) return;
-  const cashRegister = await prisma.cashRegister.findFirst({
-    where: { shopId, status: "OPEN" },
-  });
-  if (!cashRegister) return;
-  await prisma.$transaction([
-    prisma.cashTransaction.create({
-      data: {
-        cashRegisterId: cashRegister.id,
-        type: "OUT",
-        amount,
-        label,
-        reference,
-        paymentMethod,
-      },
-    }),
-    prisma.cashRegister.update({
-      where: { id: cashRegister.id },
-      data: { totalOut: { increment: amount } },
-    }),
-  ]);
+  await CashService.recordOut(
+    { shopId, amount, label, reference, paymentMethod },
+    undefined,
+    { required: false },
+  );
 }
 
 // ── GET /sales ────────────────────────────────────────────────
