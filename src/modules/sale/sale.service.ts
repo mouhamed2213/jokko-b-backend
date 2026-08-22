@@ -64,6 +64,27 @@ export const SaleService = {
     return sale;
   },
 
+  getDigitalReceipt: async (shopId: number, saleId: number) => {
+    const sale = await SaleRepository.findSaleByIdAndShop(saleId, shopId);
+    if (!sale) throw new NotFoundError("Ressource introuvable");
+
+    return {
+      id: sale.id,
+      invoiceNumber: sale.invoiceNumber,
+      customerName: sale.customerName,
+      client: sale.client,
+      totalAmount: sale.totalAmount,
+      paidAmount: sale.paidAmount,
+      remaining: sale.remaining,
+      status: sale.status,
+      note: sale.note,
+      createdAt: sale.createdAt,
+      items: sale.items,
+      payments: sale.payments,
+      returns: sale.returns,
+    };
+  },
+
   createSale: async (
     ownerId: number,
     shopId: number,

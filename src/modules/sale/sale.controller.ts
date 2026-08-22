@@ -20,7 +20,20 @@ export const SaleController = {
     }
   },
 
+    getDigitalReceipt: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = assertAuthenticated(req);
+      const saleId = SaleSchemas.id(req.params.id);
+      return res.status(200).json({
+        receipt: await SaleService.getDigitalReceipt(user.shopId, saleId),
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   getSaleById: async (req: AuthRequest, res: Response, next: NextFunction) => {
+
     try {
       const user = assertAuthenticated(req);
       const saleId = SaleSchemas.id(req.params.id);
