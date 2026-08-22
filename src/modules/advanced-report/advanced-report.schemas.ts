@@ -16,6 +16,12 @@ const positiveId = (value: unknown, label: string) => {
 };
 
 export const AdvancedReportSchemas = {
+  exportQuery: (query: Record<string, unknown>) => {
+    const format = String(query.format ?? "csv").toLowerCase();
+    if (format !== "csv") throw new BadRequestError("Format d’export invalide");
+    return { format: "csv" as const, query: AdvancedReportSchemas.query(query) };
+  },
+
   query: (query: Record<string, unknown>): AdvancedReportQueryDto => {
     const from = dateValue(query.from, "de date");
     const to = dateValue(query.to, "à date");
