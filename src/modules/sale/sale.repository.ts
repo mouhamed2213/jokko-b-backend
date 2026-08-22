@@ -288,7 +288,8 @@ export const SaleRepository = {
       shopId: number;
       productId: number;
       userId: number;
-      type: "SALE" | "ENTRY";
+            type: "SALE" | "ENTRY" | "RETURN";
+
       quantity: number;
       note: string;
     },

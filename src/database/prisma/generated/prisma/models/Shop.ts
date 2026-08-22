@@ -287,6 +287,7 @@ export type ShopWhereInput = {
   stockMovements?: Prisma.StockMovementListRelationFilter
   cashRegisters?: Prisma.CashRegisterListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
+  saleReturns?: Prisma.SaleReturnListRelationFilter
   usageCounter?: Prisma.UsageCounterListRelationFilter
   owners?: Prisma.ShopOwnerListRelationFilter
 }
@@ -315,6 +316,7 @@ export type ShopOrderByWithRelationInput = {
   stockMovements?: Prisma.StockMovementOrderByRelationAggregateInput
   cashRegisters?: Prisma.CashRegisterOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
+  saleReturns?: Prisma.SaleReturnOrderByRelationAggregateInput
   usageCounter?: Prisma.UsageCounterOrderByRelationAggregateInput
   owners?: Prisma.ShopOwnerOrderByRelationAggregateInput
 }
@@ -346,6 +348,7 @@ export type ShopWhereUniqueInput = Prisma.AtLeast<{
   stockMovements?: Prisma.StockMovementListRelationFilter
   cashRegisters?: Prisma.CashRegisterListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
+  saleReturns?: Prisma.SaleReturnListRelationFilter
   usageCounter?: Prisma.UsageCounterListRelationFilter
   owners?: Prisma.ShopOwnerListRelationFilter
 }, "id" | "email">
@@ -410,6 +413,7 @@ export type ShopCreateInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -437,6 +441,7 @@ export type ShopUncheckedCreateInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -463,6 +468,7 @@ export type ShopUpdateInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -490,6 +496,7 @@ export type ShopUncheckedUpdateInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -826,6 +833,20 @@ export type ShopUpdateOneRequiredWithoutSalesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ShopUpdateToOneWithWhereWithoutSalesInput, Prisma.ShopUpdateWithoutSalesInput>, Prisma.ShopUncheckedUpdateWithoutSalesInput>
 }
 
+export type ShopCreateNestedOneWithoutSaleReturnsInput = {
+  create?: Prisma.XOR<Prisma.ShopCreateWithoutSaleReturnsInput, Prisma.ShopUncheckedCreateWithoutSaleReturnsInput>
+  connectOrCreate?: Prisma.ShopCreateOrConnectWithoutSaleReturnsInput
+  connect?: Prisma.ShopWhereUniqueInput
+}
+
+export type ShopUpdateOneRequiredWithoutSaleReturnsNestedInput = {
+  create?: Prisma.XOR<Prisma.ShopCreateWithoutSaleReturnsInput, Prisma.ShopUncheckedCreateWithoutSaleReturnsInput>
+  connectOrCreate?: Prisma.ShopCreateOrConnectWithoutSaleReturnsInput
+  upsert?: Prisma.ShopUpsertWithoutSaleReturnsInput
+  connect?: Prisma.ShopWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ShopUpdateToOneWithWhereWithoutSaleReturnsInput, Prisma.ShopUpdateWithoutSaleReturnsInput>, Prisma.ShopUncheckedUpdateWithoutSaleReturnsInput>
+}
+
 export type ShopCreateNestedOneWithoutCashRegistersInput = {
   create?: Prisma.XOR<Prisma.ShopCreateWithoutCashRegistersInput, Prisma.ShopUncheckedCreateWithoutCashRegistersInput>
   connectOrCreate?: Prisma.ShopCreateOrConnectWithoutCashRegistersInput
@@ -861,6 +882,7 @@ export type ShopCreateWithoutSecondaryShopsInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -887,6 +909,7 @@ export type ShopUncheckedCreateWithoutSecondaryShopsInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -917,6 +940,7 @@ export type ShopCreateWithoutPrimaryShopInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -943,6 +967,7 @@ export type ShopUncheckedCreateWithoutPrimaryShopInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -989,6 +1014,7 @@ export type ShopUpdateWithoutSecondaryShopsInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1015,6 +1041,7 @@ export type ShopUncheckedUpdateWithoutSecondaryShopsInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -1075,6 +1102,7 @@ export type ShopCreateWithoutOwnersInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
 }
 
@@ -1101,6 +1129,7 @@ export type ShopUncheckedCreateWithoutOwnersInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
 }
 
@@ -1142,6 +1171,7 @@ export type ShopUpdateWithoutOwnersInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
 }
 
@@ -1168,6 +1198,7 @@ export type ShopUncheckedUpdateWithoutOwnersInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
 }
 
@@ -1192,6 +1223,7 @@ export type ShopCreateWithoutSubscriptionsInput = {
   sales?: Prisma.SaleCreateNestedManyWithoutShopInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1218,6 +1250,7 @@ export type ShopUncheckedCreateWithoutSubscriptionsInput = {
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutShopInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1259,6 +1292,7 @@ export type ShopUpdateWithoutSubscriptionsInput = {
   sales?: Prisma.SaleUpdateManyWithoutShopNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1285,6 +1319,7 @@ export type ShopUncheckedUpdateWithoutSubscriptionsInput = {
   sales?: Prisma.SaleUncheckedUpdateManyWithoutShopNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -1311,6 +1346,7 @@ export type ShopCreateWithoutUsageCounterInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
 
@@ -1337,6 +1373,7 @@ export type ShopUncheckedCreateWithoutUsageCounterInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
 
@@ -1378,6 +1415,7 @@ export type ShopUpdateWithoutUsageCounterInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
 
@@ -1404,6 +1442,7 @@ export type ShopUncheckedUpdateWithoutUsageCounterInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
 
@@ -1428,6 +1467,7 @@ export type ShopCreateWithoutUsersInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1454,6 +1494,7 @@ export type ShopUncheckedCreateWithoutUsersInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1495,6 +1536,7 @@ export type ShopUpdateWithoutUsersInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1521,6 +1563,7 @@ export type ShopUncheckedUpdateWithoutUsersInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -1546,6 +1589,7 @@ export type ShopCreateWithoutCategoriesInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1572,6 +1616,7 @@ export type ShopUncheckedCreateWithoutCategoriesInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1613,6 +1658,7 @@ export type ShopUpdateWithoutCategoriesInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1639,6 +1685,7 @@ export type ShopUncheckedUpdateWithoutCategoriesInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -1664,6 +1711,7 @@ export type ShopCreateWithoutProductsInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1690,6 +1738,7 @@ export type ShopUncheckedCreateWithoutProductsInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1731,6 +1780,7 @@ export type ShopUpdateWithoutProductsInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1757,6 +1807,7 @@ export type ShopUncheckedUpdateWithoutProductsInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -1782,6 +1833,7 @@ export type ShopCreateWithoutClientsInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1808,6 +1860,7 @@ export type ShopUncheckedCreateWithoutClientsInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1849,6 +1902,7 @@ export type ShopUpdateWithoutClientsInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1875,6 +1929,7 @@ export type ShopUncheckedUpdateWithoutClientsInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -1900,6 +1955,7 @@ export type ShopCreateWithoutSuppliersInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1926,6 +1982,7 @@ export type ShopUncheckedCreateWithoutSuppliersInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1967,6 +2024,7 @@ export type ShopUpdateWithoutSuppliersInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1993,6 +2051,7 @@ export type ShopUncheckedUpdateWithoutSuppliersInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2018,6 +2077,7 @@ export type ShopCreateWithoutStockMovementsInput = {
   sales?: Prisma.SaleCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2044,6 +2104,7 @@ export type ShopUncheckedCreateWithoutStockMovementsInput = {
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2085,6 +2146,7 @@ export type ShopUpdateWithoutStockMovementsInput = {
   sales?: Prisma.SaleUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2111,6 +2173,7 @@ export type ShopUncheckedUpdateWithoutStockMovementsInput = {
   sales?: Prisma.SaleUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2136,6 +2199,7 @@ export type ShopCreateWithoutSalesInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2162,6 +2226,7 @@ export type ShopUncheckedCreateWithoutSalesInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2203,6 +2268,7 @@ export type ShopUpdateWithoutSalesInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2226,6 +2292,129 @@ export type ShopUncheckedUpdateWithoutSalesInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutShopNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutShopNestedInput
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutShopNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
+  cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
+  usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
+  owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
+}
+
+export type ShopCreateWithoutSaleReturnsInput = {
+  name: string
+  ownerName: string
+  email: string
+  phone: string
+  address?: string | null
+  logoUrl?: string | null
+  status?: string
+  currentShop?: $Enums.CurrentShopType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  primaryShop?: Prisma.ShopCreateNestedOneWithoutSecondaryShopsInput
+  secondaryShops?: Prisma.ShopCreateNestedManyWithoutPrimaryShopInput
+  users?: Prisma.UserCreateNestedManyWithoutShopInput
+  products?: Prisma.ProductCreateNestedManyWithoutShopInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutShopInput
+  clients?: Prisma.ClientCreateNestedManyWithoutShopInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutShopInput
+  sales?: Prisma.SaleCreateNestedManyWithoutShopInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
+  cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
+  owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
+}
+
+export type ShopUncheckedCreateWithoutSaleReturnsInput = {
+  id?: number
+  name: string
+  ownerName: string
+  email: string
+  phone: string
+  address?: string | null
+  logoUrl?: string | null
+  primaryShopId?: number | null
+  status?: string
+  currentShop?: $Enums.CurrentShopType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  secondaryShops?: Prisma.ShopUncheckedCreateNestedManyWithoutPrimaryShopInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutShopInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutShopInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutShopInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutShopInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutShopInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutShopInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
+  cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
+  owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
+}
+
+export type ShopCreateOrConnectWithoutSaleReturnsInput = {
+  where: Prisma.ShopWhereUniqueInput
+  create: Prisma.XOR<Prisma.ShopCreateWithoutSaleReturnsInput, Prisma.ShopUncheckedCreateWithoutSaleReturnsInput>
+}
+
+export type ShopUpsertWithoutSaleReturnsInput = {
+  update: Prisma.XOR<Prisma.ShopUpdateWithoutSaleReturnsInput, Prisma.ShopUncheckedUpdateWithoutSaleReturnsInput>
+  create: Prisma.XOR<Prisma.ShopCreateWithoutSaleReturnsInput, Prisma.ShopUncheckedCreateWithoutSaleReturnsInput>
+  where?: Prisma.ShopWhereInput
+}
+
+export type ShopUpdateToOneWithWhereWithoutSaleReturnsInput = {
+  where?: Prisma.ShopWhereInput
+  data: Prisma.XOR<Prisma.ShopUpdateWithoutSaleReturnsInput, Prisma.ShopUncheckedUpdateWithoutSaleReturnsInput>
+}
+
+export type ShopUpdateWithoutSaleReturnsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  currentShop?: Prisma.EnumCurrentShopTypeFieldUpdateOperationsInput | $Enums.CurrentShopType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  primaryShop?: Prisma.ShopUpdateOneWithoutSecondaryShopsNestedInput
+  secondaryShops?: Prisma.ShopUpdateManyWithoutPrimaryShopNestedInput
+  users?: Prisma.UserUpdateManyWithoutShopNestedInput
+  products?: Prisma.ProductUpdateManyWithoutShopNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutShopNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutShopNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutShopNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutShopNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
+  cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
+  owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
+}
+
+export type ShopUncheckedUpdateWithoutSaleReturnsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryShopId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  currentShop?: Prisma.EnumCurrentShopTypeFieldUpdateOperationsInput | $Enums.CurrentShopType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  secondaryShops?: Prisma.ShopUncheckedUpdateManyWithoutPrimaryShopNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutShopNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutShopNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutShopNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutShopNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutShopNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutShopNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
@@ -2254,6 +2443,7 @@ export type ShopCreateWithoutCashRegistersInput = {
   sales?: Prisma.SaleCreateNestedManyWithoutShopInput
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2280,6 +2470,7 @@ export type ShopUncheckedCreateWithoutCashRegistersInput = {
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutShopInput
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2321,6 +2512,7 @@ export type ShopUpdateWithoutCashRegistersInput = {
   sales?: Prisma.SaleUpdateManyWithoutShopNestedInput
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2347,6 +2539,7 @@ export type ShopUncheckedUpdateWithoutCashRegistersInput = {
   sales?: Prisma.SaleUncheckedUpdateManyWithoutShopNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2386,6 +2579,7 @@ export type ShopUpdateWithoutPrimaryShopInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2412,6 +2606,7 @@ export type ShopUncheckedUpdateWithoutPrimaryShopInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2446,6 +2641,7 @@ export type ShopCountOutputType = {
   stockMovements: number
   cashRegisters: number
   subscriptions: number
+  saleReturns: number
   usageCounter: number
   owners: number
 }
@@ -2461,6 +2657,7 @@ export type ShopCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   stockMovements?: boolean | ShopCountOutputTypeCountStockMovementsArgs
   cashRegisters?: boolean | ShopCountOutputTypeCountCashRegistersArgs
   subscriptions?: boolean | ShopCountOutputTypeCountSubscriptionsArgs
+  saleReturns?: boolean | ShopCountOutputTypeCountSaleReturnsArgs
   usageCounter?: boolean | ShopCountOutputTypeCountUsageCounterArgs
   owners?: boolean | ShopCountOutputTypeCountOwnersArgs
 }
@@ -2548,6 +2745,13 @@ export type ShopCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Ty
 /**
  * ShopCountOutputType without action
  */
+export type ShopCountOutputTypeCountSaleReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SaleReturnWhereInput
+}
+
+/**
+ * ShopCountOutputType without action
+ */
 export type ShopCountOutputTypeCountUsageCounterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UsageCounterWhereInput
 }
@@ -2584,6 +2788,7 @@ export type ShopSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   stockMovements?: boolean | Prisma.Shop$stockMovementsArgs<ExtArgs>
   cashRegisters?: boolean | Prisma.Shop$cashRegistersArgs<ExtArgs>
   subscriptions?: boolean | Prisma.Shop$subscriptionsArgs<ExtArgs>
+  saleReturns?: boolean | Prisma.Shop$saleReturnsArgs<ExtArgs>
   usageCounter?: boolean | Prisma.Shop$usageCounterArgs<ExtArgs>
   owners?: boolean | Prisma.Shop$ownersArgs<ExtArgs>
   _count?: boolean | Prisma.ShopCountOutputTypeDefaultArgs<ExtArgs>
@@ -2649,6 +2854,7 @@ export type ShopInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   stockMovements?: boolean | Prisma.Shop$stockMovementsArgs<ExtArgs>
   cashRegisters?: boolean | Prisma.Shop$cashRegistersArgs<ExtArgs>
   subscriptions?: boolean | Prisma.Shop$subscriptionsArgs<ExtArgs>
+  saleReturns?: boolean | Prisma.Shop$saleReturnsArgs<ExtArgs>
   usageCounter?: boolean | Prisma.Shop$usageCounterArgs<ExtArgs>
   owners?: boolean | Prisma.Shop$ownersArgs<ExtArgs>
   _count?: boolean | Prisma.ShopCountOutputTypeDefaultArgs<ExtArgs>
@@ -2674,6 +2880,7 @@ export type $ShopPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     stockMovements: Prisma.$StockMovementPayload<ExtArgs>[]
     cashRegisters: Prisma.$CashRegisterPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
+    saleReturns: Prisma.$SaleReturnPayload<ExtArgs>[]
     usageCounter: Prisma.$UsageCounterPayload<ExtArgs>[]
     owners: Prisma.$ShopOwnerPayload<ExtArgs>[]
   }
@@ -3095,6 +3302,7 @@ export interface Prisma__ShopClient<T, Null = never, ExtArgs extends runtime.Typ
   stockMovements<T extends Prisma.Shop$stockMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$stockMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cashRegisters<T extends Prisma.Shop$cashRegistersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$cashRegistersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CashRegisterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.Shop$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  saleReturns<T extends Prisma.Shop$saleReturnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$saleReturnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SaleReturnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usageCounter<T extends Prisma.Shop$usageCounterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$usageCounterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsageCounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   owners<T extends Prisma.Shop$ownersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$ownersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShopOwnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -3795,6 +4003,30 @@ export type Shop$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
+}
+
+/**
+ * Shop.saleReturns
+ */
+export type Shop$saleReturnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SaleReturn
+   */
+  select?: Prisma.SaleReturnSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SaleReturn
+   */
+  omit?: Prisma.SaleReturnOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SaleReturnInclude<ExtArgs> | null
+  where?: Prisma.SaleReturnWhereInput
+  orderBy?: Prisma.SaleReturnOrderByWithRelationInput | Prisma.SaleReturnOrderByWithRelationInput[]
+  cursor?: Prisma.SaleReturnWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SaleReturnScalarFieldEnum | Prisma.SaleReturnScalarFieldEnum[]
 }
 
 /**

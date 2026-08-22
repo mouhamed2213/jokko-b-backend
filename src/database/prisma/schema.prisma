@@ -1,12 +1,10 @@
 generator client {
   provider = "prisma-client"
   output   = "./generated/prisma" // adjust path as needed
-  
 }
 
 datasource db {
   provider = "postgresql"
-  
 }
 
 // ── Super Admin ───────────────────────────────────────────────
@@ -46,8 +44,10 @@ model Shop {
   stockMovements StockMovement[]
   cashRegisters  CashRegister[]
   subscriptions  Subscription[]
-  usageCounter   UsageCounter[]
-  owners         ShopOwner[]
+  saleReturns    SaleReturn[]
+
+  usageCounter UsageCounter[]
+  owners       ShopOwner[]
 
   @@map("shops")
 }
@@ -59,7 +59,7 @@ model ShopOwner {
   subscription Subscription[]
   phone        String
   createdAt    DateTime       @default(now())
-  payment        Payment[]
+  payment      Payment[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade, onUpdate: Cascade)
@@ -105,7 +105,6 @@ model Plan {
   subscriptions    Subscription[]
   planFeature      PlanFeature[]
   payment          Payment[]
-  
 
   @@map("plans")
 }
@@ -161,6 +160,7 @@ model User {
   sales          Sale[]
   userCounts     Int             @default(0)
   ownedShops     ShopOwner[]
+  saleReturns    SaleReturn[]
 
   @@map("users")
 }
@@ -199,10 +199,11 @@ model Product {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 
-  shop           Shop            @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  category       Category?       @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  shop           Shop             @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  category       Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   stockMovements StockMovement[]
   saleItems      SaleItem[]
+  returnItems    SaleReturnItem[]
 
   @@map("products")
 }
@@ -316,6 +317,7 @@ model Sale {
   client   Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
   items    SaleItem[]
   payments SalePayment[]
+  returns  SaleReturn[]
 
   @@map("sales")
 }
@@ -331,8 +333,9 @@ model SaleItem {
   unitPrice       Float
   totalAmount     Float
 
-  sale    Sale     @relation(fields: [saleId], references: [id], onDelete: Cascade)
-  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  sale    Sale             @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  product Product?         @relation(fields: [productId], references: [id], onDelete: SetNull)
+  returns SaleReturnItem[]
 
   @@map("sale_items")
 }
@@ -352,6 +355,47 @@ model SalePayment {
 }
 
 // ── CashRegister ─────────────────────────────────────────────
+model SaleReturn {
+  id             Int      @id @default(autoincrement())
+  shopId         Int
+  saleId         Int
+  userId         Int?
+  idempotencyKey String
+  refundAmount   Float
+  reason         String?
+  status         String   @default("COMPLETED")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  shop  Shop             @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  sale  Sale             @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  user  User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  items SaleReturnItem[]
+
+  @@unique([shopId, saleId, idempotencyKey])
+  @@index([saleId])
+  @@map("sale_returns")
+}
+
+model SaleReturnItem {
+  id           Int    @id @default(autoincrement())
+  saleReturnId Int
+  saleItemId   Int
+  productId    Int?
+  productName  String
+  quantity     Int
+  unitPrice    Float
+  totalAmount  Float
+
+  saleReturn SaleReturn @relation(fields: [saleReturnId], references: [id], onDelete: Cascade)
+  saleItem   SaleItem   @relation(fields: [saleItemId], references: [id], onDelete: Cascade)
+  product    Product?   @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@unique([saleReturnId, saleItemId])
+  @@index([saleItemId])
+  @@map("sale_return_items")
+}
+
 model CashRegister {
   id            Int       @id @default(autoincrement())
   shopId        Int
@@ -459,7 +503,6 @@ enum SubscriptionStatus {
   EXPIRED
   TRIAL_EXPIRED
   SUSPENDED
-
 }
 
 enum FeatureCode {
@@ -502,4 +545,3 @@ model AuditLog {
 
   @@map("audit_logs")
 }
-

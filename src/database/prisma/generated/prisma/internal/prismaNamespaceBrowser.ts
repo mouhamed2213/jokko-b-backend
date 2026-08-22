@@ -70,6 +70,8 @@ export const ModelName = {
   Sale: 'Sale',
   SaleItem: 'SaleItem',
   SalePayment: 'SalePayment',
+  SaleReturn: 'SaleReturn',
+  SaleReturnItem: 'SaleReturnItem',
   CashRegister: 'CashRegister',
   CashTransaction: 'CashTransaction',
   Payment: 'Payment',
@@ -358,6 +360,36 @@ export const SalePaymentScalarFieldEnum = {
 } as const
 
 export type SalePaymentScalarFieldEnum = (typeof SalePaymentScalarFieldEnum)[keyof typeof SalePaymentScalarFieldEnum]
+
+
+export const SaleReturnScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  saleId: 'saleId',
+  userId: 'userId',
+  idempotencyKey: 'idempotencyKey',
+  refundAmount: 'refundAmount',
+  reason: 'reason',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SaleReturnScalarFieldEnum = (typeof SaleReturnScalarFieldEnum)[keyof typeof SaleReturnScalarFieldEnum]
+
+
+export const SaleReturnItemScalarFieldEnum = {
+  id: 'id',
+  saleReturnId: 'saleReturnId',
+  saleItemId: 'saleItemId',
+  productId: 'productId',
+  productName: 'productName',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalAmount: 'totalAmount'
+} as const
+
+export type SaleReturnItemScalarFieldEnum = (typeof SaleReturnItemScalarFieldEnum)[keyof typeof SaleReturnItemScalarFieldEnum]
 
 
 export const CashRegisterScalarFieldEnum = {

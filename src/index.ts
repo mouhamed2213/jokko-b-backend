@@ -16,6 +16,8 @@ import invoiceRoutes from "./routes/invoice.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import saleRoutes from "./routes/sale.routes.js";
+import saleReturnRoutes from "./modules/sale-return/sale-return.routes.js";
+
 import shopRoutes from "./routes/shop.routes.js";
 import stockRoutes from "./routes/stock.routes.js";
 import subscription from "./routes/subscription.routes.js";
@@ -62,6 +64,8 @@ app.use("/api/clients", clientRoutes);
 app.use("/api/suppliers", supplierRoutes);
 app.use("/api/stock", stockRoutes);
 app.use("/api/sales", saleRoutes);
+app.use("/api/sales", saleReturnRoutes);
+
 app.use("/api/invoices", invoiceRoutes);
 app.use("/api/cash", cashRoutes);
 app.use("/api/dashboard", dashboardRoutes);

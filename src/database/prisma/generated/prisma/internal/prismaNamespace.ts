@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.8.0
- * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
+ * Prisma Client JS version: 7.9.1
+ * Query Engine version: e922089b7d7502aff4249d5da3420f6fa55fc6ad
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.8.0",
-  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
+  client: "7.9.1",
+  engine: "e922089b7d7502aff4249d5da3420f6fa55fc6ad"
 }
 
 /**
@@ -156,6 +156,19 @@ export type Subset<T, U> = {
 };
 
 /**
+ * Resolved type of the argument passed to the `PrismaClient` constructor.
+ *
+ * When called without a narrower options type (the common case), this resolves
+ * to `PrismaClientOptions` directly, which produces a clear TypeScript error
+ * message (`not assignable to parameter of type 'PrismaClientOptions'`) when
+ * the argument is missing or incomplete. When the user supplies a narrower
+ * options type (e.g. via a literal), it falls back to `Subset` to keep
+ * filtering out unknown properties.
+ */
+export type PrismaClientConstructorArgs<Options extends PrismaClientOptions> =
+  [PrismaClientOptions] extends [Options] ? PrismaClientOptions : Subset<Options, PrismaClientOptions>;
+
+/**
  * SelectSubset
  * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
  * Additionally, it validates, if both select and include are present. If the case, it errors.
@@ -187,7 +200,7 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 export type XOR<T, U> =
   T extends object ?
   U extends object ?
-    (Without<T, U> & U) | (Without<U, T> & T)
+    ((Without<T, U> & U) | (Without<U, T> & T)) & object
   : U : T
 
 
@@ -403,6 +416,8 @@ export const ModelName = {
   Sale: 'Sale',
   SaleItem: 'SaleItem',
   SalePayment: 'SalePayment',
+  SaleReturn: 'SaleReturn',
+  SaleReturnItem: 'SaleReturnItem',
   CashRegister: 'CashRegister',
   CashTransaction: 'CashTransaction',
   Payment: 'Payment',
@@ -422,7 +437,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "category" | "product" | "client" | "supplier" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "cashRegister" | "cashTransaction" | "payment" | "auditLog"
+    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "category" | "product" | "client" | "supplier" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashTransaction" | "payment" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1832,6 +1847,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SaleReturn: {
+      payload: Prisma.$SaleReturnPayload<ExtArgs>
+      fields: Prisma.SaleReturnFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SaleReturnFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SaleReturnFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>
+        }
+        findFirst: {
+          args: Prisma.SaleReturnFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SaleReturnFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>
+        }
+        findMany: {
+          args: Prisma.SaleReturnFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>[]
+        }
+        create: {
+          args: Prisma.SaleReturnCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>
+        }
+        createMany: {
+          args: Prisma.SaleReturnCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SaleReturnCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>[]
+        }
+        delete: {
+          args: Prisma.SaleReturnDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>
+        }
+        update: {
+          args: Prisma.SaleReturnUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>
+        }
+        deleteMany: {
+          args: Prisma.SaleReturnDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SaleReturnUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SaleReturnUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>[]
+        }
+        upsert: {
+          args: Prisma.SaleReturnUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnPayload>
+        }
+        aggregate: {
+          args: Prisma.SaleReturnAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSaleReturn>
+        }
+        groupBy: {
+          args: Prisma.SaleReturnGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SaleReturnGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SaleReturnCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SaleReturnCountAggregateOutputType> | number
+        }
+      }
+    }
+    SaleReturnItem: {
+      payload: Prisma.$SaleReturnItemPayload<ExtArgs>
+      fields: Prisma.SaleReturnItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SaleReturnItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SaleReturnItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>
+        }
+        findFirst: {
+          args: Prisma.SaleReturnItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SaleReturnItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>
+        }
+        findMany: {
+          args: Prisma.SaleReturnItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>[]
+        }
+        create: {
+          args: Prisma.SaleReturnItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>
+        }
+        createMany: {
+          args: Prisma.SaleReturnItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SaleReturnItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>[]
+        }
+        delete: {
+          args: Prisma.SaleReturnItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>
+        }
+        update: {
+          args: Prisma.SaleReturnItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.SaleReturnItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SaleReturnItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SaleReturnItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.SaleReturnItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SaleReturnItemPayload>
+        }
+        aggregate: {
+          args: Prisma.SaleReturnItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSaleReturnItem>
+        }
+        groupBy: {
+          args: Prisma.SaleReturnItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SaleReturnItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SaleReturnItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SaleReturnItemCountAggregateOutputType> | number
+        }
+      }
+    }
     CashRegister: {
       payload: Prisma.$CashRegisterPayload<ExtArgs>
       fields: Prisma.CashRegisterFieldRefs
@@ -2435,6 +2598,36 @@ export const SalePaymentScalarFieldEnum = {
 export type SalePaymentScalarFieldEnum = (typeof SalePaymentScalarFieldEnum)[keyof typeof SalePaymentScalarFieldEnum]
 
 
+export const SaleReturnScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  saleId: 'saleId',
+  userId: 'userId',
+  idempotencyKey: 'idempotencyKey',
+  refundAmount: 'refundAmount',
+  reason: 'reason',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SaleReturnScalarFieldEnum = (typeof SaleReturnScalarFieldEnum)[keyof typeof SaleReturnScalarFieldEnum]
+
+
+export const SaleReturnItemScalarFieldEnum = {
+  id: 'id',
+  saleReturnId: 'saleReturnId',
+  saleItemId: 'saleItemId',
+  productId: 'productId',
+  productName: 'productName',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalAmount: 'totalAmount'
+} as const
+
+export type SaleReturnItemScalarFieldEnum = (typeof SaleReturnItemScalarFieldEnum)[keyof typeof SaleReturnItemScalarFieldEnum]
+
+
 export const CashRegisterScalarFieldEnum = {
   id: 'id',
   shopId: 'shopId',
@@ -2762,19 +2955,10 @@ export type BatchPayload = {
 export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<"define", TypeMapCb, runtime.Types.Extensions.DefaultArgs>
 export type DefaultPrismaClient = PrismaClient
 export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
-export type PrismaClientOptions = ({
-  /**
-   * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-pg`.
-   */
-  adapter: runtime.SqlDriverAdapterFactory
-  accelerateUrl?: never
-} | {
-  /**
-   * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
-   */
-  accelerateUrl: string
-  adapter?: never
-}) & {
+/**
+ * Options common to all variants of `PrismaClientOptions`, regardless of whether you connect to your database through a driver adapter or through Prisma Accelerate.
+ */
+export interface PrismaClientBaseOptions {
   /**
    * @default "colorless"
    */
@@ -2861,6 +3045,56 @@ export type PrismaClientOptions = ({
    */
   queryPlanCacheMaxSize?: number
 }
+
+/**
+ * `PrismaClient` options for connecting to your database through Prisma Accelerate instead of a driver adapter.
+ * 
+ * Learn more: https://pris.ly/d/accelerate
+ */
+export interface PrismaClientOptionsWithAccelerateUrl extends PrismaClientBaseOptions {
+  /**
+   * The Prisma Accelerate connection URL. Use this option to connect to your database through Prisma Accelerate instead of using a driver adapter to connect directly.
+   * 
+   * Learn more: https://pris.ly/d/accelerate
+   */
+  accelerateUrl: string
+  adapter?: never
+}
+
+/**
+ * `PrismaClient` options for connecting to your database through a driver adapter. This is the common case in Prisma 7.
+ * 
+ * Learn more: https://pris.ly/d/driver-adapters
+ */
+export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions {
+  /**
+   * A driver adapter that PrismaClient uses to connect to your database, such as the ones provided by `@prisma/adapter-pg`, `@prisma/adapter-libsql`, `@prisma/adapter-planetscale`, etc.
+   * 
+   * A driver adapter is **required** unless you connect to your database through Prisma Accelerate (in which case use `accelerateUrl` instead).
+   * 
+   * Learn more: https://pris.ly/d/driver-adapters
+   * 
+   * @example
+   * ```ts
+   * import { PrismaPg } from '@prisma/adapter-pg'
+   * import { PrismaClient } from './generated/prisma/client'
+   * 
+   * const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * const prisma = new PrismaClient({ adapter })
+   * ```
+   */
+  adapter: runtime.SqlDriverAdapterFactory
+  accelerateUrl?: never
+}
+
+/**
+ * Options passed to the `PrismaClient` constructor.
+ * 
+ * A driver adapter (or, alternatively, a Prisma Accelerate URL) is **required**. See {@link PrismaClientOptionsWithAdapter} and {@link PrismaClientOptionsWithAccelerateUrl} for the two variants. All other properties live in {@link PrismaClientBaseOptions} and are optional.
+ * 
+ * Learn more about driver adapters: https://pris.ly/d/driver-adapters
+ */
+export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   superAdmin?: Prisma.SuperAdminOmit
   shop?: Prisma.ShopOmit
@@ -2881,6 +3115,8 @@ export type GlobalOmitConfig = {
   sale?: Prisma.SaleOmit
   saleItem?: Prisma.SaleItemOmit
   salePayment?: Prisma.SalePaymentOmit
+  saleReturn?: Prisma.SaleReturnOmit
+  saleReturnItem?: Prisma.SaleReturnItemOmit
   cashRegister?: Prisma.CashRegisterOmit
   cashTransaction?: Prisma.CashTransactionOmit
   payment?: Prisma.PaymentOmit
