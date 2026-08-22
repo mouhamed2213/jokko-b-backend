@@ -29,6 +29,7 @@ import userRoutes from "./routes/user.routes.js";
 import purchaseOrderRoutes from "./modules/purchase-order/purchase-order.routes.js";
 import marginRoutes from "./modules/margin/margin.routes.js";
 import advancedReportRoutes from "./modules/advanced-report/advanced-report.routes.js";
+import { NotificationScheduler } from "./modules/notification/notification.scheduler.js";
 
 const app = express();
 // const PORT = Number(env.PORT) || 5000;
@@ -96,4 +97,5 @@ app.listen(env.port, () => {
   logger.info(`✅ Jokko Business API démarrée sur ${env.server}:${env.port}`);
   logger.info(`📁 Uploads servis sur ${env.server}:${env.port}/uploads/`);
   logger.info(`🌍 Environnement : ${env.mode}`);
+  NotificationScheduler.start();
 });

@@ -107,6 +107,16 @@ export type Client = Prisma.ClientModel
  */
 export type ClientReminder = Prisma.ClientReminderModel
 /**
+ * Model NotificationPreference
+ * 
+ */
+export type NotificationPreference = Prisma.NotificationPreferenceModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
  * Model Supplier
  * 
  */
