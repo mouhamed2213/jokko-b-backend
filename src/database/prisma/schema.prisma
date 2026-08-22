@@ -45,6 +45,7 @@ model Shop {
   cashRegisters  CashRegister[]
   subscriptions  Subscription[]
   saleReturns    SaleReturn[]
+  expenses       Expense[]
 
   usageCounter UsageCounter[]
   owners       ShopOwner[]
@@ -161,6 +162,7 @@ model User {
   userCounts     Int             @default(0)
   ownedShops     ShopOwner[]
   saleReturns    SaleReturn[]
+  expenses       Expense[]
 
   @@map("users")
 }
@@ -429,8 +431,32 @@ model CashTransaction {
   createdAt      DateTime @default(now())
 
   cashRegister CashRegister @relation(fields: [cashRegisterId], references: [id], onDelete: Cascade)
+  expense      Expense?
 
   @@map("cash_transactions")
+}
+
+model Expense {
+  id                Int      @id @default(autoincrement())
+  shopId            Int
+  userId            Int?
+  cashTransactionId Int      @unique
+  idempotencyKey    String
+  category          String
+  amount            Float
+  description       String?
+  reference         String?
+  paymentMethod     String   @default("CASH")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  shop            Shop            @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  user            User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  cashTransaction CashTransaction @relation(fields: [cashTransactionId], references: [id], onDelete: Cascade)
+
+  @@unique([shopId, idempotencyKey])
+  @@index([shopId, category, createdAt])
+  @@map("expenses")
 }
 
 model Payment {
@@ -518,6 +544,7 @@ enum FeatureCode {
   EXPORT_PDF
   API_ACCESS
   OUT_OF_STOCK_ALERT
+  CASH_CONTROL
 }
 
 enum PlanType {

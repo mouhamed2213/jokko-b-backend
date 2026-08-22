@@ -249,6 +249,7 @@ export type CashTransactionWhereInput = {
   paymentMethod?: Prisma.StringFilter<"CashTransaction"> | string
   createdAt?: Prisma.DateTimeFilter<"CashTransaction"> | Date | string
   cashRegister?: Prisma.XOR<Prisma.CashRegisterScalarRelationFilter, Prisma.CashRegisterWhereInput>
+  expense?: Prisma.XOR<Prisma.ExpenseNullableScalarRelationFilter, Prisma.ExpenseWhereInput> | null
 }
 
 export type CashTransactionOrderByWithRelationInput = {
@@ -261,6 +262,7 @@ export type CashTransactionOrderByWithRelationInput = {
   paymentMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   cashRegister?: Prisma.CashRegisterOrderByWithRelationInput
+  expense?: Prisma.ExpenseOrderByWithRelationInput
 }
 
 export type CashTransactionWhereUniqueInput = Prisma.AtLeast<{
@@ -276,6 +278,7 @@ export type CashTransactionWhereUniqueInput = Prisma.AtLeast<{
   paymentMethod?: Prisma.StringFilter<"CashTransaction"> | string
   createdAt?: Prisma.DateTimeFilter<"CashTransaction"> | Date | string
   cashRegister?: Prisma.XOR<Prisma.CashRegisterScalarRelationFilter, Prisma.CashRegisterWhereInput>
+  expense?: Prisma.XOR<Prisma.ExpenseNullableScalarRelationFilter, Prisma.ExpenseWhereInput> | null
 }, "id">
 
 export type CashTransactionOrderByWithAggregationInput = {
@@ -316,6 +319,7 @@ export type CashTransactionCreateInput = {
   paymentMethod?: string
   createdAt?: Date | string
   cashRegister: Prisma.CashRegisterCreateNestedOneWithoutTransactionsInput
+  expense?: Prisma.ExpenseCreateNestedOneWithoutCashTransactionInput
 }
 
 export type CashTransactionUncheckedCreateInput = {
@@ -327,6 +331,7 @@ export type CashTransactionUncheckedCreateInput = {
   reference?: string | null
   paymentMethod?: string
   createdAt?: Date | string
+  expense?: Prisma.ExpenseUncheckedCreateNestedOneWithoutCashTransactionInput
 }
 
 export type CashTransactionUpdateInput = {
@@ -337,6 +342,7 @@ export type CashTransactionUpdateInput = {
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cashRegister?: Prisma.CashRegisterUpdateOneRequiredWithoutTransactionsNestedInput
+  expense?: Prisma.ExpenseUpdateOneWithoutCashTransactionNestedInput
 }
 
 export type CashTransactionUncheckedUpdateInput = {
@@ -348,6 +354,7 @@ export type CashTransactionUncheckedUpdateInput = {
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expense?: Prisma.ExpenseUncheckedUpdateOneWithoutCashTransactionNestedInput
 }
 
 export type CashTransactionCreateManyInput = {
@@ -436,6 +443,11 @@ export type CashTransactionSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
 }
 
+export type CashTransactionScalarRelationFilter = {
+  is?: Prisma.CashTransactionWhereInput
+  isNot?: Prisma.CashTransactionWhereInput
+}
+
 export type CashTransactionCreateNestedManyWithoutCashRegisterInput = {
   create?: Prisma.XOR<Prisma.CashTransactionCreateWithoutCashRegisterInput, Prisma.CashTransactionUncheckedCreateWithoutCashRegisterInput> | Prisma.CashTransactionCreateWithoutCashRegisterInput[] | Prisma.CashTransactionUncheckedCreateWithoutCashRegisterInput[]
   connectOrCreate?: Prisma.CashTransactionCreateOrConnectWithoutCashRegisterInput | Prisma.CashTransactionCreateOrConnectWithoutCashRegisterInput[]
@@ -478,6 +490,20 @@ export type CashTransactionUncheckedUpdateManyWithoutCashRegisterNestedInput = {
   deleteMany?: Prisma.CashTransactionScalarWhereInput | Prisma.CashTransactionScalarWhereInput[]
 }
 
+export type CashTransactionCreateNestedOneWithoutExpenseInput = {
+  create?: Prisma.XOR<Prisma.CashTransactionCreateWithoutExpenseInput, Prisma.CashTransactionUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.CashTransactionCreateOrConnectWithoutExpenseInput
+  connect?: Prisma.CashTransactionWhereUniqueInput
+}
+
+export type CashTransactionUpdateOneRequiredWithoutExpenseNestedInput = {
+  create?: Prisma.XOR<Prisma.CashTransactionCreateWithoutExpenseInput, Prisma.CashTransactionUncheckedCreateWithoutExpenseInput>
+  connectOrCreate?: Prisma.CashTransactionCreateOrConnectWithoutExpenseInput
+  upsert?: Prisma.CashTransactionUpsertWithoutExpenseInput
+  connect?: Prisma.CashTransactionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CashTransactionUpdateToOneWithWhereWithoutExpenseInput, Prisma.CashTransactionUpdateWithoutExpenseInput>, Prisma.CashTransactionUncheckedUpdateWithoutExpenseInput>
+}
+
 export type CashTransactionCreateWithoutCashRegisterInput = {
   type: string
   amount: number
@@ -485,6 +511,7 @@ export type CashTransactionCreateWithoutCashRegisterInput = {
   reference?: string | null
   paymentMethod?: string
   createdAt?: Date | string
+  expense?: Prisma.ExpenseCreateNestedOneWithoutCashTransactionInput
 }
 
 export type CashTransactionUncheckedCreateWithoutCashRegisterInput = {
@@ -495,6 +522,7 @@ export type CashTransactionUncheckedCreateWithoutCashRegisterInput = {
   reference?: string | null
   paymentMethod?: string
   createdAt?: Date | string
+  expense?: Prisma.ExpenseUncheckedCreateNestedOneWithoutCashTransactionInput
 }
 
 export type CashTransactionCreateOrConnectWithoutCashRegisterInput = {
@@ -537,6 +565,64 @@ export type CashTransactionScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CashTransaction"> | Date | string
 }
 
+export type CashTransactionCreateWithoutExpenseInput = {
+  type: string
+  amount: number
+  label: string
+  reference?: string | null
+  paymentMethod?: string
+  createdAt?: Date | string
+  cashRegister: Prisma.CashRegisterCreateNestedOneWithoutTransactionsInput
+}
+
+export type CashTransactionUncheckedCreateWithoutExpenseInput = {
+  id?: number
+  cashRegisterId: number
+  type: string
+  amount: number
+  label: string
+  reference?: string | null
+  paymentMethod?: string
+  createdAt?: Date | string
+}
+
+export type CashTransactionCreateOrConnectWithoutExpenseInput = {
+  where: Prisma.CashTransactionWhereUniqueInput
+  create: Prisma.XOR<Prisma.CashTransactionCreateWithoutExpenseInput, Prisma.CashTransactionUncheckedCreateWithoutExpenseInput>
+}
+
+export type CashTransactionUpsertWithoutExpenseInput = {
+  update: Prisma.XOR<Prisma.CashTransactionUpdateWithoutExpenseInput, Prisma.CashTransactionUncheckedUpdateWithoutExpenseInput>
+  create: Prisma.XOR<Prisma.CashTransactionCreateWithoutExpenseInput, Prisma.CashTransactionUncheckedCreateWithoutExpenseInput>
+  where?: Prisma.CashTransactionWhereInput
+}
+
+export type CashTransactionUpdateToOneWithWhereWithoutExpenseInput = {
+  where?: Prisma.CashTransactionWhereInput
+  data: Prisma.XOR<Prisma.CashTransactionUpdateWithoutExpenseInput, Prisma.CashTransactionUncheckedUpdateWithoutExpenseInput>
+}
+
+export type CashTransactionUpdateWithoutExpenseInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cashRegister?: Prisma.CashRegisterUpdateOneRequiredWithoutTransactionsNestedInput
+}
+
+export type CashTransactionUncheckedUpdateWithoutExpenseInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  cashRegisterId?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  label?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type CashTransactionCreateManyCashRegisterInput = {
   id?: number
   type: string
@@ -554,6 +640,7 @@ export type CashTransactionUpdateWithoutCashRegisterInput = {
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expense?: Prisma.ExpenseUpdateOneWithoutCashTransactionNestedInput
 }
 
 export type CashTransactionUncheckedUpdateWithoutCashRegisterInput = {
@@ -564,6 +651,7 @@ export type CashTransactionUncheckedUpdateWithoutCashRegisterInput = {
   reference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expense?: Prisma.ExpenseUncheckedUpdateOneWithoutCashTransactionNestedInput
 }
 
 export type CashTransactionUncheckedUpdateManyWithoutCashRegisterInput = {
@@ -588,6 +676,7 @@ export type CashTransactionSelect<ExtArgs extends runtime.Types.Extensions.Inter
   paymentMethod?: boolean
   createdAt?: boolean
   cashRegister?: boolean | Prisma.CashRegisterDefaultArgs<ExtArgs>
+  expense?: boolean | Prisma.CashTransaction$expenseArgs<ExtArgs>
 }, ExtArgs["result"]["cashTransaction"]>
 
 export type CashTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -628,6 +717,7 @@ export type CashTransactionSelectScalar = {
 export type CashTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cashRegisterId" | "type" | "amount" | "label" | "reference" | "paymentMethod" | "createdAt", ExtArgs["result"]["cashTransaction"]>
 export type CashTransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cashRegister?: boolean | Prisma.CashRegisterDefaultArgs<ExtArgs>
+  expense?: boolean | Prisma.CashTransaction$expenseArgs<ExtArgs>
 }
 export type CashTransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cashRegister?: boolean | Prisma.CashRegisterDefaultArgs<ExtArgs>
@@ -640,6 +730,7 @@ export type $CashTransactionPayload<ExtArgs extends runtime.Types.Extensions.Int
   name: "CashTransaction"
   objects: {
     cashRegister: Prisma.$CashRegisterPayload<ExtArgs>
+    expense: Prisma.$ExpensePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1045,6 +1136,7 @@ readonly fields: CashTransactionFieldRefs;
 export interface Prisma__CashTransactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   cashRegister<T extends Prisma.CashRegisterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CashRegisterDefaultArgs<ExtArgs>>): Prisma.Prisma__CashRegisterClient<runtime.Types.Result.GetResult<Prisma.$CashRegisterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  expense<T extends Prisma.CashTransaction$expenseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CashTransaction$expenseArgs<ExtArgs>>): Prisma.Prisma__ExpenseClient<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1480,6 +1572,25 @@ export type CashTransactionDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many CashTransactions to delete.
    */
   limit?: number
+}
+
+/**
+ * CashTransaction.expense
+ */
+export type CashTransaction$expenseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Expense
+   */
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Expense
+   */
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
 }
 
 /**

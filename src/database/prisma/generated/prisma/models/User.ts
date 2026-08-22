@@ -270,6 +270,7 @@ export type UserWhereInput = {
   sales?: Prisma.SaleListRelationFilter
   ownedShops?: Prisma.ShopOwnerListRelationFilter
   saleReturns?: Prisma.SaleReturnListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -289,6 +290,7 @@ export type UserOrderByWithRelationInput = {
   sales?: Prisma.SaleOrderByRelationAggregateInput
   ownedShops?: Prisma.ShopOwnerOrderByRelationAggregateInput
   saleReturns?: Prisma.SaleReturnOrderByRelationAggregateInput
+  expenses?: Prisma.ExpenseOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -311,6 +313,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sales?: Prisma.SaleListRelationFilter
   ownedShops?: Prisma.ShopOwnerListRelationFilter
   saleReturns?: Prisma.SaleReturnListRelationFilter
+  expenses?: Prisma.ExpenseListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -362,6 +365,7 @@ export type UserCreateInput = {
   sales?: Prisma.SaleCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -380,6 +384,7 @@ export type UserUncheckedCreateInput = {
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -397,6 +402,7 @@ export type UserUpdateInput = {
   sales?: Prisma.SaleUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -415,6 +421,7 @@ export type UserUncheckedUpdateInput = {
   sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -649,6 +656,22 @@ export type UserUpdateOneWithoutCashRegistersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCashRegistersInput, Prisma.UserUpdateWithoutCashRegistersInput>, Prisma.UserUncheckedUpdateWithoutCashRegistersInput>
 }
 
+export type UserCreateNestedOneWithoutExpensesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExpensesInput, Prisma.UserUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExpensesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutExpensesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExpensesInput, Prisma.UserUncheckedCreateWithoutExpensesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExpensesInput
+  upsert?: Prisma.UserUpsertWithoutExpensesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutExpensesInput, Prisma.UserUpdateWithoutExpensesInput>, Prisma.UserUncheckedUpdateWithoutExpensesInput>
+}
+
 export type UserCreateWithoutShopInput = {
   name: string
   email: string
@@ -663,6 +686,7 @@ export type UserCreateWithoutShopInput = {
   sales?: Prisma.SaleCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutShopInput = {
@@ -680,6 +704,7 @@ export type UserUncheckedCreateWithoutShopInput = {
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutShopInput = {
@@ -738,6 +763,7 @@ export type UserCreateWithoutOwnedShopsInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutUserInput
   sales?: Prisma.SaleCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedShopsInput = {
@@ -755,6 +781,7 @@ export type UserUncheckedCreateWithoutOwnedShopsInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutUserInput
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedShopsInput = {
@@ -787,6 +814,7 @@ export type UserUpdateWithoutOwnedShopsInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutUserNestedInput
   sales?: Prisma.SaleUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedShopsInput = {
@@ -804,6 +832,7 @@ export type UserUncheckedUpdateWithoutOwnedShopsInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutUserNestedInput
   sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStockMovementsInput = {
@@ -820,6 +849,7 @@ export type UserCreateWithoutStockMovementsInput = {
   sales?: Prisma.SaleCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStockMovementsInput = {
@@ -837,6 +867,7 @@ export type UserUncheckedCreateWithoutStockMovementsInput = {
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStockMovementsInput = {
@@ -869,6 +900,7 @@ export type UserUpdateWithoutStockMovementsInput = {
   sales?: Prisma.SaleUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockMovementsInput = {
@@ -886,6 +918,7 @@ export type UserUncheckedUpdateWithoutStockMovementsInput = {
   sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSalesInput = {
@@ -902,6 +935,7 @@ export type UserCreateWithoutSalesInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSalesInput = {
@@ -919,6 +953,7 @@ export type UserUncheckedCreateWithoutSalesInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSalesInput = {
@@ -951,6 +986,7 @@ export type UserUpdateWithoutSalesInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSalesInput = {
@@ -968,6 +1004,7 @@ export type UserUncheckedUpdateWithoutSalesInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSaleReturnsInput = {
@@ -984,6 +1021,7 @@ export type UserCreateWithoutSaleReturnsInput = {
   stockMovements?: Prisma.StockMovementCreateNestedManyWithoutUserInput
   sales?: Prisma.SaleCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSaleReturnsInput = {
@@ -1001,6 +1039,7 @@ export type UserUncheckedCreateWithoutSaleReturnsInput = {
   stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutUserInput
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSaleReturnsInput = {
@@ -1033,6 +1072,7 @@ export type UserUpdateWithoutSaleReturnsInput = {
   stockMovements?: Prisma.StockMovementUpdateManyWithoutUserNestedInput
   sales?: Prisma.SaleUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSaleReturnsInput = {
@@ -1050,6 +1090,7 @@ export type UserUncheckedUpdateWithoutSaleReturnsInput = {
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutUserNestedInput
   sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCashRegistersInput = {
@@ -1066,6 +1107,7 @@ export type UserCreateWithoutCashRegistersInput = {
   sales?: Prisma.SaleCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCashRegistersInput = {
@@ -1083,6 +1125,7 @@ export type UserUncheckedCreateWithoutCashRegistersInput = {
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutUserInput
   ownedShops?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutUserInput
   saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCashRegistersInput = {
@@ -1115,6 +1158,7 @@ export type UserUpdateWithoutCashRegistersInput = {
   sales?: Prisma.SaleUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCashRegistersInput = {
@@ -1128,6 +1172,93 @@ export type UserUncheckedUpdateWithoutCashRegistersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userCounts?: Prisma.IntFieldUpdateOperationsInput | number
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutUserNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
+  ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutExpensesInput = {
+  name: string
+  email: string
+  password: string
+  role?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userCounts?: number
+  shop: Prisma.ShopCreateNestedOneWithoutUsersInput
+  cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutUserInput
+  sales?: Prisma.SaleCreateNestedManyWithoutUserInput
+  ownedShops?: Prisma.ShopOwnerCreateNestedManyWithoutUserInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutExpensesInput = {
+  id?: number
+  shopId: number
+  name: string
+  email: string
+  password: string
+  role?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userCounts?: number
+  cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutUserInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutUserInput
+  ownedShops?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutUserInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutExpensesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutExpensesInput, Prisma.UserUncheckedCreateWithoutExpensesInput>
+}
+
+export type UserUpsertWithoutExpensesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutExpensesInput, Prisma.UserUncheckedUpdateWithoutExpensesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutExpensesInput, Prisma.UserUncheckedCreateWithoutExpensesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutExpensesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutExpensesInput, Prisma.UserUncheckedUpdateWithoutExpensesInput>
+}
+
+export type UserUpdateWithoutExpensesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userCounts?: Prisma.IntFieldUpdateOperationsInput | number
+  shop?: Prisma.ShopUpdateOneRequiredWithoutUsersNestedInput
+  cashRegisters?: Prisma.CashRegisterUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutUserNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutUserNestedInput
+  ownedShops?: Prisma.ShopOwnerUpdateManyWithoutUserNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutExpensesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  shopId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userCounts?: Prisma.IntFieldUpdateOperationsInput | number
+  cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutUserNestedInput
   stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutUserNestedInput
   sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
@@ -1160,6 +1291,7 @@ export type UserUpdateWithoutShopInput = {
   sales?: Prisma.SaleUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutShopInput = {
@@ -1177,6 +1309,7 @@ export type UserUncheckedUpdateWithoutShopInput = {
   sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutShopInput = {
@@ -1202,6 +1335,7 @@ export type UserCountOutputType = {
   sales: number
   ownedShops: number
   saleReturns: number
+  expenses: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1210,6 +1344,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   sales?: boolean | UserCountOutputTypeCountSalesArgs
   ownedShops?: boolean | UserCountOutputTypeCountOwnedShopsArgs
   saleReturns?: boolean | UserCountOutputTypeCountSaleReturnsArgs
+  expenses?: boolean | UserCountOutputTypeCountExpensesArgs
 }
 
 /**
@@ -1257,6 +1392,13 @@ export type UserCountOutputTypeCountSaleReturnsArgs<ExtArgs extends runtime.Type
   where?: Prisma.SaleReturnWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountExpensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExpenseWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1275,6 +1417,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sales?: boolean | Prisma.User$salesArgs<ExtArgs>
   ownedShops?: boolean | Prisma.User$ownedShopsArgs<ExtArgs>
   saleReturns?: boolean | Prisma.User$saleReturnsArgs<ExtArgs>
+  expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1327,6 +1470,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sales?: boolean | Prisma.User$salesArgs<ExtArgs>
   ownedShops?: boolean | Prisma.User$ownedShopsArgs<ExtArgs>
   saleReturns?: boolean | Prisma.User$saleReturnsArgs<ExtArgs>
+  expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1345,6 +1489,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sales: Prisma.$SalePayload<ExtArgs>[]
     ownedShops: Prisma.$ShopOwnerPayload<ExtArgs>[]
     saleReturns: Prisma.$SaleReturnPayload<ExtArgs>[]
+    expenses: Prisma.$ExpensePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1757,6 +1902,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sales<T extends Prisma.User$salesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$salesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ownedShops<T extends Prisma.User$ownedShopsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedShopsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShopOwnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   saleReturns<T extends Prisma.User$saleReturnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$saleReturnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SaleReturnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  expenses<T extends Prisma.User$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2314,6 +2460,30 @@ export type User$saleReturnsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.SaleReturnScalarFieldEnum | Prisma.SaleReturnScalarFieldEnum[]
+}
+
+/**
+ * User.expenses
+ */
+export type User$expensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Expense
+   */
+  select?: Prisma.ExpenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Expense
+   */
+  omit?: Prisma.ExpenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExpenseInclude<ExtArgs> | null
+  where?: Prisma.ExpenseWhereInput
+  orderBy?: Prisma.ExpenseOrderByWithRelationInput | Prisma.ExpenseOrderByWithRelationInput[]
+  cursor?: Prisma.ExpenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExpenseScalarFieldEnum | Prisma.ExpenseScalarFieldEnum[]
 }
 
 /**

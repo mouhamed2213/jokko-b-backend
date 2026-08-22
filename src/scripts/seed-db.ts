@@ -87,6 +87,7 @@ export const seedDb = async () => {
       { code: "SUPPLIER_MANAGEMENT", name: "Supplier Management" },
       { code: "ADVANCED_REPORTS", name: "Advanced Reports" },
       { code: "ACCOUNTING", name: "Accounting" },
+      { code: "CASH_CONTROL", name: "Cash control" },
       { code: "MULTI_STORE", name: "Multi Store" },
       { code: "API_ACCESS", name: "API Access" },
     ];
@@ -141,6 +142,7 @@ export const seedDb = async () => {
         "LOW_STOCK_ALERT",
         "TOP_PRODUCTS",
         "STOCK_VALUE",
+        "CASH_CONTROL",
       ],
 
       PRO: [
@@ -152,6 +154,7 @@ export const seedDb = async () => {
         "SUPPLIER_MANAGEMENT",
         "ADVANCED_REPORTS",
         "ACCOUNTING",
+        "CASH_CONTROL",
         "MULTI_STORE"
       ],
 
@@ -163,7 +166,7 @@ export const seedDb = async () => {
         "STOCK_VALUE",
         "SUPPLIER_MANAGEMENT",
         "ADVANCED_REPORTS",
-        // "ACCOUNTING",
+        "CASH_CONTROL",
         "MULTI_STORE",
         // "API_ACCESS",
       ],
