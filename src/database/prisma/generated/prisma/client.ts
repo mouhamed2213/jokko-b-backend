@@ -137,6 +137,16 @@ export type SaleItem = Prisma.SaleItemModel
  */
 export type SalePayment = Prisma.SalePaymentModel
 /**
+ * Model SaleReturn
+ * 
+ */
+export type SaleReturn = Prisma.SaleReturnModel
+/**
+ * Model SaleReturnItem
+ * 
+ */
+export type SaleReturnItem = Prisma.SaleReturnItemModel
+/**
  * Model CashRegister
  * 
  */
