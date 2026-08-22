@@ -32,6 +32,7 @@ export type SupplierDebtAvgAggregateOutputType = {
   totalAmount: number | null
   paidAmount: number | null
   remaining: number | null
+  receiptId: number | null
 }
 
 export type SupplierDebtSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type SupplierDebtSumAggregateOutputType = {
   totalAmount: number | null
   paidAmount: number | null
   remaining: number | null
+  receiptId: number | null
 }
 
 export type SupplierDebtMinAggregateOutputType = {
@@ -49,6 +51,7 @@ export type SupplierDebtMinAggregateOutputType = {
   paidAmount: number | null
   remaining: number | null
   status: string | null
+  receiptId: number | null
   note: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -61,6 +64,7 @@ export type SupplierDebtMaxAggregateOutputType = {
   paidAmount: number | null
   remaining: number | null
   status: string | null
+  receiptId: number | null
   note: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -73,6 +77,7 @@ export type SupplierDebtCountAggregateOutputType = {
   paidAmount: number
   remaining: number
   status: number
+  receiptId: number
   note: number
   createdAt: number
   updatedAt: number
@@ -86,6 +91,7 @@ export type SupplierDebtAvgAggregateInputType = {
   totalAmount?: true
   paidAmount?: true
   remaining?: true
+  receiptId?: true
 }
 
 export type SupplierDebtSumAggregateInputType = {
@@ -94,6 +100,7 @@ export type SupplierDebtSumAggregateInputType = {
   totalAmount?: true
   paidAmount?: true
   remaining?: true
+  receiptId?: true
 }
 
 export type SupplierDebtMinAggregateInputType = {
@@ -103,6 +110,7 @@ export type SupplierDebtMinAggregateInputType = {
   paidAmount?: true
   remaining?: true
   status?: true
+  receiptId?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -115,6 +123,7 @@ export type SupplierDebtMaxAggregateInputType = {
   paidAmount?: true
   remaining?: true
   status?: true
+  receiptId?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -127,6 +136,7 @@ export type SupplierDebtCountAggregateInputType = {
   paidAmount?: true
   remaining?: true
   status?: true
+  receiptId?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -226,6 +236,7 @@ export type SupplierDebtGroupByOutputType = {
   paidAmount: number
   remaining: number
   status: string
+  receiptId: number | null
   note: string | null
   createdAt: Date
   updatedAt: Date
@@ -261,10 +272,12 @@ export type SupplierDebtWhereInput = {
   paidAmount?: Prisma.FloatFilter<"SupplierDebt"> | number
   remaining?: Prisma.FloatFilter<"SupplierDebt"> | number
   status?: Prisma.StringFilter<"SupplierDebt"> | string
+  receiptId?: Prisma.IntNullableFilter<"SupplierDebt"> | number | null
   note?: Prisma.StringNullableFilter<"SupplierDebt"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SupplierDebt"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SupplierDebt"> | Date | string
   supplier?: Prisma.XOR<Prisma.SupplierScalarRelationFilter, Prisma.SupplierWhereInput>
+  receipt?: Prisma.XOR<Prisma.PurchaseReceiptNullableScalarRelationFilter, Prisma.PurchaseReceiptWhereInput> | null
   payments?: Prisma.SupplierPaymentListRelationFilter
 }
 
@@ -275,15 +288,18 @@ export type SupplierDebtOrderByWithRelationInput = {
   paidAmount?: Prisma.SortOrder
   remaining?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptId?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   supplier?: Prisma.SupplierOrderByWithRelationInput
+  receipt?: Prisma.PurchaseReceiptOrderByWithRelationInput
   payments?: Prisma.SupplierPaymentOrderByRelationAggregateInput
 }
 
 export type SupplierDebtWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  receiptId?: number
   AND?: Prisma.SupplierDebtWhereInput | Prisma.SupplierDebtWhereInput[]
   OR?: Prisma.SupplierDebtWhereInput[]
   NOT?: Prisma.SupplierDebtWhereInput | Prisma.SupplierDebtWhereInput[]
@@ -296,8 +312,9 @@ export type SupplierDebtWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"SupplierDebt"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SupplierDebt"> | Date | string
   supplier?: Prisma.XOR<Prisma.SupplierScalarRelationFilter, Prisma.SupplierWhereInput>
+  receipt?: Prisma.XOR<Prisma.PurchaseReceiptNullableScalarRelationFilter, Prisma.PurchaseReceiptWhereInput> | null
   payments?: Prisma.SupplierPaymentListRelationFilter
-}, "id">
+}, "id" | "receiptId">
 
 export type SupplierDebtOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -306,6 +323,7 @@ export type SupplierDebtOrderByWithAggregationInput = {
   paidAmount?: Prisma.SortOrder
   remaining?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptId?: Prisma.SortOrderInput | Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -326,6 +344,7 @@ export type SupplierDebtScalarWhereWithAggregatesInput = {
   paidAmount?: Prisma.FloatWithAggregatesFilter<"SupplierDebt"> | number
   remaining?: Prisma.FloatWithAggregatesFilter<"SupplierDebt"> | number
   status?: Prisma.StringWithAggregatesFilter<"SupplierDebt"> | string
+  receiptId?: Prisma.IntNullableWithAggregatesFilter<"SupplierDebt"> | number | null
   note?: Prisma.StringNullableWithAggregatesFilter<"SupplierDebt"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SupplierDebt"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SupplierDebt"> | Date | string
@@ -340,6 +359,7 @@ export type SupplierDebtCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   supplier: Prisma.SupplierCreateNestedOneWithoutSupplierDebtsInput
+  receipt?: Prisma.PurchaseReceiptCreateNestedOneWithoutDebtInput
   payments?: Prisma.SupplierPaymentCreateNestedManyWithoutDebtInput
 }
 
@@ -350,6 +370,7 @@ export type SupplierDebtUncheckedCreateInput = {
   paidAmount?: number
   remaining: number
   status?: string
+  receiptId?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -365,6 +386,7 @@ export type SupplierDebtUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   supplier?: Prisma.SupplierUpdateOneRequiredWithoutSupplierDebtsNestedInput
+  receipt?: Prisma.PurchaseReceiptUpdateOneWithoutDebtNestedInput
   payments?: Prisma.SupplierPaymentUpdateManyWithoutDebtNestedInput
 }
 
@@ -375,6 +397,7 @@ export type SupplierDebtUncheckedUpdateInput = {
   paidAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   remaining?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -388,6 +411,7 @@ export type SupplierDebtCreateManyInput = {
   paidAmount?: number
   remaining: number
   status?: string
+  receiptId?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -410,6 +434,7 @@ export type SupplierDebtUncheckedUpdateManyInput = {
   paidAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   remaining?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -425,6 +450,11 @@ export type SupplierDebtOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type SupplierDebtNullableScalarRelationFilter = {
+  is?: Prisma.SupplierDebtWhereInput | null
+  isNot?: Prisma.SupplierDebtWhereInput | null
+}
+
 export type SupplierDebtCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   supplierId?: Prisma.SortOrder
@@ -432,6 +462,7 @@ export type SupplierDebtCountOrderByAggregateInput = {
   paidAmount?: Prisma.SortOrder
   remaining?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptId?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -443,6 +474,7 @@ export type SupplierDebtAvgOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   paidAmount?: Prisma.SortOrder
   remaining?: Prisma.SortOrder
+  receiptId?: Prisma.SortOrder
 }
 
 export type SupplierDebtMaxOrderByAggregateInput = {
@@ -452,6 +484,7 @@ export type SupplierDebtMaxOrderByAggregateInput = {
   paidAmount?: Prisma.SortOrder
   remaining?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptId?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -464,6 +497,7 @@ export type SupplierDebtMinOrderByAggregateInput = {
   paidAmount?: Prisma.SortOrder
   remaining?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  receiptId?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -475,6 +509,7 @@ export type SupplierDebtSumOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   paidAmount?: Prisma.SortOrder
   remaining?: Prisma.SortOrder
+  receiptId?: Prisma.SortOrder
 }
 
 export type SupplierDebtScalarRelationFilter = {
@@ -524,6 +559,38 @@ export type SupplierDebtUncheckedUpdateManyWithoutSupplierNestedInput = {
   deleteMany?: Prisma.SupplierDebtScalarWhereInput | Prisma.SupplierDebtScalarWhereInput[]
 }
 
+export type SupplierDebtCreateNestedOneWithoutReceiptInput = {
+  create?: Prisma.XOR<Prisma.SupplierDebtCreateWithoutReceiptInput, Prisma.SupplierDebtUncheckedCreateWithoutReceiptInput>
+  connectOrCreate?: Prisma.SupplierDebtCreateOrConnectWithoutReceiptInput
+  connect?: Prisma.SupplierDebtWhereUniqueInput
+}
+
+export type SupplierDebtUncheckedCreateNestedOneWithoutReceiptInput = {
+  create?: Prisma.XOR<Prisma.SupplierDebtCreateWithoutReceiptInput, Prisma.SupplierDebtUncheckedCreateWithoutReceiptInput>
+  connectOrCreate?: Prisma.SupplierDebtCreateOrConnectWithoutReceiptInput
+  connect?: Prisma.SupplierDebtWhereUniqueInput
+}
+
+export type SupplierDebtUpdateOneWithoutReceiptNestedInput = {
+  create?: Prisma.XOR<Prisma.SupplierDebtCreateWithoutReceiptInput, Prisma.SupplierDebtUncheckedCreateWithoutReceiptInput>
+  connectOrCreate?: Prisma.SupplierDebtCreateOrConnectWithoutReceiptInput
+  upsert?: Prisma.SupplierDebtUpsertWithoutReceiptInput
+  disconnect?: Prisma.SupplierDebtWhereInput | boolean
+  delete?: Prisma.SupplierDebtWhereInput | boolean
+  connect?: Prisma.SupplierDebtWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SupplierDebtUpdateToOneWithWhereWithoutReceiptInput, Prisma.SupplierDebtUpdateWithoutReceiptInput>, Prisma.SupplierDebtUncheckedUpdateWithoutReceiptInput>
+}
+
+export type SupplierDebtUncheckedUpdateOneWithoutReceiptNestedInput = {
+  create?: Prisma.XOR<Prisma.SupplierDebtCreateWithoutReceiptInput, Prisma.SupplierDebtUncheckedCreateWithoutReceiptInput>
+  connectOrCreate?: Prisma.SupplierDebtCreateOrConnectWithoutReceiptInput
+  upsert?: Prisma.SupplierDebtUpsertWithoutReceiptInput
+  disconnect?: Prisma.SupplierDebtWhereInput | boolean
+  delete?: Prisma.SupplierDebtWhereInput | boolean
+  connect?: Prisma.SupplierDebtWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SupplierDebtUpdateToOneWithWhereWithoutReceiptInput, Prisma.SupplierDebtUpdateWithoutReceiptInput>, Prisma.SupplierDebtUncheckedUpdateWithoutReceiptInput>
+}
+
 export type SupplierDebtCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.SupplierDebtCreateWithoutPaymentsInput, Prisma.SupplierDebtUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.SupplierDebtCreateOrConnectWithoutPaymentsInput
@@ -546,6 +613,7 @@ export type SupplierDebtCreateWithoutSupplierInput = {
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  receipt?: Prisma.PurchaseReceiptCreateNestedOneWithoutDebtInput
   payments?: Prisma.SupplierPaymentCreateNestedManyWithoutDebtInput
 }
 
@@ -555,6 +623,7 @@ export type SupplierDebtUncheckedCreateWithoutSupplierInput = {
   paidAmount?: number
   remaining: number
   status?: string
+  receiptId?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -597,9 +666,76 @@ export type SupplierDebtScalarWhereInput = {
   paidAmount?: Prisma.FloatFilter<"SupplierDebt"> | number
   remaining?: Prisma.FloatFilter<"SupplierDebt"> | number
   status?: Prisma.StringFilter<"SupplierDebt"> | string
+  receiptId?: Prisma.IntNullableFilter<"SupplierDebt"> | number | null
   note?: Prisma.StringNullableFilter<"SupplierDebt"> | string | null
   createdAt?: Prisma.DateTimeFilter<"SupplierDebt"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SupplierDebt"> | Date | string
+}
+
+export type SupplierDebtCreateWithoutReceiptInput = {
+  totalAmount: number
+  paidAmount?: number
+  remaining: number
+  status?: string
+  note?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  supplier: Prisma.SupplierCreateNestedOneWithoutSupplierDebtsInput
+  payments?: Prisma.SupplierPaymentCreateNestedManyWithoutDebtInput
+}
+
+export type SupplierDebtUncheckedCreateWithoutReceiptInput = {
+  id?: number
+  supplierId: number
+  totalAmount: number
+  paidAmount?: number
+  remaining: number
+  status?: string
+  note?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.SupplierPaymentUncheckedCreateNestedManyWithoutDebtInput
+}
+
+export type SupplierDebtCreateOrConnectWithoutReceiptInput = {
+  where: Prisma.SupplierDebtWhereUniqueInput
+  create: Prisma.XOR<Prisma.SupplierDebtCreateWithoutReceiptInput, Prisma.SupplierDebtUncheckedCreateWithoutReceiptInput>
+}
+
+export type SupplierDebtUpsertWithoutReceiptInput = {
+  update: Prisma.XOR<Prisma.SupplierDebtUpdateWithoutReceiptInput, Prisma.SupplierDebtUncheckedUpdateWithoutReceiptInput>
+  create: Prisma.XOR<Prisma.SupplierDebtCreateWithoutReceiptInput, Prisma.SupplierDebtUncheckedCreateWithoutReceiptInput>
+  where?: Prisma.SupplierDebtWhereInput
+}
+
+export type SupplierDebtUpdateToOneWithWhereWithoutReceiptInput = {
+  where?: Prisma.SupplierDebtWhereInput
+  data: Prisma.XOR<Prisma.SupplierDebtUpdateWithoutReceiptInput, Prisma.SupplierDebtUncheckedUpdateWithoutReceiptInput>
+}
+
+export type SupplierDebtUpdateWithoutReceiptInput = {
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paidAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  remaining?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  supplier?: Prisma.SupplierUpdateOneRequiredWithoutSupplierDebtsNestedInput
+  payments?: Prisma.SupplierPaymentUpdateManyWithoutDebtNestedInput
+}
+
+export type SupplierDebtUncheckedUpdateWithoutReceiptInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  supplierId?: Prisma.IntFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  paidAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  remaining?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.SupplierPaymentUncheckedUpdateManyWithoutDebtNestedInput
 }
 
 export type SupplierDebtCreateWithoutPaymentsInput = {
@@ -611,6 +747,7 @@ export type SupplierDebtCreateWithoutPaymentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   supplier: Prisma.SupplierCreateNestedOneWithoutSupplierDebtsInput
+  receipt?: Prisma.PurchaseReceiptCreateNestedOneWithoutDebtInput
 }
 
 export type SupplierDebtUncheckedCreateWithoutPaymentsInput = {
@@ -620,6 +757,7 @@ export type SupplierDebtUncheckedCreateWithoutPaymentsInput = {
   paidAmount?: number
   remaining: number
   status?: string
+  receiptId?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -650,6 +788,7 @@ export type SupplierDebtUpdateWithoutPaymentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   supplier?: Prisma.SupplierUpdateOneRequiredWithoutSupplierDebtsNestedInput
+  receipt?: Prisma.PurchaseReceiptUpdateOneWithoutDebtNestedInput
 }
 
 export type SupplierDebtUncheckedUpdateWithoutPaymentsInput = {
@@ -659,6 +798,7 @@ export type SupplierDebtUncheckedUpdateWithoutPaymentsInput = {
   paidAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   remaining?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -670,6 +810,7 @@ export type SupplierDebtCreateManySupplierInput = {
   paidAmount?: number
   remaining: number
   status?: string
+  receiptId?: number | null
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -683,6 +824,7 @@ export type SupplierDebtUpdateWithoutSupplierInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  receipt?: Prisma.PurchaseReceiptUpdateOneWithoutDebtNestedInput
   payments?: Prisma.SupplierPaymentUpdateManyWithoutDebtNestedInput
 }
 
@@ -692,6 +834,7 @@ export type SupplierDebtUncheckedUpdateWithoutSupplierInput = {
   paidAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   remaining?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -704,6 +847,7 @@ export type SupplierDebtUncheckedUpdateManyWithoutSupplierInput = {
   paidAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   remaining?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -747,10 +891,12 @@ export type SupplierDebtSelect<ExtArgs extends runtime.Types.Extensions.Internal
   paidAmount?: boolean
   remaining?: boolean
   status?: boolean
+  receiptId?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>
+  receipt?: boolean | Prisma.SupplierDebt$receiptArgs<ExtArgs>
   payments?: boolean | Prisma.SupplierDebt$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.SupplierDebtCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["supplierDebt"]>
@@ -762,10 +908,12 @@ export type SupplierDebtSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   paidAmount?: boolean
   remaining?: boolean
   status?: boolean
+  receiptId?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>
+  receipt?: boolean | Prisma.SupplierDebt$receiptArgs<ExtArgs>
 }, ExtArgs["result"]["supplierDebt"]>
 
 export type SupplierDebtSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -775,10 +923,12 @@ export type SupplierDebtSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   paidAmount?: boolean
   remaining?: boolean
   status?: boolean
+  receiptId?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>
+  receipt?: boolean | Prisma.SupplierDebt$receiptArgs<ExtArgs>
 }, ExtArgs["result"]["supplierDebt"]>
 
 export type SupplierDebtSelectScalar = {
@@ -788,28 +938,33 @@ export type SupplierDebtSelectScalar = {
   paidAmount?: boolean
   remaining?: boolean
   status?: boolean
+  receiptId?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SupplierDebtOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "supplierId" | "totalAmount" | "paidAmount" | "remaining" | "status" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["supplierDebt"]>
+export type SupplierDebtOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "supplierId" | "totalAmount" | "paidAmount" | "remaining" | "status" | "receiptId" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["supplierDebt"]>
 export type SupplierDebtInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>
+  receipt?: boolean | Prisma.SupplierDebt$receiptArgs<ExtArgs>
   payments?: boolean | Prisma.SupplierDebt$paymentsArgs<ExtArgs>
   _count?: boolean | Prisma.SupplierDebtCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SupplierDebtIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>
+  receipt?: boolean | Prisma.SupplierDebt$receiptArgs<ExtArgs>
 }
 export type SupplierDebtIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   supplier?: boolean | Prisma.SupplierDefaultArgs<ExtArgs>
+  receipt?: boolean | Prisma.SupplierDebt$receiptArgs<ExtArgs>
 }
 
 export type $SupplierDebtPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SupplierDebt"
   objects: {
     supplier: Prisma.$SupplierPayload<ExtArgs>
+    receipt: Prisma.$PurchaseReceiptPayload<ExtArgs> | null
     payments: Prisma.$SupplierPaymentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -819,6 +974,7 @@ export type $SupplierDebtPayload<ExtArgs extends runtime.Types.Extensions.Intern
     paidAmount: number
     remaining: number
     status: string
+    receiptId: number | null
     note: string | null
     createdAt: Date
     updatedAt: Date
@@ -1217,6 +1373,7 @@ readonly fields: SupplierDebtFieldRefs;
 export interface Prisma__SupplierDebtClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   supplier<T extends Prisma.SupplierDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SupplierDefaultArgs<ExtArgs>>): Prisma.Prisma__SupplierClient<runtime.Types.Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  receipt<T extends Prisma.SupplierDebt$receiptArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SupplierDebt$receiptArgs<ExtArgs>>): Prisma.Prisma__PurchaseReceiptClient<runtime.Types.Result.GetResult<Prisma.$PurchaseReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   payments<T extends Prisma.SupplierDebt$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SupplierDebt$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SupplierPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1253,6 +1410,7 @@ export interface SupplierDebtFieldRefs {
   readonly paidAmount: Prisma.FieldRef<"SupplierDebt", 'Float'>
   readonly remaining: Prisma.FieldRef<"SupplierDebt", 'Float'>
   readonly status: Prisma.FieldRef<"SupplierDebt", 'String'>
+  readonly receiptId: Prisma.FieldRef<"SupplierDebt", 'Int'>
   readonly note: Prisma.FieldRef<"SupplierDebt", 'String'>
   readonly createdAt: Prisma.FieldRef<"SupplierDebt", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SupplierDebt", 'DateTime'>
@@ -1654,6 +1812,25 @@ export type SupplierDebtDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many SupplierDebts to delete.
    */
   limit?: number
+}
+
+/**
+ * SupplierDebt.receipt
+ */
+export type SupplierDebt$receiptArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseReceipt
+   */
+  select?: Prisma.PurchaseReceiptSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseReceipt
+   */
+  omit?: Prisma.PurchaseReceiptOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseReceiptInclude<ExtArgs> | null
+  where?: Prisma.PurchaseReceiptWhereInput
 }
 
 /**

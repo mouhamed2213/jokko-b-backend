@@ -18,6 +18,10 @@ export const ProcurementService = {
       paymentMethod: input.paymentMethod,
     });
 
+    if (input.receiptId) {
+      await db.supplierDebt.update({ where: { id: debt.id }, data: { receiptId: input.receiptId } });
+    }
+
     let payment = null;
     if (input.paidAmount > 0) {
       payment = await SupplierRepository.createPayment(db, debt.id, {
