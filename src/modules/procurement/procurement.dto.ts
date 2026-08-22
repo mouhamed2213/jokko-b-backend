@@ -8,4 +8,5 @@ export type RecordSupplierObligationDto = {
   paidAmount: number;
   note?: string;
   paymentMethod: string;
+  receiptId?: number;
 };

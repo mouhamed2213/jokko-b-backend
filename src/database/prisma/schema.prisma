@@ -21,33 +21,35 @@ model SuperAdmin {
 
 // ── Shop ─────────────────────────────────────────────────────
 model Shop {
-  id              Int                  @id @default(autoincrement())
-  name            String
-  ownerName       String
-  email           String               @unique
-  phone           String
-  address         String?
-  logoUrl         String?
-  primaryShopId   Int?
-  primaryShop     Shop?                @relation("ShopHierarchy", fields: [primaryShopId], references: [id])
-  secondaryShops  Shop[]               @relation("ShopHierarchy")
-  status          String               @default("ACTIVE")
-  currentShop     CurrentShopType      @default(PRIMARY)
-  createdAt       DateTime             @default(now())
-  updatedAt       DateTime             @updatedAt
-  users           User[]
-  products        Product[]
-  categories      Category[]
-  clients         Client[]
-  suppliers       Supplier[]
-  sales           Sale[]
-  stockMovements  StockMovement[]
-  cashRegisters   CashRegister[]
-  subscriptions   Subscription[]
-  saleReturns     SaleReturn[]
-  expenses        Expense[]
-  reconciliations CashReconciliation[]
-  clientReminders ClientReminder[]
+  id               Int                  @id @default(autoincrement())
+  name             String
+  ownerName        String
+  email            String               @unique
+  phone            String
+  address          String?
+  logoUrl          String?
+  primaryShopId    Int?
+  primaryShop      Shop?                @relation("ShopHierarchy", fields: [primaryShopId], references: [id])
+  secondaryShops   Shop[]               @relation("ShopHierarchy")
+  status           String               @default("ACTIVE")
+  currentShop      CurrentShopType      @default(PRIMARY)
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  users            User[]
+  products         Product[]
+  categories       Category[]
+  clients          Client[]
+  suppliers        Supplier[]
+  sales            Sale[]
+  stockMovements   StockMovement[]
+  cashRegisters    CashRegister[]
+  subscriptions    Subscription[]
+  saleReturns      SaleReturn[]
+  expenses         Expense[]
+  reconciliations  CashReconciliation[]
+  clientReminders  ClientReminder[]
+  purchaseOrders   PurchaseOrder[]
+  purchaseReceipts PurchaseReceipt[]
 
   usageCounter UsageCounter[]
   owners       ShopOwner[]
@@ -157,16 +159,18 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  shop            Shop                 @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  cashRegisters   CashRegister[]
-  stockMovements  StockMovement[]
-  sales           Sale[]
-  userCounts      Int                  @default(0)
-  ownedShops      ShopOwner[]
-  saleReturns     SaleReturn[]
-  expenses        Expense[]
-  reconciliations CashReconciliation[]
-  reminders       ClientReminder[]
+  shop             Shop                 @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  cashRegisters    CashRegister[]
+  stockMovements   StockMovement[]
+  sales            Sale[]
+  userCounts       Int                  @default(0)
+  ownedShops       ShopOwner[]
+  saleReturns      SaleReturn[]
+  expenses         Expense[]
+  reconciliations  CashReconciliation[]
+  reminders        ClientReminder[]
+  purchaseOrders   PurchaseOrder[]      @relation("PurchaseOrderCreator")
+  purchaseReceipts PurchaseReceipt[]    @relation("PurchaseReceiptReceiver")
 
   @@map("users")
 }
@@ -205,11 +209,13 @@ model Product {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 
-  shop           Shop             @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  category       Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
-  stockMovements StockMovement[]
-  saleItems      SaleItem[]
-  returnItems    SaleReturnItem[]
+  shop                 Shop                  @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  category             Category?             @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  stockMovements       StockMovement[]
+  saleItems            SaleItem[]
+  returnItems          SaleReturnItem[]
+  purchaseOrderItems   PurchaseOrderItem[]
+  purchaseReceiptItems PurchaseReceiptItem[]
 
   @@map("products")
 }
@@ -264,11 +270,90 @@ model Supplier {
   shop           Shop            @relation(fields: [shopId], references: [id], onDelete: Cascade)
   stockMovements StockMovement[]
   supplierDebts  SupplierDebt[]
+  purchaseOrders PurchaseOrder[]
 
   @@map("suppliers")
 }
 
+// ── PurchaseOrder ─────────────────────────────────────────────
+model PurchaseOrder {
+  id          Int      @id @default(autoincrement())
+  shopId      Int
+  supplierId  Int
+  createdById Int?
+  orderNumber String   @unique
+  status      String   @default("DRAFT")
+  totalAmount Float    @default(0)
+  note        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  shop      Shop                @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  supplier  Supplier            @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  createdBy User?               @relation("PurchaseOrderCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  items     PurchaseOrderItem[]
+  receipts  PurchaseReceipt[]
+
+  @@index([shopId, status])
+  @@map("purchase_orders")
+}
+
+model PurchaseOrderItem {
+  id               Int    @id @default(autoincrement())
+  purchaseOrderId  Int
+  productId        Int
+  productName      String
+  quantityOrdered  Int
+  quantityReceived Int    @default(0)
+  unitCost         Float
+  totalAmount      Float
+
+  purchaseOrder PurchaseOrder         @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  product       Product               @relation(fields: [productId], references: [id], onDelete: Cascade)
+  receiptItems  PurchaseReceiptItem[]
+
+  @@index([purchaseOrderId])
+  @@map("purchase_order_items")
+}
+
+model PurchaseReceipt {
+  id              Int      @id @default(autoincrement())
+  purchaseOrderId Int
+  shopId          Int
+  userId          Int?
+  receiptNumber   String   @unique
+  note            String?
+  receivedAt      DateTime @default(now())
+
+  purchaseOrder PurchaseOrder         @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  shop          Shop                  @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  user          User?                 @relation("PurchaseReceiptReceiver", fields: [userId], references: [id], onDelete: SetNull)
+  items         PurchaseReceiptItem[]
+  debt          SupplierDebt?
+
+  @@index([shopId, purchaseOrderId])
+  @@map("purchase_receipts")
+}
+
+model PurchaseReceiptItem {
+  id                  Int   @id @default(autoincrement())
+  receiptId           Int
+  purchaseOrderItemId Int
+  quantity            Int
+  unitCost            Float
+  totalAmount         Float
+
+  receipt   PurchaseReceipt   @relation(fields: [receiptId], references: [id], onDelete: Cascade)
+  orderItem PurchaseOrderItem @relation(fields: [purchaseOrderItemId], references: [id], onDelete: Cascade)
+  product   Product?          @relation(fields: [productId], references: [id])
+  productId Int?
+
+  @@unique([receiptId, purchaseOrderItemId])
+  @@map("purchase_receipt_items")
+}
+
 // ── SupplierDebt ──────────────────────────────────────────────
+
 model SupplierDebt {
   id          Int      @id @default(autoincrement())
   supplierId  Int
@@ -276,11 +361,13 @@ model SupplierDebt {
   paidAmount  Float    @default(0)
   remaining   Float
   status      String   @default("UNPAID")
+  receiptId   Int?     @unique
   note        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   supplier Supplier          @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  receipt  PurchaseReceipt?  @relation(fields: [receiptId], references: [id], onDelete: SetNull)
   payments SupplierPayment[]
 
   @@map("supplier_debts")
