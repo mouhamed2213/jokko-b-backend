@@ -4,5 +4,6 @@ import { AdvancedReportController } from "./advanced-report.controller.js";
 
 const router = Router();
 router.get("/summary", protect, authorizeRoles("ADMIN", "EMPLOYEE"), AdvancedReportController.summary);
+router.get("/export", protect, authorizeRoles("ADMIN", "EMPLOYEE"), AdvancedReportController.exportCsv);
 
 export default router;
