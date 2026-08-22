@@ -48,6 +48,8 @@ model Shop {
   expenses         Expense[]
   reconciliations  CashReconciliation[]
   clientReminders  ClientReminder[]
+  notificationPreferences NotificationPreference?
+  notifications Notification[]
   purchaseOrders   PurchaseOrder[]
   purchaseReceipts PurchaseReceipt[]
 
@@ -254,6 +256,56 @@ model ClientReminder {
 
   @@index([shopId, clientId, createdAt])
   @@map("client_reminders")
+}
+
+model NotificationPreference {
+  id                         Int      @id @default(autoincrement())
+  shopId                     Int      @unique
+  enabled                    Boolean  @default(true)
+  lowStockEnabled            Boolean  @default(true)
+  outOfStockEnabled          Boolean  @default(true)
+  dormantProductEnabled      Boolean  @default(true)
+  clientDebtEnabled          Boolean  @default(true)
+  supplierDebtEnabled        Boolean  @default(true)
+  subscriptionExpiryEnabled  Boolean  @default(true)
+  marginEnabled              Boolean  @default(true)
+  cashDiscrepancyEnabled     Boolean  @default(true)
+  dormantDays                Int      @default(30)
+  subscriptionExpiryDays     Int      @default(7)
+  clientDebtThreshold        Float    @default(100000)
+  supplierDebtThreshold      Float    @default(100000)
+  marginRateThreshold        Float    @default(0)
+  marginPeriodDays           Int      @default(30)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@map("notification_preferences")
+}
+
+model Notification {
+  id                Int      @id @default(autoincrement())
+  shopId            Int
+  type              String
+  severity          String   @default("INFO")
+  title             String
+  message           String
+  entityType        String?
+  entityId          Int?
+  deduplicationKey  String
+  metadata          Json?
+  readAt            DateTime?
+  resolvedAt        DateTime?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@unique([shopId, deduplicationKey])
+  @@index([shopId, resolvedAt, createdAt])
+  @@index([shopId, readAt, createdAt])
+  @@map("notifications")
 }
 
 // ── Supplier ──────────────────────────────────────────────────

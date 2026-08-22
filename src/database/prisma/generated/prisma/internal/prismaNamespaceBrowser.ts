@@ -64,6 +64,8 @@ export const ModelName = {
   Product: 'Product',
   Client: 'Client',
   ClientReminder: 'ClientReminder',
+  NotificationPreference: 'NotificationPreference',
+  Notification: 'Notification',
   Supplier: 'Supplier',
   PurchaseOrder: 'PurchaseOrder',
   PurchaseOrderItem: 'PurchaseOrderItem',
@@ -279,6 +281,51 @@ export const ClientReminderScalarFieldEnum = {
 } as const
 
 export type ClientReminderScalarFieldEnum = (typeof ClientReminderScalarFieldEnum)[keyof typeof ClientReminderScalarFieldEnum]
+
+
+export const NotificationPreferenceScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  enabled: 'enabled',
+  lowStockEnabled: 'lowStockEnabled',
+  outOfStockEnabled: 'outOfStockEnabled',
+  dormantProductEnabled: 'dormantProductEnabled',
+  clientDebtEnabled: 'clientDebtEnabled',
+  supplierDebtEnabled: 'supplierDebtEnabled',
+  subscriptionExpiryEnabled: 'subscriptionExpiryEnabled',
+  marginEnabled: 'marginEnabled',
+  cashDiscrepancyEnabled: 'cashDiscrepancyEnabled',
+  dormantDays: 'dormantDays',
+  subscriptionExpiryDays: 'subscriptionExpiryDays',
+  clientDebtThreshold: 'clientDebtThreshold',
+  supplierDebtThreshold: 'supplierDebtThreshold',
+  marginRateThreshold: 'marginRateThreshold',
+  marginPeriodDays: 'marginPeriodDays',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationPreferenceScalarFieldEnum = (typeof NotificationPreferenceScalarFieldEnum)[keyof typeof NotificationPreferenceScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  type: 'type',
+  severity: 'severity',
+  title: 'title',
+  message: 'message',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  deduplicationKey: 'deduplicationKey',
+  metadata: 'metadata',
+  readAt: 'readAt',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const SupplierScalarFieldEnum = {

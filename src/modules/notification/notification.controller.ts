@@ -3,10 +3,17 @@ import type { AuthRequest } from "../../middlewares/auth.middleware.js";
 import { logger } from "../../config/logger.js";
 import { UnauthorizedError } from "../../utils/errors.js";
 import { NotificationService } from "./notification.service.js";
+import { NotificationSchemas } from "./notification.schemas.js";
 
 const assertAuthenticated = (req: AuthRequest) => {
-  if (!req.user) throw new UnauthorizedError("Token invalid ou expiré");
+  if (!req.user) throw new UnauthorizedError("Token invalide ou expiré");
   return req.user;
+};
+
+const assertAdvancedAccess = async (req: AuthRequest) => {
+  const user = assertAuthenticated(req);
+  await NotificationService.assertAdvancedAccess(user.shopId, user.ownerId);
+  return user;
 };
 
 export const NotificationController = {
@@ -26,9 +33,7 @@ export const NotificationController = {
       res.flushHeaders();
 
       NotificationService.addClient(shopId, res);
-      logger.info(
-        `SSE connecté — Shop: ${shopId} — User: ${userId}`,
-      );
+      logger.info(`SSE connecté — Shop: ${shopId} — User: ${userId}`);
 
       NotificationService.writeToClient(res, "connected", {
         message: "Connexion établie",
@@ -42,6 +47,11 @@ export const NotificationController = {
             type: "initial",
             ...alerts,
           });
+        }
+        const subscription = await NotificationService.assertAdvancedAccess(shopId, user.ownerId);
+        if (subscription) {
+          const notifications = await NotificationService.getNotifications(shopId);
+          NotificationService.writeToClient(res, "notification.initial", notifications);
         }
       } catch (error) {
         logger.error("Erreur envoi alertes initiales SSE", { error });
@@ -65,15 +75,61 @@ export const NotificationController = {
     }
   },
 
-  getStockAlerts: async (
-    req: AuthRequest,
-    res: Response,
-    next: NextFunction,
-  ) => {
+  getStockAlerts: async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       const user = assertAuthenticated(req);
       const alerts = await NotificationService.getStockAlerts(user.shopId);
       return res.status(200).json(alerts);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getNotifications: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = await assertAdvancedAccess(req);
+      return res.status(200).json(await NotificationService.getNotifications(user.shopId));
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getPreferences: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = await assertAdvancedAccess(req);
+      return res.status(200).json(await NotificationService.getPreferences(user.shopId));
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  updatePreferences: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = await assertAdvancedAccess(req);
+      const data = NotificationSchemas.updatePreferences(req.body);
+      return res.status(200).json(
+        await NotificationService.updatePreferences(user.shopId, data),
+      );
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  markRead: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = await assertAdvancedAccess(req);
+      const notificationId = NotificationSchemas.notificationId(req.params.id);
+      await NotificationService.markRead(user.shopId, notificationId);
+      return res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  markAllRead: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = await assertAdvancedAccess(req);
+      return res.status(200).json(await NotificationService.markAllRead(user.shopId));
     } catch (error) {
       next(error);
     }
