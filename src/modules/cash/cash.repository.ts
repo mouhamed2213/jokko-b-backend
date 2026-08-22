@@ -32,6 +32,7 @@ export const CashRepository = {
       include: {
         transactions: { orderBy: { createdAt: "asc" } },
         user: { select: { name: true } },
+        reconciliation: true,
       },
     });
   },
@@ -61,7 +62,45 @@ export const CashRepository = {
     });
   },
 
+    findReconciliationByRegisterIdAndShop: async (
+    db: DatabaseClient,
+    registerId: number,
+    shopId: number,
+  ) =>
+    db.cashReconciliation.findFirst({
+      where: { cashRegisterId: registerId, shopId },
+      include: { user: { select: { id: true, name: true } } },
+    }),
+
+  createReconciliation: async (
+    db: DatabaseClient,
+    input: {
+      shopId: number;
+      cashRegisterId: number;
+      userId: number;
+      expectedAmount: number;
+      countedAmount: number;
+      difference: number;
+      status: string;
+      note?: string;
+    },
+  ) =>
+    db.cashReconciliation.create({
+      data: {
+        shopId: input.shopId,
+        cashRegisterId: input.cashRegisterId,
+        userId: input.userId,
+        expectedAmount: input.expectedAmount,
+        countedAmount: input.countedAmount,
+        difference: input.difference,
+        status: input.status,
+        note: input.note || null,
+      },
+      include: { user: { select: { id: true, name: true } } },
+    }),
+
   closeRegister: async (
+
     db: DatabaseClient,
     id: number,
     closingAmount: number,

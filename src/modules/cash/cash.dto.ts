@@ -41,3 +41,10 @@ export type CashRecordInput = {
 export type CashRecordOptions = {
   required?: boolean;
 };
+
+export type CashReconciliationStatus = "BALANCED" | "SHORTAGE" | "SURPLUS";
+
+export type ReconcileCashDto = {
+  countedAmount: number;
+  note?: string;
+};

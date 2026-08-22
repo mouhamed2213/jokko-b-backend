@@ -419,6 +419,7 @@ export const ModelName = {
   SaleReturn: 'SaleReturn',
   SaleReturnItem: 'SaleReturnItem',
   CashRegister: 'CashRegister',
+  CashReconciliation: 'CashReconciliation',
   CashTransaction: 'CashTransaction',
   Expense: 'Expense',
   Payment: 'Payment',
@@ -438,7 +439,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "category" | "product" | "client" | "supplier" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashTransaction" | "expense" | "payment" | "auditLog"
+    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "category" | "product" | "client" | "supplier" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2070,6 +2071,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CashReconciliation: {
+      payload: Prisma.$CashReconciliationPayload<ExtArgs>
+      fields: Prisma.CashReconciliationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CashReconciliationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CashReconciliationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>
+        }
+        findFirst: {
+          args: Prisma.CashReconciliationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CashReconciliationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>
+        }
+        findMany: {
+          args: Prisma.CashReconciliationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>[]
+        }
+        create: {
+          args: Prisma.CashReconciliationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>
+        }
+        createMany: {
+          args: Prisma.CashReconciliationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CashReconciliationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>[]
+        }
+        delete: {
+          args: Prisma.CashReconciliationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>
+        }
+        update: {
+          args: Prisma.CashReconciliationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>
+        }
+        deleteMany: {
+          args: Prisma.CashReconciliationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CashReconciliationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CashReconciliationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>[]
+        }
+        upsert: {
+          args: Prisma.CashReconciliationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CashReconciliationPayload>
+        }
+        aggregate: {
+          args: Prisma.CashReconciliationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCashReconciliation>
+        }
+        groupBy: {
+          args: Prisma.CashReconciliationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CashReconciliationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CashReconciliationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CashReconciliationCountAggregateOutputType> | number
+        }
+      }
+    }
     CashTransaction: {
       payload: Prisma.$CashTransactionPayload<ExtArgs>
       fields: Prisma.CashTransactionFieldRefs
@@ -2721,6 +2796,22 @@ export const CashRegisterScalarFieldEnum = {
 export type CashRegisterScalarFieldEnum = (typeof CashRegisterScalarFieldEnum)[keyof typeof CashRegisterScalarFieldEnum]
 
 
+export const CashReconciliationScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  cashRegisterId: 'cashRegisterId',
+  userId: 'userId',
+  expectedAmount: 'expectedAmount',
+  countedAmount: 'countedAmount',
+  difference: 'difference',
+  status: 'status',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type CashReconciliationScalarFieldEnum = (typeof CashReconciliationScalarFieldEnum)[keyof typeof CashReconciliationScalarFieldEnum]
+
+
 export const CashTransactionScalarFieldEnum = {
   id: 'id',
   cashRegisterId: 'cashRegisterId',
@@ -3211,6 +3302,7 @@ export type GlobalOmitConfig = {
   saleReturn?: Prisma.SaleReturnOmit
   saleReturnItem?: Prisma.SaleReturnItemOmit
   cashRegister?: Prisma.CashRegisterOmit
+  cashReconciliation?: Prisma.CashReconciliationOmit
   cashTransaction?: Prisma.CashTransactionOmit
   expense?: Prisma.ExpenseOmit
   payment?: Prisma.PaymentOmit

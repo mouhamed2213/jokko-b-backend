@@ -5,6 +5,7 @@ import type {
   CloseCashDto,
   CreateCashTransactionDto,
   OpenCashDto,
+  ReconcileCashDto,
 } from "./cash.dto.js";
 
 const METHODS: CashPaymentMethod[] = [
@@ -39,6 +40,17 @@ export const CashSchemas = {
   close: (input: Record<string, unknown>): CloseCashDto => ({
     note: optionalText(input.note),
   }),
+
+  reconcile: (input: Record<string, unknown>): ReconcileCashDto => {
+    const countedAmount = Number(input.countedAmount);
+    if (!Number.isFinite(countedAmount) || countedAmount < 0) {
+      throw new BadRequestError("Montant de comptage invalide");
+    }
+    return {
+      countedAmount,
+      note: optionalText(input.note),
+    };
+  },
 
   id: (value: unknown): number => {
     const id = Number(value);

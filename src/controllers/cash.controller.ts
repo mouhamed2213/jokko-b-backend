@@ -6,3 +6,5 @@ export const getCurrentCash = DomainCashController.getCurrentCash;
 export const getCashHistory = DomainCashController.getCashHistory;
 export const getCashById = DomainCashController.getCashById;
 export const addTransaction = DomainCashController.addTransaction;
+export const getReconciliation = DomainCashController.getReconciliation;
+export const reconcileCash = DomainCashController.reconcileCash;
