@@ -24,7 +24,47 @@ export const ClientController = {
     }
   },
 
+    getClientStatement: async (
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const user = assertAuthenticated(req);
+      const id = ClientSchemas.id(req.params.id);
+      const query = ClientSchemas.statementQuery(req.query as Record<string, unknown>);
+      return res.status(200).json(
+        await ClientService.getClientStatement(user.ownerId, user.shopId, id, query),
+      );
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  createClientReminder: async (
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const user = assertAuthenticated(req);
+      const id = ClientSchemas.id(req.params.id);
+      const payload = ClientSchemas.reminder(req.body as Record<string, unknown>);
+      const reminder = await ClientService.createClientReminder(
+        user.ownerId,
+        user.shopId,
+        user.userId,
+        id,
+        payload,
+      );
+      return res.status(201).json({ message: "Rappel enregistré", reminder });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   getClientById: async (
+
     req: AuthRequest,
     res: Response,
     next: NextFunction,

@@ -102,6 +102,11 @@ export type Product = Prisma.ProductModel
  */
 export type Client = Prisma.ClientModel
 /**
+ * Model ClientReminder
+ * 
+ */
+export type ClientReminder = Prisma.ClientReminderModel
+/**
  * Model Supplier
  * 
  */

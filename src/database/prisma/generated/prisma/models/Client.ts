@@ -246,6 +246,7 @@ export type ClientWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Client"> | Date | string
   shop?: Prisma.XOR<Prisma.ShopScalarRelationFilter, Prisma.ShopWhereInput>
   sales?: Prisma.SaleListRelationFilter
+  reminders?: Prisma.ClientReminderListRelationFilter
 }
 
 export type ClientOrderByWithRelationInput = {
@@ -259,6 +260,7 @@ export type ClientOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   shop?: Prisma.ShopOrderByWithRelationInput
   sales?: Prisma.SaleOrderByRelationAggregateInput
+  reminders?: Prisma.ClientReminderOrderByRelationAggregateInput
 }
 
 export type ClientWhereUniqueInput = Prisma.AtLeast<{
@@ -275,6 +277,7 @@ export type ClientWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Client"> | Date | string
   shop?: Prisma.XOR<Prisma.ShopScalarRelationFilter, Prisma.ShopWhereInput>
   sales?: Prisma.SaleListRelationFilter
+  reminders?: Prisma.ClientReminderListRelationFilter
 }, "id">
 
 export type ClientOrderByWithAggregationInput = {
@@ -316,6 +319,7 @@ export type ClientCreateInput = {
   updatedAt?: Date | string
   shop: Prisma.ShopCreateNestedOneWithoutClientsInput
   sales?: Prisma.SaleCreateNestedManyWithoutClientInput
+  reminders?: Prisma.ClientReminderCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateInput = {
@@ -328,6 +332,7 @@ export type ClientUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutClientInput
+  reminders?: Prisma.ClientReminderUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientUpdateInput = {
@@ -339,6 +344,7 @@ export type ClientUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   shop?: Prisma.ShopUpdateOneRequiredWithoutClientsNestedInput
   sales?: Prisma.SaleUpdateManyWithoutClientNestedInput
+  reminders?: Prisma.ClientReminderUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateInput = {
@@ -351,6 +357,7 @@ export type ClientUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sales?: Prisma.SaleUncheckedUpdateManyWithoutClientNestedInput
+  reminders?: Prisma.ClientReminderUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateManyInput = {
@@ -437,6 +444,11 @@ export type ClientSumOrderByAggregateInput = {
   shopId?: Prisma.SortOrder
 }
 
+export type ClientScalarRelationFilter = {
+  is?: Prisma.ClientWhereInput
+  isNot?: Prisma.ClientWhereInput
+}
+
 export type ClientNullableScalarRelationFilter = {
   is?: Prisma.ClientWhereInput | null
   isNot?: Prisma.ClientWhereInput | null
@@ -484,6 +496,20 @@ export type ClientUncheckedUpdateManyWithoutShopNestedInput = {
   deleteMany?: Prisma.ClientScalarWhereInput | Prisma.ClientScalarWhereInput[]
 }
 
+export type ClientCreateNestedOneWithoutRemindersInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutRemindersInput, Prisma.ClientUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutRemindersInput
+  connect?: Prisma.ClientWhereUniqueInput
+}
+
+export type ClientUpdateOneRequiredWithoutRemindersNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutRemindersInput, Prisma.ClientUncheckedCreateWithoutRemindersInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutRemindersInput
+  upsert?: Prisma.ClientUpsertWithoutRemindersInput
+  connect?: Prisma.ClientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutRemindersInput, Prisma.ClientUpdateWithoutRemindersInput>, Prisma.ClientUncheckedUpdateWithoutRemindersInput>
+}
+
 export type ClientCreateNestedOneWithoutSalesInput = {
   create?: Prisma.XOR<Prisma.ClientCreateWithoutSalesInput, Prisma.ClientUncheckedCreateWithoutSalesInput>
   connectOrCreate?: Prisma.ClientCreateOrConnectWithoutSalesInput
@@ -508,6 +534,7 @@ export type ClientCreateWithoutShopInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sales?: Prisma.SaleCreateNestedManyWithoutClientInput
+  reminders?: Prisma.ClientReminderCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutShopInput = {
@@ -519,6 +546,7 @@ export type ClientUncheckedCreateWithoutShopInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutClientInput
+  reminders?: Prisma.ClientReminderUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutShopInput = {
@@ -561,6 +589,68 @@ export type ClientScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Client"> | Date | string
 }
 
+export type ClientCreateWithoutRemindersInput = {
+  name: string
+  phone: string
+  email?: string | null
+  address?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  shop: Prisma.ShopCreateNestedOneWithoutClientsInput
+  sales?: Prisma.SaleCreateNestedManyWithoutClientInput
+}
+
+export type ClientUncheckedCreateWithoutRemindersInput = {
+  id?: number
+  shopId: number
+  name: string
+  phone: string
+  email?: string | null
+  address?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type ClientCreateOrConnectWithoutRemindersInput = {
+  where: Prisma.ClientWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientCreateWithoutRemindersInput, Prisma.ClientUncheckedCreateWithoutRemindersInput>
+}
+
+export type ClientUpsertWithoutRemindersInput = {
+  update: Prisma.XOR<Prisma.ClientUpdateWithoutRemindersInput, Prisma.ClientUncheckedUpdateWithoutRemindersInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutRemindersInput, Prisma.ClientUncheckedCreateWithoutRemindersInput>
+  where?: Prisma.ClientWhereInput
+}
+
+export type ClientUpdateToOneWithWhereWithoutRemindersInput = {
+  where?: Prisma.ClientWhereInput
+  data: Prisma.XOR<Prisma.ClientUpdateWithoutRemindersInput, Prisma.ClientUncheckedUpdateWithoutRemindersInput>
+}
+
+export type ClientUpdateWithoutRemindersInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  shop?: Prisma.ShopUpdateOneRequiredWithoutClientsNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutClientNestedInput
+}
+
+export type ClientUncheckedUpdateWithoutRemindersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  shopId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutClientNestedInput
+}
+
 export type ClientCreateWithoutSalesInput = {
   name: string
   phone: string
@@ -569,6 +659,7 @@ export type ClientCreateWithoutSalesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   shop: Prisma.ShopCreateNestedOneWithoutClientsInput
+  reminders?: Prisma.ClientReminderCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutSalesInput = {
@@ -580,6 +671,7 @@ export type ClientUncheckedCreateWithoutSalesInput = {
   address?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  reminders?: Prisma.ClientReminderUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutSalesInput = {
@@ -606,6 +698,7 @@ export type ClientUpdateWithoutSalesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   shop?: Prisma.ShopUpdateOneRequiredWithoutClientsNestedInput
+  reminders?: Prisma.ClientReminderUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutSalesInput = {
@@ -617,6 +710,7 @@ export type ClientUncheckedUpdateWithoutSalesInput = {
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reminders?: Prisma.ClientReminderUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateManyShopInput = {
@@ -637,6 +731,7 @@ export type ClientUpdateWithoutShopInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sales?: Prisma.SaleUpdateManyWithoutClientNestedInput
+  reminders?: Prisma.ClientReminderUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutShopInput = {
@@ -648,6 +743,7 @@ export type ClientUncheckedUpdateWithoutShopInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sales?: Prisma.SaleUncheckedUpdateManyWithoutClientNestedInput
+  reminders?: Prisma.ClientReminderUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateManyWithoutShopInput = {
@@ -667,10 +763,12 @@ export type ClientUncheckedUpdateManyWithoutShopInput = {
 
 export type ClientCountOutputType = {
   sales: number
+  reminders: number
 }
 
 export type ClientCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sales?: boolean | ClientCountOutputTypeCountSalesArgs
+  reminders?: boolean | ClientCountOutputTypeCountRemindersArgs
 }
 
 /**
@@ -690,6 +788,13 @@ export type ClientCountOutputTypeCountSalesArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.SaleWhereInput
 }
 
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountRemindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClientReminderWhereInput
+}
+
 
 export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -702,6 +807,7 @@ export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedAt?: boolean
   shop?: boolean | Prisma.ShopDefaultArgs<ExtArgs>
   sales?: boolean | Prisma.Client$salesArgs<ExtArgs>
+  reminders?: boolean | Prisma.Client$remindersArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["client"]>
 
@@ -744,6 +850,7 @@ export type ClientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type ClientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   shop?: boolean | Prisma.ShopDefaultArgs<ExtArgs>
   sales?: boolean | Prisma.Client$salesArgs<ExtArgs>
+  reminders?: boolean | Prisma.Client$remindersArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -758,6 +865,7 @@ export type $ClientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     shop: Prisma.$ShopPayload<ExtArgs>
     sales: Prisma.$SalePayload<ExtArgs>[]
+    reminders: Prisma.$ClientReminderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1164,6 +1272,7 @@ export interface Prisma__ClientClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   shop<T extends Prisma.ShopDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShopDefaultArgs<ExtArgs>>): Prisma.Prisma__ShopClient<runtime.Types.Result.GetResult<Prisma.$ShopPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sales<T extends Prisma.Client$salesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$salesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminders<T extends Prisma.Client$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1623,6 +1732,30 @@ export type Client$salesArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.SaleScalarFieldEnum | Prisma.SaleScalarFieldEnum[]
+}
+
+/**
+ * Client.reminders
+ */
+export type Client$remindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClientReminder
+   */
+  select?: Prisma.ClientReminderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClientReminder
+   */
+  omit?: Prisma.ClientReminderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientReminderInclude<ExtArgs> | null
+  where?: Prisma.ClientReminderWhereInput
+  orderBy?: Prisma.ClientReminderOrderByWithRelationInput | Prisma.ClientReminderOrderByWithRelationInput[]
+  cursor?: Prisma.ClientReminderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClientReminderScalarFieldEnum | Prisma.ClientReminderScalarFieldEnum[]
 }
 
 /**

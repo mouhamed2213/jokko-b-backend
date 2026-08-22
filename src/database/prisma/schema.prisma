@@ -47,6 +47,7 @@ model Shop {
   saleReturns     SaleReturn[]
   expenses        Expense[]
   reconciliations CashReconciliation[]
+  clientReminders ClientReminder[]
 
   usageCounter UsageCounter[]
   owners       ShopOwner[]
@@ -165,6 +166,7 @@ model User {
   saleReturns     SaleReturn[]
   expenses        Expense[]
   reconciliations CashReconciliation[]
+  reminders       ClientReminder[]
 
   @@map("users")
 }
@@ -223,10 +225,29 @@ model Client {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  shop  Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  sales Sale[]
+  shop      Shop             @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  sales     Sale[]
+  reminders ClientReminder[]
 
   @@map("clients")
+}
+
+model ClientReminder {
+  id        Int      @id @default(autoincrement())
+  shopId    Int
+  clientId  Int
+  userId    Int?
+  amountDue Float
+  message   String
+  channel   String   @default("IN_APP")
+  createdAt DateTime @default(now())
+
+  shop   Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  user   User?  @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([shopId, clientId, createdAt])
+  @@map("client_reminders")
 }
 
 // ── Supplier ──────────────────────────────────────────────────

@@ -29,3 +29,12 @@ export type UpdateClientDto = {
   email?: string | null;
   address?: string | null;
 };
+
+export type ClientStatementQueryDto = {
+  from?: Date;
+  to?: Date;
+};
+
+export type CreateClientReminderDto = {
+  message?: string;
+};
