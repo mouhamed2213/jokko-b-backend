@@ -28,6 +28,7 @@ import uploadRoutes from "./routes/upload.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import purchaseOrderRoutes from "./modules/purchase-order/purchase-order.routes.js";
 import marginRoutes from "./modules/margin/margin.routes.js";
+import advancedReportRoutes from "./modules/advanced-report/advanced-report.routes.js";
 
 const app = express();
 // const PORT = Number(env.PORT) || 5000;
@@ -68,6 +69,7 @@ app.use("/api/suppliers", supplierRoutes);
 app.use("/api/stock", stockRoutes);
 app.use("/api/purchase-orders", purchaseOrderRoutes);
 app.use("/api/margins", marginRoutes);
+app.use("/api/advanced-reports", advancedReportRoutes);
 
 app.use("/api/sales", saleRoutes);
 app.use("/api/sales", saleReturnRoutes);
