@@ -422,6 +422,9 @@ export const SaleItemScalarFieldEnum = {
   productImageUrl: 'productImageUrl',
   quantity: 'quantity',
   unitPrice: 'unitPrice',
+  unitCost: 'unitCost',
+  costTotal: 'costTotal',
+  marginAmount: 'marginAmount',
   totalAmount: 'totalAmount'
 } as const
 
@@ -464,6 +467,7 @@ export const SaleReturnItemScalarFieldEnum = {
   productName: 'productName',
   quantity: 'quantity',
   unitPrice: 'unitPrice',
+  costAmount: 'costAmount',
   totalAmount: 'totalAmount'
 } as const
 

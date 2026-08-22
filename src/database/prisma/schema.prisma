@@ -443,6 +443,9 @@ model SaleItem {
   productImageUrl String?
   quantity        Int
   unitPrice       Float
+  unitCost        Float?
+  costTotal       Float?
+  marginAmount    Float?
   totalAmount     Float
 
   sale    Sale             @relation(fields: [saleId], references: [id], onDelete: Cascade)
@@ -497,6 +500,7 @@ model SaleReturnItem {
   productName  String
   quantity     Int
   unitPrice    Float
+  costAmount   Float?
   totalAmount  Float
 
   saleReturn SaleReturn @relation(fields: [saleReturnId], references: [id], onDelete: Cascade)
