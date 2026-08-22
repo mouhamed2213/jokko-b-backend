@@ -94,7 +94,13 @@ export const PurchaseOrderService = {
         const unitCost = requested.unitCost ?? orderItem.unitCost;
         const updated = await PurchaseOrderRepository.updateReceivedQuantity(db, orderItem.id, requested.quantity, orderItem.quantityOrdered);
         if (updated.count !== 1) throw new BadRequestError("Réception déjà traitée");
-        const productUpdated = await StockRepository.incrementProductQuantity(db, orderItem.productId, shopId, requested.quantity);
+        const productUpdated = await StockRepository.applyEntryWithAverageCost(
+          db,
+          orderItem.productId,
+          shopId,
+          requested.quantity,
+          unitCost,
+        );
         if (productUpdated.count !== 1) throw new NotFoundError("Ressource introuvable");
         await StockRepository.createMovement(
           db,
