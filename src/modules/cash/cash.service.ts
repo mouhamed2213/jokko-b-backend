@@ -1,5 +1,6 @@
 import { prisma } from "../../config/prisma.js";
-import { BadRequestError, NotFoundError } from "../../utils/errors.js";
+import { BadRequestError, ForbiddenError, NotFoundError, UnauthorizedError } from "../../utils/errors.js";
+import { PlanChecker } from "../../services/plan-checker.service.js";
 import type {
   CashHistoryQueryDto,
   CashRecordInput,
@@ -7,6 +8,7 @@ import type {
   CloseCashDto,
   CreateCashTransactionDto,
   OpenCashDto,
+  ReconcileCashDto,
 } from "./cash.dto.js";
 import { CashRepository } from "./cash.repository.js";
 
@@ -186,6 +188,96 @@ export const CashService = {
     const currentBalance =
       register.closingAmount ?? register.openingAmount + register.totalIn - register.totalOut;
     return { ...register, currentBalance };
+  },
+
+  getReconciliation: async (ownerId: number, shopId: number, registerId: number) => {
+    const ownership = await prisma.shopOwner.findUnique({
+      where: { userId_shopId: { userId: ownerId, shopId } },
+      select: { id: true },
+    });
+    if (!ownership) throw new UnauthorizedError("Accès non autorisé");
+
+    const subscription = await PlanChecker.plan(shopId, ownership.id);
+    if (
+      ["EXPIRED", "SUSPENDED", "TRIAL_EXPIRED"].includes(subscription.status) ||
+      !subscription.features.includes("CASH_CONTROL" as never)
+    ) {
+      throw new ForbiddenError("Opération non autorisée");
+    }
+
+    const register = await CashRepository.findRegisterByIdAndShop(registerId, shopId);
+    if (!register) throw new NotFoundError("Ressource introuvable");
+    const reconciliation = await CashRepository.findReconciliationByRegisterIdAndShop(
+      prisma,
+      registerId,
+      shopId,
+    );
+    return reconciliation;
+  },
+
+  reconcileCash: async (
+    ownerId: number,
+    shopId: number,
+    userId: number,
+    registerId: number,
+    data: ReconcileCashDto,
+  ) => {
+    const ownership = await prisma.shopOwner.findUnique({
+      where: { userId_shopId: { userId: ownerId, shopId } },
+      select: { id: true },
+    });
+    if (!ownership) throw new UnauthorizedError("Accès non autorisé");
+
+    const subscription = await PlanChecker.plan(shopId, ownership.id);
+    if (
+      ["EXPIRED", "SUSPENDED", "TRIAL_EXPIRED"].includes(subscription.status) ||
+      !subscription.features.includes("CASH_CONTROL" as never)
+    ) {
+      throw new ForbiddenError("Opération non autorisée");
+    }
+
+    return prisma.$transaction(async (tx: any) => {
+      const register = await CashRepository.findOpenRegisterByIdAndShop(
+        registerId,
+        shopId,
+        tx,
+      );
+      if (!register) throw new BadRequestError("Opération impossible");
+
+      const existing = await CashRepository.findReconciliationByRegisterIdAndShop(
+        tx,
+        registerId,
+        shopId,
+      );
+      if (existing) throw new BadRequestError("Opération impossible");
+
+      const expectedAmount = register.openingAmount + register.totalIn - register.totalOut;
+      const difference = data.countedAmount - expectedAmount;
+      const status = difference === 0
+        ? "BALANCED"
+        : difference < 0
+          ? "SHORTAGE"
+          : "SURPLUS";
+
+      const reconciliation = await CashRepository.createReconciliation(tx, {
+        shopId,
+        cashRegisterId: registerId,
+        userId,
+        expectedAmount,
+        countedAmount: data.countedAmount,
+        difference,
+        status,
+        note: data.note,
+      });
+      const cashRegister = await CashRepository.closeRegister(
+        tx,
+        registerId,
+        data.countedAmount,
+        data.note,
+      );
+
+      return { reconciliation, cashRegister };
+    });
   },
 
   addTransaction: async (

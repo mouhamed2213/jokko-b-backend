@@ -21,31 +21,32 @@ model SuperAdmin {
 
 // ── Shop ─────────────────────────────────────────────────────
 model Shop {
-  id             Int             @id @default(autoincrement())
-  name           String
-  ownerName      String
-  email          String          @unique
-  phone          String
-  address        String?
-  logoUrl        String?
-  primaryShopId  Int?
-  primaryShop    Shop?           @relation("ShopHierarchy", fields: [primaryShopId], references: [id])
-  secondaryShops Shop[]          @relation("ShopHierarchy")
-  status         String          @default("ACTIVE")
-  currentShop    CurrentShopType @default(PRIMARY)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  users          User[]
-  products       Product[]
-  categories     Category[]
-  clients        Client[]
-  suppliers      Supplier[]
-  sales          Sale[]
-  stockMovements StockMovement[]
-  cashRegisters  CashRegister[]
-  subscriptions  Subscription[]
-  saleReturns    SaleReturn[]
-  expenses       Expense[]
+  id              Int                  @id @default(autoincrement())
+  name            String
+  ownerName       String
+  email           String               @unique
+  phone           String
+  address         String?
+  logoUrl         String?
+  primaryShopId   Int?
+  primaryShop     Shop?                @relation("ShopHierarchy", fields: [primaryShopId], references: [id])
+  secondaryShops  Shop[]               @relation("ShopHierarchy")
+  status          String               @default("ACTIVE")
+  currentShop     CurrentShopType      @default(PRIMARY)
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  users           User[]
+  products        Product[]
+  categories      Category[]
+  clients         Client[]
+  suppliers       Supplier[]
+  sales           Sale[]
+  stockMovements  StockMovement[]
+  cashRegisters   CashRegister[]
+  subscriptions   Subscription[]
+  saleReturns     SaleReturn[]
+  expenses        Expense[]
+  reconciliations CashReconciliation[]
 
   usageCounter UsageCounter[]
   owners       ShopOwner[]
@@ -155,14 +156,15 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  shop           Shop            @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  cashRegisters  CashRegister[]
-  stockMovements StockMovement[]
-  sales          Sale[]
-  userCounts     Int             @default(0)
-  ownedShops     ShopOwner[]
-  saleReturns    SaleReturn[]
-  expenses       Expense[]
+  shop            Shop                 @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  cashRegisters   CashRegister[]
+  stockMovements  StockMovement[]
+  sales           Sale[]
+  userCounts      Int                  @default(0)
+  ownedShops      ShopOwner[]
+  saleReturns     SaleReturn[]
+  expenses        Expense[]
+  reconciliations CashReconciliation[]
 
   @@map("users")
 }
@@ -412,14 +414,35 @@ model CashRegister {
   closedAt      DateTime?
   createdAt     DateTime  @default(now())
 
-  shop         Shop              @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  user         User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
-  transactions CashTransaction[]
+  shop           Shop                @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  user           User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
+  transactions   CashTransaction[]
+  reconciliation CashReconciliation?
 
   @@map("cash_registers")
 }
 
 // ── CashTransaction ───────────────────────────────────────────
+model CashReconciliation {
+  id             Int      @id @default(autoincrement())
+  shopId         Int
+  cashRegisterId Int      @unique
+  userId         Int?
+  expectedAmount Float
+  countedAmount  Float
+  difference     Float
+  status         String
+  note           String?
+  createdAt      DateTime @default(now())
+
+  shop         Shop         @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  cashRegister CashRegister @relation(fields: [cashRegisterId], references: [id], onDelete: Cascade)
+  user         User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([shopId, createdAt])
+  @@map("cash_reconciliations")
+}
+
 model CashTransaction {
   id             Int      @id @default(autoincrement())
   cashRegisterId Int

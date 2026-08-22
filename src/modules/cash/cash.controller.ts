@@ -74,6 +74,40 @@ export const CashController = {
     }
   },
 
+  getReconciliation: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = assertAuthenticated(req);
+      const registerId = CashSchemas.id(req.params.id);
+      return res.status(200).json(
+        await CashService.getReconciliation(user.ownerId, user.shopId, registerId),
+      );
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  reconcileCash: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = assertAuthenticated(req);
+      const registerId = CashSchemas.id(req.params.id);
+      const data = CashSchemas.reconcile(req.body as Record<string, unknown>);
+      const result = await CashService.reconcileCash(
+        user.ownerId,
+        user.shopId,
+        user.userId,
+        registerId,
+        data,
+      );
+      return res.status(200).json({
+        message: "Caisse rapprochée et clôturée",
+        reconciliation: result.reconciliation,
+        cashRegister: result.cashRegister,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   addTransaction: async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       const user = assertAuthenticated(req);

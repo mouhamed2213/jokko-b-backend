@@ -73,6 +73,7 @@ export const ModelName = {
   SaleReturn: 'SaleReturn',
   SaleReturnItem: 'SaleReturnItem',
   CashRegister: 'CashRegister',
+  CashReconciliation: 'CashReconciliation',
   CashTransaction: 'CashTransaction',
   Expense: 'Expense',
   Payment: 'Payment',
@@ -409,6 +410,22 @@ export const CashRegisterScalarFieldEnum = {
 } as const
 
 export type CashRegisterScalarFieldEnum = (typeof CashRegisterScalarFieldEnum)[keyof typeof CashRegisterScalarFieldEnum]
+
+
+export const CashReconciliationScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  cashRegisterId: 'cashRegisterId',
+  userId: 'userId',
+  expectedAmount: 'expectedAmount',
+  countedAmount: 'countedAmount',
+  difference: 'difference',
+  status: 'status',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type CashReconciliationScalarFieldEnum = (typeof CashReconciliationScalarFieldEnum)[keyof typeof CashReconciliationScalarFieldEnum]
 
 
 export const CashTransactionScalarFieldEnum = {

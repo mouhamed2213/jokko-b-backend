@@ -128,6 +128,11 @@ export type SaleReturnItem = Prisma.SaleReturnItemModel
  */
 export type CashRegister = Prisma.CashRegisterModel
 /**
+ * Model CashReconciliation
+ * 
+ */
+export type CashReconciliation = Prisma.CashReconciliationModel
+/**
  * Model CashTransaction
  * 
  */

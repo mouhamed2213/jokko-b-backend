@@ -299,6 +299,7 @@ export type CashRegisterWhereInput = {
   shop?: Prisma.XOR<Prisma.ShopScalarRelationFilter, Prisma.ShopWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   transactions?: Prisma.CashTransactionListRelationFilter
+  reconciliation?: Prisma.XOR<Prisma.CashReconciliationNullableScalarRelationFilter, Prisma.CashReconciliationWhereInput> | null
 }
 
 export type CashRegisterOrderByWithRelationInput = {
@@ -317,6 +318,7 @@ export type CashRegisterOrderByWithRelationInput = {
   shop?: Prisma.ShopOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   transactions?: Prisma.CashTransactionOrderByRelationAggregateInput
+  reconciliation?: Prisma.CashReconciliationOrderByWithRelationInput
 }
 
 export type CashRegisterWhereUniqueInput = Prisma.AtLeast<{
@@ -338,6 +340,7 @@ export type CashRegisterWhereUniqueInput = Prisma.AtLeast<{
   shop?: Prisma.XOR<Prisma.ShopScalarRelationFilter, Prisma.ShopWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   transactions?: Prisma.CashTransactionListRelationFilter
+  reconciliation?: Prisma.XOR<Prisma.CashReconciliationNullableScalarRelationFilter, Prisma.CashReconciliationWhereInput> | null
 }, "id">
 
 export type CashRegisterOrderByWithAggregationInput = {
@@ -391,6 +394,7 @@ export type CashRegisterCreateInput = {
   shop: Prisma.ShopCreateNestedOneWithoutCashRegistersInput
   user?: Prisma.UserCreateNestedOneWithoutCashRegistersInput
   transactions?: Prisma.CashTransactionCreateNestedManyWithoutCashRegisterInput
+  reconciliation?: Prisma.CashReconciliationCreateNestedOneWithoutCashRegisterInput
 }
 
 export type CashRegisterUncheckedCreateInput = {
@@ -407,6 +411,7 @@ export type CashRegisterUncheckedCreateInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   transactions?: Prisma.CashTransactionUncheckedCreateNestedManyWithoutCashRegisterInput
+  reconciliation?: Prisma.CashReconciliationUncheckedCreateNestedOneWithoutCashRegisterInput
 }
 
 export type CashRegisterUpdateInput = {
@@ -422,6 +427,7 @@ export type CashRegisterUpdateInput = {
   shop?: Prisma.ShopUpdateOneRequiredWithoutCashRegistersNestedInput
   user?: Prisma.UserUpdateOneWithoutCashRegistersNestedInput
   transactions?: Prisma.CashTransactionUpdateManyWithoutCashRegisterNestedInput
+  reconciliation?: Prisma.CashReconciliationUpdateOneWithoutCashRegisterNestedInput
 }
 
 export type CashRegisterUncheckedUpdateInput = {
@@ -438,6 +444,7 @@ export type CashRegisterUncheckedUpdateInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.CashTransactionUncheckedUpdateManyWithoutCashRegisterNestedInput
+  reconciliation?: Prisma.CashReconciliationUncheckedUpdateOneWithoutCashRegisterNestedInput
 }
 
 export type CashRegisterCreateManyInput = {
@@ -646,6 +653,20 @@ export type CashRegisterUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.CashRegisterScalarWhereInput | Prisma.CashRegisterScalarWhereInput[]
 }
 
+export type CashRegisterCreateNestedOneWithoutReconciliationInput = {
+  create?: Prisma.XOR<Prisma.CashRegisterCreateWithoutReconciliationInput, Prisma.CashRegisterUncheckedCreateWithoutReconciliationInput>
+  connectOrCreate?: Prisma.CashRegisterCreateOrConnectWithoutReconciliationInput
+  connect?: Prisma.CashRegisterWhereUniqueInput
+}
+
+export type CashRegisterUpdateOneRequiredWithoutReconciliationNestedInput = {
+  create?: Prisma.XOR<Prisma.CashRegisterCreateWithoutReconciliationInput, Prisma.CashRegisterUncheckedCreateWithoutReconciliationInput>
+  connectOrCreate?: Prisma.CashRegisterCreateOrConnectWithoutReconciliationInput
+  upsert?: Prisma.CashRegisterUpsertWithoutReconciliationInput
+  connect?: Prisma.CashRegisterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CashRegisterUpdateToOneWithWhereWithoutReconciliationInput, Prisma.CashRegisterUpdateWithoutReconciliationInput>, Prisma.CashRegisterUncheckedUpdateWithoutReconciliationInput>
+}
+
 export type CashRegisterCreateNestedOneWithoutTransactionsInput = {
   create?: Prisma.XOR<Prisma.CashRegisterCreateWithoutTransactionsInput, Prisma.CashRegisterUncheckedCreateWithoutTransactionsInput>
   connectOrCreate?: Prisma.CashRegisterCreateOrConnectWithoutTransactionsInput
@@ -672,6 +693,7 @@ export type CashRegisterCreateWithoutShopInput = {
   createdAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutCashRegistersInput
   transactions?: Prisma.CashTransactionCreateNestedManyWithoutCashRegisterInput
+  reconciliation?: Prisma.CashReconciliationCreateNestedOneWithoutCashRegisterInput
 }
 
 export type CashRegisterUncheckedCreateWithoutShopInput = {
@@ -687,6 +709,7 @@ export type CashRegisterUncheckedCreateWithoutShopInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   transactions?: Prisma.CashTransactionUncheckedCreateNestedManyWithoutCashRegisterInput
+  reconciliation?: Prisma.CashReconciliationUncheckedCreateNestedOneWithoutCashRegisterInput
 }
 
 export type CashRegisterCreateOrConnectWithoutShopInput = {
@@ -745,6 +768,7 @@ export type CashRegisterCreateWithoutUserInput = {
   createdAt?: Date | string
   shop: Prisma.ShopCreateNestedOneWithoutCashRegistersInput
   transactions?: Prisma.CashTransactionCreateNestedManyWithoutCashRegisterInput
+  reconciliation?: Prisma.CashReconciliationCreateNestedOneWithoutCashRegisterInput
 }
 
 export type CashRegisterUncheckedCreateWithoutUserInput = {
@@ -760,6 +784,7 @@ export type CashRegisterUncheckedCreateWithoutUserInput = {
   closedAt?: Date | string | null
   createdAt?: Date | string
   transactions?: Prisma.CashTransactionUncheckedCreateNestedManyWithoutCashRegisterInput
+  reconciliation?: Prisma.CashReconciliationUncheckedCreateNestedOneWithoutCashRegisterInput
 }
 
 export type CashRegisterCreateOrConnectWithoutUserInput = {
@@ -788,6 +813,84 @@ export type CashRegisterUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.CashRegisterUpdateManyMutationInput, Prisma.CashRegisterUncheckedUpdateManyWithoutUserInput>
 }
 
+export type CashRegisterCreateWithoutReconciliationInput = {
+  openingAmount?: number
+  totalIn?: number
+  totalOut?: number
+  closingAmount?: number | null
+  status?: string
+  note?: string | null
+  openedAt?: Date | string
+  closedAt?: Date | string | null
+  createdAt?: Date | string
+  shop: Prisma.ShopCreateNestedOneWithoutCashRegistersInput
+  user?: Prisma.UserCreateNestedOneWithoutCashRegistersInput
+  transactions?: Prisma.CashTransactionCreateNestedManyWithoutCashRegisterInput
+}
+
+export type CashRegisterUncheckedCreateWithoutReconciliationInput = {
+  id?: number
+  shopId: number
+  userId?: number | null
+  openingAmount?: number
+  totalIn?: number
+  totalOut?: number
+  closingAmount?: number | null
+  status?: string
+  note?: string | null
+  openedAt?: Date | string
+  closedAt?: Date | string | null
+  createdAt?: Date | string
+  transactions?: Prisma.CashTransactionUncheckedCreateNestedManyWithoutCashRegisterInput
+}
+
+export type CashRegisterCreateOrConnectWithoutReconciliationInput = {
+  where: Prisma.CashRegisterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CashRegisterCreateWithoutReconciliationInput, Prisma.CashRegisterUncheckedCreateWithoutReconciliationInput>
+}
+
+export type CashRegisterUpsertWithoutReconciliationInput = {
+  update: Prisma.XOR<Prisma.CashRegisterUpdateWithoutReconciliationInput, Prisma.CashRegisterUncheckedUpdateWithoutReconciliationInput>
+  create: Prisma.XOR<Prisma.CashRegisterCreateWithoutReconciliationInput, Prisma.CashRegisterUncheckedCreateWithoutReconciliationInput>
+  where?: Prisma.CashRegisterWhereInput
+}
+
+export type CashRegisterUpdateToOneWithWhereWithoutReconciliationInput = {
+  where?: Prisma.CashRegisterWhereInput
+  data: Prisma.XOR<Prisma.CashRegisterUpdateWithoutReconciliationInput, Prisma.CashRegisterUncheckedUpdateWithoutReconciliationInput>
+}
+
+export type CashRegisterUpdateWithoutReconciliationInput = {
+  openingAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalIn?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalOut?: Prisma.FloatFieldUpdateOperationsInput | number
+  closingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  shop?: Prisma.ShopUpdateOneRequiredWithoutCashRegistersNestedInput
+  user?: Prisma.UserUpdateOneWithoutCashRegistersNestedInput
+  transactions?: Prisma.CashTransactionUpdateManyWithoutCashRegisterNestedInput
+}
+
+export type CashRegisterUncheckedUpdateWithoutReconciliationInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  shopId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  openingAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalIn?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalOut?: Prisma.FloatFieldUpdateOperationsInput | number
+  closingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  transactions?: Prisma.CashTransactionUncheckedUpdateManyWithoutCashRegisterNestedInput
+}
+
 export type CashRegisterCreateWithoutTransactionsInput = {
   openingAmount?: number
   totalIn?: number
@@ -800,6 +903,7 @@ export type CashRegisterCreateWithoutTransactionsInput = {
   createdAt?: Date | string
   shop: Prisma.ShopCreateNestedOneWithoutCashRegistersInput
   user?: Prisma.UserCreateNestedOneWithoutCashRegistersInput
+  reconciliation?: Prisma.CashReconciliationCreateNestedOneWithoutCashRegisterInput
 }
 
 export type CashRegisterUncheckedCreateWithoutTransactionsInput = {
@@ -815,6 +919,7 @@ export type CashRegisterUncheckedCreateWithoutTransactionsInput = {
   openedAt?: Date | string
   closedAt?: Date | string | null
   createdAt?: Date | string
+  reconciliation?: Prisma.CashReconciliationUncheckedCreateNestedOneWithoutCashRegisterInput
 }
 
 export type CashRegisterCreateOrConnectWithoutTransactionsInput = {
@@ -845,6 +950,7 @@ export type CashRegisterUpdateWithoutTransactionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   shop?: Prisma.ShopUpdateOneRequiredWithoutCashRegistersNestedInput
   user?: Prisma.UserUpdateOneWithoutCashRegistersNestedInput
+  reconciliation?: Prisma.CashReconciliationUpdateOneWithoutCashRegisterNestedInput
 }
 
 export type CashRegisterUncheckedUpdateWithoutTransactionsInput = {
@@ -860,6 +966,7 @@ export type CashRegisterUncheckedUpdateWithoutTransactionsInput = {
   openedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reconciliation?: Prisma.CashReconciliationUncheckedUpdateOneWithoutCashRegisterNestedInput
 }
 
 export type CashRegisterCreateManyShopInput = {
@@ -888,6 +995,7 @@ export type CashRegisterUpdateWithoutShopInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutCashRegistersNestedInput
   transactions?: Prisma.CashTransactionUpdateManyWithoutCashRegisterNestedInput
+  reconciliation?: Prisma.CashReconciliationUpdateOneWithoutCashRegisterNestedInput
 }
 
 export type CashRegisterUncheckedUpdateWithoutShopInput = {
@@ -903,6 +1011,7 @@ export type CashRegisterUncheckedUpdateWithoutShopInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.CashTransactionUncheckedUpdateManyWithoutCashRegisterNestedInput
+  reconciliation?: Prisma.CashReconciliationUncheckedUpdateOneWithoutCashRegisterNestedInput
 }
 
 export type CashRegisterUncheckedUpdateManyWithoutShopInput = {
@@ -945,6 +1054,7 @@ export type CashRegisterUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   shop?: Prisma.ShopUpdateOneRequiredWithoutCashRegistersNestedInput
   transactions?: Prisma.CashTransactionUpdateManyWithoutCashRegisterNestedInput
+  reconciliation?: Prisma.CashReconciliationUpdateOneWithoutCashRegisterNestedInput
 }
 
 export type CashRegisterUncheckedUpdateWithoutUserInput = {
@@ -960,6 +1070,7 @@ export type CashRegisterUncheckedUpdateWithoutUserInput = {
   closedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.CashTransactionUncheckedUpdateManyWithoutCashRegisterNestedInput
+  reconciliation?: Prisma.CashReconciliationUncheckedUpdateOneWithoutCashRegisterNestedInput
 }
 
 export type CashRegisterUncheckedUpdateManyWithoutUserInput = {
@@ -1023,6 +1134,7 @@ export type CashRegisterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   shop?: boolean | Prisma.ShopDefaultArgs<ExtArgs>
   user?: boolean | Prisma.CashRegister$userArgs<ExtArgs>
   transactions?: boolean | Prisma.CashRegister$transactionsArgs<ExtArgs>
+  reconciliation?: boolean | Prisma.CashRegister$reconciliationArgs<ExtArgs>
   _count?: boolean | Prisma.CashRegisterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cashRegister"]>
 
@@ -1080,6 +1192,7 @@ export type CashRegisterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   shop?: boolean | Prisma.ShopDefaultArgs<ExtArgs>
   user?: boolean | Prisma.CashRegister$userArgs<ExtArgs>
   transactions?: boolean | Prisma.CashRegister$transactionsArgs<ExtArgs>
+  reconciliation?: boolean | Prisma.CashRegister$reconciliationArgs<ExtArgs>
   _count?: boolean | Prisma.CashRegisterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CashRegisterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1097,6 +1210,7 @@ export type $CashRegisterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     shop: Prisma.$ShopPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
     transactions: Prisma.$CashTransactionPayload<ExtArgs>[]
+    reconciliation: Prisma.$CashReconciliationPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1508,6 +1622,7 @@ export interface Prisma__CashRegisterClient<T, Null = never, ExtArgs extends run
   shop<T extends Prisma.ShopDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShopDefaultArgs<ExtArgs>>): Prisma.Prisma__ShopClient<runtime.Types.Result.GetResult<Prisma.$ShopPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.CashRegister$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CashRegister$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   transactions<T extends Prisma.CashRegister$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CashRegister$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CashTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reconciliation<T extends Prisma.CashRegister$reconciliationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CashRegister$reconciliationArgs<ExtArgs>>): Prisma.Prisma__CashReconciliationClient<runtime.Types.Result.GetResult<Prisma.$CashReconciliationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1990,6 +2105,25 @@ export type CashRegister$transactionsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.CashTransactionScalarFieldEnum | Prisma.CashTransactionScalarFieldEnum[]
+}
+
+/**
+ * CashRegister.reconciliation
+ */
+export type CashRegister$reconciliationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CashReconciliation
+   */
+  select?: Prisma.CashReconciliationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CashReconciliation
+   */
+  omit?: Prisma.CashReconciliationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CashReconciliationInclude<ExtArgs> | null
+  where?: Prisma.CashReconciliationWhereInput
 }
 
 /**
