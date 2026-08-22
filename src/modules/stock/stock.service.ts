@@ -40,12 +40,20 @@ export const StockService = {
     }
 
     return prisma.$transaction(async (tx) => {
-      const incremented = await StockRepository.incrementProductQuantity(
-        tx,
-        data.productId,
-        shopId,
-        data.quantity,
-      );
+      const incremented = data.unitCost && data.unitCost > 0
+        ? await StockRepository.applyEntryWithAverageCost(
+            tx,
+            data.productId,
+            shopId,
+            data.quantity,
+            data.unitCost,
+          )
+        : await StockRepository.incrementProductQuantity(
+            tx,
+            data.productId,
+            shopId,
+            data.quantity,
+          );
       if (incremented.count !== 1) {
         throw new NotFoundError("Ressource introuvable");
       }

@@ -45,6 +45,80 @@ export const StockRepository = {
     });
   },
 
+  applyEntryWithAverageCost: async (
+    db: DatabaseClient,
+    productId: number,
+    shopId: number,
+    quantity: number,
+    unitCost: number,
+  ) => {
+    const rows = await db.$queryRaw`
+      SELECT id, quantity, "purchasePrice"
+      FROM "products"
+      WHERE id = ${productId} AND "shopId" = ${shopId}
+      FOR UPDATE
+    `;
+    if (!rows[0]) return { count: 0, product: null };
+    const currentQuantity = Number(rows[0].quantity);
+    const currentCost = Number(rows[0].purchasePrice);
+    const nextQuantity = currentQuantity + quantity;
+    const nextCost = nextQuantity > 0
+      ? ((currentQuantity * currentCost) + (quantity * unitCost)) / nextQuantity
+      : unitCost;
+    const product = await db.product.update({
+      where: { id: productId },
+      data: { quantity: nextQuantity, purchasePrice: nextCost },
+    });
+    return { count: 1, product };
+  },
+
+  decrementWithAverageCost: async (
+    db: DatabaseClient,
+    productId: number,
+    shopId: number,
+    quantity: number,
+  ) => {
+    const rows = await db.$queryRaw`
+      SELECT id, quantity, "purchasePrice"
+      FROM "products"
+      WHERE id = ${productId} AND "shopId" = ${shopId}
+      FOR UPDATE
+    `;
+    const current = rows[0];
+    if (!current || Number(current.quantity) < quantity) return { count: 0, unitCost: null };
+    await db.product.update({
+      where: { id: productId },
+      data: { quantity: { decrement: quantity } },
+    });
+    return { count: 1, unitCost: Number(current.purchasePrice) };
+  },
+
+  restoreWithAverageCost: async (
+    db: DatabaseClient,
+    productId: number,
+    shopId: number,
+    quantity: number,
+    unitCost: number,
+  ) => {
+    const rows = await db.$queryRaw`
+      SELECT id, quantity, "purchasePrice"
+      FROM "products"
+      WHERE id = ${productId} AND "shopId" = ${shopId}
+      FOR UPDATE
+    `;
+    const current = rows[0];
+    if (!current) return { count: 0, product: null };
+    const currentQuantity = Number(current.quantity);
+    const currentCost = Number(current.purchasePrice);
+    const nextQuantity = currentQuantity + quantity;
+    const nextCost = ((currentQuantity * currentCost) + (quantity * unitCost)) / nextQuantity;
+    const product = await db.product.update({
+      where: { id: productId },
+      data: { quantity: nextQuantity, purchasePrice: nextCost },
+    });
+    return { count: 1, product };
+  },
+
   findProductByIdInTransaction: async (
     db: DatabaseClient,
     id: number,

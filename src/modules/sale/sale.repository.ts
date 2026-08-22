@@ -80,7 +80,7 @@ export const SaleRepository = {
       remaining: number;
       status: string;
       note?: string;
-      items: SaleItemDto[];
+      items: Array<SaleItemDto & { unitCost?: number; costTotal?: number; marginAmount?: number }>;
       products: Array<{ id: number; name: string; imageUrl: string | null }>;
     },
   ) => {
@@ -105,6 +105,9 @@ export const SaleRepository = {
               productImageUrl: product.imageUrl,
               quantity: item.quantity,
               unitPrice: item.unitPrice,
+              unitCost: item.unitCost ?? null,
+              costTotal: item.costTotal ?? null,
+              marginAmount: item.marginAmount ?? null,
               totalAmount: item.unitPrice * item.quantity,
             };
           }),
@@ -227,7 +230,7 @@ export const SaleRepository = {
       customerName?: string;
       totalAmount: number;
       note?: string;
-      items: SaleItemDto[];
+      items: Array<SaleItemDto & { unitCost?: number; costTotal?: number; marginAmount?: number }>;
       products: Array<{ id: number; name: string; imageUrl: string | null }>;
     },
   ) => {
@@ -251,6 +254,9 @@ export const SaleRepository = {
               productImageUrl: product.imageUrl,
               quantity: item.quantity,
               unitPrice: item.unitPrice,
+              unitCost: item.unitCost ?? null,
+              costTotal: item.costTotal ?? null,
+              marginAmount: item.marginAmount ?? null,
               totalAmount: item.unitPrice * item.quantity,
             };
           }),
@@ -291,6 +297,7 @@ export const SaleRepository = {
             type: "SALE" | "ENTRY" | "RETURN";
 
       quantity: number;
+      unitCost?: number | null;
       note: string;
     },
   ) => {

@@ -33,6 +33,7 @@ export type SaleReturnItemAvgAggregateOutputType = {
   productId: number | null
   quantity: number | null
   unitPrice: number | null
+  costAmount: number | null
   totalAmount: number | null
 }
 
@@ -43,6 +44,7 @@ export type SaleReturnItemSumAggregateOutputType = {
   productId: number | null
   quantity: number | null
   unitPrice: number | null
+  costAmount: number | null
   totalAmount: number | null
 }
 
@@ -54,6 +56,7 @@ export type SaleReturnItemMinAggregateOutputType = {
   productName: string | null
   quantity: number | null
   unitPrice: number | null
+  costAmount: number | null
   totalAmount: number | null
 }
 
@@ -65,6 +68,7 @@ export type SaleReturnItemMaxAggregateOutputType = {
   productName: string | null
   quantity: number | null
   unitPrice: number | null
+  costAmount: number | null
   totalAmount: number | null
 }
 
@@ -76,6 +80,7 @@ export type SaleReturnItemCountAggregateOutputType = {
   productName: number
   quantity: number
   unitPrice: number
+  costAmount: number
   totalAmount: number
   _all: number
 }
@@ -88,6 +93,7 @@ export type SaleReturnItemAvgAggregateInputType = {
   productId?: true
   quantity?: true
   unitPrice?: true
+  costAmount?: true
   totalAmount?: true
 }
 
@@ -98,6 +104,7 @@ export type SaleReturnItemSumAggregateInputType = {
   productId?: true
   quantity?: true
   unitPrice?: true
+  costAmount?: true
   totalAmount?: true
 }
 
@@ -109,6 +116,7 @@ export type SaleReturnItemMinAggregateInputType = {
   productName?: true
   quantity?: true
   unitPrice?: true
+  costAmount?: true
   totalAmount?: true
 }
 
@@ -120,6 +128,7 @@ export type SaleReturnItemMaxAggregateInputType = {
   productName?: true
   quantity?: true
   unitPrice?: true
+  costAmount?: true
   totalAmount?: true
 }
 
@@ -131,6 +140,7 @@ export type SaleReturnItemCountAggregateInputType = {
   productName?: true
   quantity?: true
   unitPrice?: true
+  costAmount?: true
   totalAmount?: true
   _all?: true
 }
@@ -229,6 +239,7 @@ export type SaleReturnItemGroupByOutputType = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount: number | null
   totalAmount: number
   _count: SaleReturnItemCountAggregateOutputType | null
   _avg: SaleReturnItemAvgAggregateOutputType | null
@@ -263,6 +274,7 @@ export type SaleReturnItemWhereInput = {
   productName?: Prisma.StringFilter<"SaleReturnItem"> | string
   quantity?: Prisma.IntFilter<"SaleReturnItem"> | number
   unitPrice?: Prisma.FloatFilter<"SaleReturnItem"> | number
+  costAmount?: Prisma.FloatNullableFilter<"SaleReturnItem"> | number | null
   totalAmount?: Prisma.FloatFilter<"SaleReturnItem"> | number
   saleReturn?: Prisma.XOR<Prisma.SaleReturnScalarRelationFilter, Prisma.SaleReturnWhereInput>
   saleItem?: Prisma.XOR<Prisma.SaleItemScalarRelationFilter, Prisma.SaleItemWhereInput>
@@ -277,6 +289,7 @@ export type SaleReturnItemOrderByWithRelationInput = {
   productName?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   saleReturn?: Prisma.SaleReturnOrderByWithRelationInput
   saleItem?: Prisma.SaleItemOrderByWithRelationInput
@@ -295,6 +308,7 @@ export type SaleReturnItemWhereUniqueInput = Prisma.AtLeast<{
   productName?: Prisma.StringFilter<"SaleReturnItem"> | string
   quantity?: Prisma.IntFilter<"SaleReturnItem"> | number
   unitPrice?: Prisma.FloatFilter<"SaleReturnItem"> | number
+  costAmount?: Prisma.FloatNullableFilter<"SaleReturnItem"> | number | null
   totalAmount?: Prisma.FloatFilter<"SaleReturnItem"> | number
   saleReturn?: Prisma.XOR<Prisma.SaleReturnScalarRelationFilter, Prisma.SaleReturnWhereInput>
   saleItem?: Prisma.XOR<Prisma.SaleItemScalarRelationFilter, Prisma.SaleItemWhereInput>
@@ -309,6 +323,7 @@ export type SaleReturnItemOrderByWithAggregationInput = {
   productName?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   _count?: Prisma.SaleReturnItemCountOrderByAggregateInput
   _avg?: Prisma.SaleReturnItemAvgOrderByAggregateInput
@@ -328,6 +343,7 @@ export type SaleReturnItemScalarWhereWithAggregatesInput = {
   productName?: Prisma.StringWithAggregatesFilter<"SaleReturnItem"> | string
   quantity?: Prisma.IntWithAggregatesFilter<"SaleReturnItem"> | number
   unitPrice?: Prisma.FloatWithAggregatesFilter<"SaleReturnItem"> | number
+  costAmount?: Prisma.FloatNullableWithAggregatesFilter<"SaleReturnItem"> | number | null
   totalAmount?: Prisma.FloatWithAggregatesFilter<"SaleReturnItem"> | number
 }
 
@@ -335,6 +351,7 @@ export type SaleReturnItemCreateInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
   saleReturn: Prisma.SaleReturnCreateNestedOneWithoutItemsInput
   saleItem: Prisma.SaleItemCreateNestedOneWithoutReturnsInput
@@ -349,6 +366,7 @@ export type SaleReturnItemUncheckedCreateInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
 }
 
@@ -356,6 +374,7 @@ export type SaleReturnItemUpdateInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   saleReturn?: Prisma.SaleReturnUpdateOneRequiredWithoutItemsNestedInput
   saleItem?: Prisma.SaleItemUpdateOneRequiredWithoutReturnsNestedInput
@@ -370,6 +389,7 @@ export type SaleReturnItemUncheckedUpdateInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -381,6 +401,7 @@ export type SaleReturnItemCreateManyInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
 }
 
@@ -388,6 +409,7 @@ export type SaleReturnItemUpdateManyMutationInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -399,6 +421,7 @@ export type SaleReturnItemUncheckedUpdateManyInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -425,6 +448,7 @@ export type SaleReturnItemCountOrderByAggregateInput = {
   productName?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -435,6 +459,7 @@ export type SaleReturnItemAvgOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -446,6 +471,7 @@ export type SaleReturnItemMaxOrderByAggregateInput = {
   productName?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -457,6 +483,7 @@ export type SaleReturnItemMinOrderByAggregateInput = {
   productName?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -467,6 +494,7 @@ export type SaleReturnItemSumOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  costAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -600,6 +628,7 @@ export type SaleReturnItemCreateWithoutProductInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
   saleReturn: Prisma.SaleReturnCreateNestedOneWithoutItemsInput
   saleItem: Prisma.SaleItemCreateNestedOneWithoutReturnsInput
@@ -612,6 +641,7 @@ export type SaleReturnItemUncheckedCreateWithoutProductInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
 }
 
@@ -652,6 +682,7 @@ export type SaleReturnItemScalarWhereInput = {
   productName?: Prisma.StringFilter<"SaleReturnItem"> | string
   quantity?: Prisma.IntFilter<"SaleReturnItem"> | number
   unitPrice?: Prisma.FloatFilter<"SaleReturnItem"> | number
+  costAmount?: Prisma.FloatNullableFilter<"SaleReturnItem"> | number | null
   totalAmount?: Prisma.FloatFilter<"SaleReturnItem"> | number
 }
 
@@ -659,6 +690,7 @@ export type SaleReturnItemCreateWithoutSaleItemInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
   saleReturn: Prisma.SaleReturnCreateNestedOneWithoutItemsInput
   product?: Prisma.ProductCreateNestedOneWithoutReturnItemsInput
@@ -671,6 +703,7 @@ export type SaleReturnItemUncheckedCreateWithoutSaleItemInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
 }
 
@@ -704,6 +737,7 @@ export type SaleReturnItemCreateWithoutSaleReturnInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
   saleItem: Prisma.SaleItemCreateNestedOneWithoutReturnsInput
   product?: Prisma.ProductCreateNestedOneWithoutReturnItemsInput
@@ -716,6 +750,7 @@ export type SaleReturnItemUncheckedCreateWithoutSaleReturnInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
 }
 
@@ -752,6 +787,7 @@ export type SaleReturnItemCreateManyProductInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
 }
 
@@ -759,6 +795,7 @@ export type SaleReturnItemUpdateWithoutProductInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   saleReturn?: Prisma.SaleReturnUpdateOneRequiredWithoutItemsNestedInput
   saleItem?: Prisma.SaleItemUpdateOneRequiredWithoutReturnsNestedInput
@@ -771,6 +808,7 @@ export type SaleReturnItemUncheckedUpdateWithoutProductInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -781,6 +819,7 @@ export type SaleReturnItemUncheckedUpdateManyWithoutProductInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -791,6 +830,7 @@ export type SaleReturnItemCreateManySaleItemInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
 }
 
@@ -798,6 +838,7 @@ export type SaleReturnItemUpdateWithoutSaleItemInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   saleReturn?: Prisma.SaleReturnUpdateOneRequiredWithoutItemsNestedInput
   product?: Prisma.ProductUpdateOneWithoutReturnItemsNestedInput
@@ -810,6 +851,7 @@ export type SaleReturnItemUncheckedUpdateWithoutSaleItemInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -820,6 +862,7 @@ export type SaleReturnItemUncheckedUpdateManyWithoutSaleItemInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -830,6 +873,7 @@ export type SaleReturnItemCreateManySaleReturnInput = {
   productName: string
   quantity: number
   unitPrice: number
+  costAmount?: number | null
   totalAmount: number
 }
 
@@ -837,6 +881,7 @@ export type SaleReturnItemUpdateWithoutSaleReturnInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   saleItem?: Prisma.SaleItemUpdateOneRequiredWithoutReturnsNestedInput
   product?: Prisma.ProductUpdateOneWithoutReturnItemsNestedInput
@@ -849,6 +894,7 @@ export type SaleReturnItemUncheckedUpdateWithoutSaleReturnInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -859,6 +905,7 @@ export type SaleReturnItemUncheckedUpdateManyWithoutSaleReturnInput = {
   productName?: Prisma.StringFieldUpdateOperationsInput | string
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  costAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -872,6 +919,7 @@ export type SaleReturnItemSelect<ExtArgs extends runtime.Types.Extensions.Intern
   productName?: boolean
   quantity?: boolean
   unitPrice?: boolean
+  costAmount?: boolean
   totalAmount?: boolean
   saleReturn?: boolean | Prisma.SaleReturnDefaultArgs<ExtArgs>
   saleItem?: boolean | Prisma.SaleItemDefaultArgs<ExtArgs>
@@ -886,6 +934,7 @@ export type SaleReturnItemSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   productName?: boolean
   quantity?: boolean
   unitPrice?: boolean
+  costAmount?: boolean
   totalAmount?: boolean
   saleReturn?: boolean | Prisma.SaleReturnDefaultArgs<ExtArgs>
   saleItem?: boolean | Prisma.SaleItemDefaultArgs<ExtArgs>
@@ -900,6 +949,7 @@ export type SaleReturnItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   productName?: boolean
   quantity?: boolean
   unitPrice?: boolean
+  costAmount?: boolean
   totalAmount?: boolean
   saleReturn?: boolean | Prisma.SaleReturnDefaultArgs<ExtArgs>
   saleItem?: boolean | Prisma.SaleItemDefaultArgs<ExtArgs>
@@ -914,10 +964,11 @@ export type SaleReturnItemSelectScalar = {
   productName?: boolean
   quantity?: boolean
   unitPrice?: boolean
+  costAmount?: boolean
   totalAmount?: boolean
 }
 
-export type SaleReturnItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleReturnId" | "saleItemId" | "productId" | "productName" | "quantity" | "unitPrice" | "totalAmount", ExtArgs["result"]["saleReturnItem"]>
+export type SaleReturnItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleReturnId" | "saleItemId" | "productId" | "productName" | "quantity" | "unitPrice" | "costAmount" | "totalAmount", ExtArgs["result"]["saleReturnItem"]>
 export type SaleReturnItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   saleReturn?: boolean | Prisma.SaleReturnDefaultArgs<ExtArgs>
   saleItem?: boolean | Prisma.SaleItemDefaultArgs<ExtArgs>
@@ -949,6 +1000,7 @@ export type $SaleReturnItemPayload<ExtArgs extends runtime.Types.Extensions.Inte
     productName: string
     quantity: number
     unitPrice: number
+    costAmount: number | null
     totalAmount: number
   }, ExtArgs["result"]["saleReturnItem"]>
   composites: {}
@@ -1383,6 +1435,7 @@ export interface SaleReturnItemFieldRefs {
   readonly productName: Prisma.FieldRef<"SaleReturnItem", 'String'>
   readonly quantity: Prisma.FieldRef<"SaleReturnItem", 'Int'>
   readonly unitPrice: Prisma.FieldRef<"SaleReturnItem", 'Float'>
+  readonly costAmount: Prisma.FieldRef<"SaleReturnItem", 'Float'>
   readonly totalAmount: Prisma.FieldRef<"SaleReturnItem", 'Float'>
 }
     

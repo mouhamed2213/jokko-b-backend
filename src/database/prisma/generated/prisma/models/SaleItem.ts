@@ -32,6 +32,9 @@ export type SaleItemAvgAggregateOutputType = {
   productId: number | null
   quantity: number | null
   unitPrice: number | null
+  unitCost: number | null
+  costTotal: number | null
+  marginAmount: number | null
   totalAmount: number | null
 }
 
@@ -41,6 +44,9 @@ export type SaleItemSumAggregateOutputType = {
   productId: number | null
   quantity: number | null
   unitPrice: number | null
+  unitCost: number | null
+  costTotal: number | null
+  marginAmount: number | null
   totalAmount: number | null
 }
 
@@ -52,6 +58,9 @@ export type SaleItemMinAggregateOutputType = {
   productImageUrl: string | null
   quantity: number | null
   unitPrice: number | null
+  unitCost: number | null
+  costTotal: number | null
+  marginAmount: number | null
   totalAmount: number | null
 }
 
@@ -63,6 +72,9 @@ export type SaleItemMaxAggregateOutputType = {
   productImageUrl: string | null
   quantity: number | null
   unitPrice: number | null
+  unitCost: number | null
+  costTotal: number | null
+  marginAmount: number | null
   totalAmount: number | null
 }
 
@@ -74,6 +86,9 @@ export type SaleItemCountAggregateOutputType = {
   productImageUrl: number
   quantity: number
   unitPrice: number
+  unitCost: number
+  costTotal: number
+  marginAmount: number
   totalAmount: number
   _all: number
 }
@@ -85,6 +100,9 @@ export type SaleItemAvgAggregateInputType = {
   productId?: true
   quantity?: true
   unitPrice?: true
+  unitCost?: true
+  costTotal?: true
+  marginAmount?: true
   totalAmount?: true
 }
 
@@ -94,6 +112,9 @@ export type SaleItemSumAggregateInputType = {
   productId?: true
   quantity?: true
   unitPrice?: true
+  unitCost?: true
+  costTotal?: true
+  marginAmount?: true
   totalAmount?: true
 }
 
@@ -105,6 +126,9 @@ export type SaleItemMinAggregateInputType = {
   productImageUrl?: true
   quantity?: true
   unitPrice?: true
+  unitCost?: true
+  costTotal?: true
+  marginAmount?: true
   totalAmount?: true
 }
 
@@ -116,6 +140,9 @@ export type SaleItemMaxAggregateInputType = {
   productImageUrl?: true
   quantity?: true
   unitPrice?: true
+  unitCost?: true
+  costTotal?: true
+  marginAmount?: true
   totalAmount?: true
 }
 
@@ -127,6 +154,9 @@ export type SaleItemCountAggregateInputType = {
   productImageUrl?: true
   quantity?: true
   unitPrice?: true
+  unitCost?: true
+  costTotal?: true
+  marginAmount?: true
   totalAmount?: true
   _all?: true
 }
@@ -225,6 +255,9 @@ export type SaleItemGroupByOutputType = {
   productImageUrl: string | null
   quantity: number
   unitPrice: number
+  unitCost: number | null
+  costTotal: number | null
+  marginAmount: number | null
   totalAmount: number
   _count: SaleItemCountAggregateOutputType | null
   _avg: SaleItemAvgAggregateOutputType | null
@@ -259,6 +292,9 @@ export type SaleItemWhereInput = {
   productImageUrl?: Prisma.StringNullableFilter<"SaleItem"> | string | null
   quantity?: Prisma.IntFilter<"SaleItem"> | number
   unitPrice?: Prisma.FloatFilter<"SaleItem"> | number
+  unitCost?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
+  costTotal?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
+  marginAmount?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
   totalAmount?: Prisma.FloatFilter<"SaleItem"> | number
   sale?: Prisma.XOR<Prisma.SaleScalarRelationFilter, Prisma.SaleWhereInput>
   product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
@@ -273,6 +309,9 @@ export type SaleItemOrderByWithRelationInput = {
   productImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  unitCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  costTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  marginAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   sale?: Prisma.SaleOrderByWithRelationInput
   product?: Prisma.ProductOrderByWithRelationInput
@@ -290,6 +329,9 @@ export type SaleItemWhereUniqueInput = Prisma.AtLeast<{
   productImageUrl?: Prisma.StringNullableFilter<"SaleItem"> | string | null
   quantity?: Prisma.IntFilter<"SaleItem"> | number
   unitPrice?: Prisma.FloatFilter<"SaleItem"> | number
+  unitCost?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
+  costTotal?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
+  marginAmount?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
   totalAmount?: Prisma.FloatFilter<"SaleItem"> | number
   sale?: Prisma.XOR<Prisma.SaleScalarRelationFilter, Prisma.SaleWhereInput>
   product?: Prisma.XOR<Prisma.ProductNullableScalarRelationFilter, Prisma.ProductWhereInput> | null
@@ -304,6 +346,9 @@ export type SaleItemOrderByWithAggregationInput = {
   productImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  unitCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  costTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  marginAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
   _count?: Prisma.SaleItemCountOrderByAggregateInput
   _avg?: Prisma.SaleItemAvgOrderByAggregateInput
@@ -323,6 +368,9 @@ export type SaleItemScalarWhereWithAggregatesInput = {
   productImageUrl?: Prisma.StringNullableWithAggregatesFilter<"SaleItem"> | string | null
   quantity?: Prisma.IntWithAggregatesFilter<"SaleItem"> | number
   unitPrice?: Prisma.FloatWithAggregatesFilter<"SaleItem"> | number
+  unitCost?: Prisma.FloatNullableWithAggregatesFilter<"SaleItem"> | number | null
+  costTotal?: Prisma.FloatNullableWithAggregatesFilter<"SaleItem"> | number | null
+  marginAmount?: Prisma.FloatNullableWithAggregatesFilter<"SaleItem"> | number | null
   totalAmount?: Prisma.FloatWithAggregatesFilter<"SaleItem"> | number
 }
 
@@ -331,6 +379,9 @@ export type SaleItemCreateInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
   sale: Prisma.SaleCreateNestedOneWithoutItemsInput
   product?: Prisma.ProductCreateNestedOneWithoutSaleItemsInput
@@ -345,6 +396,9 @@ export type SaleItemUncheckedCreateInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
   returns?: Prisma.SaleReturnItemUncheckedCreateNestedManyWithoutSaleItemInput
 }
@@ -354,6 +408,9 @@ export type SaleItemUpdateInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   sale?: Prisma.SaleUpdateOneRequiredWithoutItemsNestedInput
   product?: Prisma.ProductUpdateOneWithoutSaleItemsNestedInput
@@ -368,6 +425,9 @@ export type SaleItemUncheckedUpdateInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   returns?: Prisma.SaleReturnItemUncheckedUpdateManyWithoutSaleItemNestedInput
 }
@@ -380,6 +440,9 @@ export type SaleItemCreateManyInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
 }
 
@@ -388,6 +451,9 @@ export type SaleItemUpdateManyMutationInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -399,6 +465,9 @@ export type SaleItemUncheckedUpdateManyInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -420,6 +489,9 @@ export type SaleItemCountOrderByAggregateInput = {
   productImageUrl?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  unitCost?: Prisma.SortOrder
+  costTotal?: Prisma.SortOrder
+  marginAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -429,6 +501,9 @@ export type SaleItemAvgOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  unitCost?: Prisma.SortOrder
+  costTotal?: Prisma.SortOrder
+  marginAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -440,6 +515,9 @@ export type SaleItemMaxOrderByAggregateInput = {
   productImageUrl?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  unitCost?: Prisma.SortOrder
+  costTotal?: Prisma.SortOrder
+  marginAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -451,6 +529,9 @@ export type SaleItemMinOrderByAggregateInput = {
   productImageUrl?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  unitCost?: Prisma.SortOrder
+  costTotal?: Prisma.SortOrder
+  marginAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -460,6 +541,9 @@ export type SaleItemSumOrderByAggregateInput = {
   productId?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unitPrice?: Prisma.SortOrder
+  unitCost?: Prisma.SortOrder
+  costTotal?: Prisma.SortOrder
+  marginAmount?: Prisma.SortOrder
   totalAmount?: Prisma.SortOrder
 }
 
@@ -571,6 +655,9 @@ export type SaleItemCreateWithoutProductInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
   sale: Prisma.SaleCreateNestedOneWithoutItemsInput
   returns?: Prisma.SaleReturnItemCreateNestedManyWithoutSaleItemInput
@@ -583,6 +670,9 @@ export type SaleItemUncheckedCreateWithoutProductInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
   returns?: Prisma.SaleReturnItemUncheckedCreateNestedManyWithoutSaleItemInput
 }
@@ -624,6 +714,9 @@ export type SaleItemScalarWhereInput = {
   productImageUrl?: Prisma.StringNullableFilter<"SaleItem"> | string | null
   quantity?: Prisma.IntFilter<"SaleItem"> | number
   unitPrice?: Prisma.FloatFilter<"SaleItem"> | number
+  unitCost?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
+  costTotal?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
+  marginAmount?: Prisma.FloatNullableFilter<"SaleItem"> | number | null
   totalAmount?: Prisma.FloatFilter<"SaleItem"> | number
 }
 
@@ -632,6 +725,9 @@ export type SaleItemCreateWithoutSaleInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
   product?: Prisma.ProductCreateNestedOneWithoutSaleItemsInput
   returns?: Prisma.SaleReturnItemCreateNestedManyWithoutSaleItemInput
@@ -644,6 +740,9 @@ export type SaleItemUncheckedCreateWithoutSaleInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
   returns?: Prisma.SaleReturnItemUncheckedCreateNestedManyWithoutSaleItemInput
 }
@@ -679,6 +778,9 @@ export type SaleItemCreateWithoutReturnsInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
   sale: Prisma.SaleCreateNestedOneWithoutItemsInput
   product?: Prisma.ProductCreateNestedOneWithoutSaleItemsInput
@@ -692,6 +794,9 @@ export type SaleItemUncheckedCreateWithoutReturnsInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
 }
 
@@ -716,6 +821,9 @@ export type SaleItemUpdateWithoutReturnsInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   sale?: Prisma.SaleUpdateOneRequiredWithoutItemsNestedInput
   product?: Prisma.ProductUpdateOneWithoutSaleItemsNestedInput
@@ -729,6 +837,9 @@ export type SaleItemUncheckedUpdateWithoutReturnsInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -739,6 +850,9 @@ export type SaleItemCreateManyProductInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
 }
 
@@ -747,6 +861,9 @@ export type SaleItemUpdateWithoutProductInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   sale?: Prisma.SaleUpdateOneRequiredWithoutItemsNestedInput
   returns?: Prisma.SaleReturnItemUpdateManyWithoutSaleItemNestedInput
@@ -759,6 +876,9 @@ export type SaleItemUncheckedUpdateWithoutProductInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   returns?: Prisma.SaleReturnItemUncheckedUpdateManyWithoutSaleItemNestedInput
 }
@@ -770,6 +890,9 @@ export type SaleItemUncheckedUpdateManyWithoutProductInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -780,6 +903,9 @@ export type SaleItemCreateManySaleInput = {
   productImageUrl?: string | null
   quantity: number
   unitPrice: number
+  unitCost?: number | null
+  costTotal?: number | null
+  marginAmount?: number | null
   totalAmount: number
 }
 
@@ -788,6 +914,9 @@ export type SaleItemUpdateWithoutSaleInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   product?: Prisma.ProductUpdateOneWithoutSaleItemsNestedInput
   returns?: Prisma.SaleReturnItemUpdateManyWithoutSaleItemNestedInput
@@ -800,6 +929,9 @@ export type SaleItemUncheckedUpdateWithoutSaleInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   returns?: Prisma.SaleReturnItemUncheckedUpdateManyWithoutSaleItemNestedInput
 }
@@ -811,6 +943,9 @@ export type SaleItemUncheckedUpdateManyWithoutSaleInput = {
   productImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number
   unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  unitCost?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  costTotal?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  marginAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
 }
 
@@ -853,6 +988,9 @@ export type SaleItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   productImageUrl?: boolean
   quantity?: boolean
   unitPrice?: boolean
+  unitCost?: boolean
+  costTotal?: boolean
+  marginAmount?: boolean
   totalAmount?: boolean
   sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
   product?: boolean | Prisma.SaleItem$productArgs<ExtArgs>
@@ -868,6 +1006,9 @@ export type SaleItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   productImageUrl?: boolean
   quantity?: boolean
   unitPrice?: boolean
+  unitCost?: boolean
+  costTotal?: boolean
+  marginAmount?: boolean
   totalAmount?: boolean
   sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
   product?: boolean | Prisma.SaleItem$productArgs<ExtArgs>
@@ -881,6 +1022,9 @@ export type SaleItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   productImageUrl?: boolean
   quantity?: boolean
   unitPrice?: boolean
+  unitCost?: boolean
+  costTotal?: boolean
+  marginAmount?: boolean
   totalAmount?: boolean
   sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
   product?: boolean | Prisma.SaleItem$productArgs<ExtArgs>
@@ -894,10 +1038,13 @@ export type SaleItemSelectScalar = {
   productImageUrl?: boolean
   quantity?: boolean
   unitPrice?: boolean
+  unitCost?: boolean
+  costTotal?: boolean
+  marginAmount?: boolean
   totalAmount?: boolean
 }
 
-export type SaleItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleId" | "productId" | "productName" | "productImageUrl" | "quantity" | "unitPrice" | "totalAmount", ExtArgs["result"]["saleItem"]>
+export type SaleItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleId" | "productId" | "productName" | "productImageUrl" | "quantity" | "unitPrice" | "unitCost" | "costTotal" | "marginAmount" | "totalAmount", ExtArgs["result"]["saleItem"]>
 export type SaleItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
   product?: boolean | Prisma.SaleItem$productArgs<ExtArgs>
@@ -928,6 +1075,9 @@ export type $SaleItemPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     productImageUrl: string | null
     quantity: number
     unitPrice: number
+    unitCost: number | null
+    costTotal: number | null
+    marginAmount: number | null
     totalAmount: number
   }, ExtArgs["result"]["saleItem"]>
   composites: {}
@@ -1362,6 +1512,9 @@ export interface SaleItemFieldRefs {
   readonly productImageUrl: Prisma.FieldRef<"SaleItem", 'String'>
   readonly quantity: Prisma.FieldRef<"SaleItem", 'Int'>
   readonly unitPrice: Prisma.FieldRef<"SaleItem", 'Float'>
+  readonly unitCost: Prisma.FieldRef<"SaleItem", 'Float'>
+  readonly costTotal: Prisma.FieldRef<"SaleItem", 'Float'>
+  readonly marginAmount: Prisma.FieldRef<"SaleItem", 'Float'>
   readonly totalAmount: Prisma.FieldRef<"SaleItem", 'Float'>
 }
     

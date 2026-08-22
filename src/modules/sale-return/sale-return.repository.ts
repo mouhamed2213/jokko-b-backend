@@ -56,8 +56,10 @@ export const SaleReturnRepository = {
         productId: number;
         productName: string;
         quantity: number;
-        unitPrice: number;
+                unitPrice: number;
+        costAmount?: number | null;
         totalAmount: number;
+
       }>;
     },
   ) =>

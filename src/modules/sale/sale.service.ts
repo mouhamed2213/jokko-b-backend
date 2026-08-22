@@ -16,6 +16,7 @@ import type {
 } from "./sale.dto.js";
 import { SalePaymentService } from "./sale.payment.service.js";
 import { SaleRepository } from "./sale.repository.js";
+import { StockRepository } from "../stock/stock.repository.js";
 
 export const getSaleStatus = (paid: number, total: number) => {
   if (paid >= total) return "PAID";
@@ -124,6 +125,26 @@ export const SaleService = {
       await CashService.assertOpen(shopId, tx);
 
       const invoiceNumber = await SaleRepository.generateInvoiceNumber(tx, shopId);
+      const costedItems: Array<CreateSaleDto["items"][number] & { unitCost: number; costTotal: number; marginAmount: number }> = [];
+      for (const item of data.items) {
+        const cost = await StockRepository.decrementWithAverageCost(
+          tx,
+          item.productId,
+          shopId,
+          item.quantity,
+        );
+        if (cost.count !== 1 || cost.unitCost === null) {
+          throw new BadRequestError("Stock insuffisant");
+        }
+        const costTotal = cost.unitCost * item.quantity;
+        costedItems.push({
+          ...item,
+          unitCost: cost.unitCost,
+          costTotal,
+          marginAmount: item.unitPrice * item.quantity - costTotal,
+        });
+      }
+
       const remaining = totalAmount - paidAmount;
       const status = getSaleStatus(paidAmount, totalAmount);
       const sale = await SaleRepository.createSale(tx, {
@@ -137,7 +158,7 @@ export const SaleService = {
         remaining,
         status,
         note: data.note,
-        items: data.items,
+        items: costedItems,
         products,
       });
 
@@ -149,20 +170,14 @@ export const SaleService = {
         });
       }
 
-      for (const item of data.items) {
-        const updated = await SaleRepository.updateProductQuantity(
-          tx,
-          item.productId,
-          shopId,
-          -item.quantity,
-        );
-        if (updated.count !== 1) throw new BadRequestError("Stock insuffisant");
+      for (const item of costedItems) {
         await SaleRepository.createStockMovement(tx, {
           shopId,
           productId: item.productId,
           userId,
           type: "SALE",
           quantity: item.quantity,
+          unitCost: item.unitCost,
           note: `Vente ${invoiceNumber}`,
         });
       }
@@ -251,29 +266,43 @@ export const SaleService = {
 
     const totalAmount = totalOf(data.items);
     return prisma.$transaction(async (tx) => {
-      for (const [productId, quantity] of previous.entries()) {
-        await SaleRepository.updateProductQuantity(tx, productId, shopId, quantity);
-      }
-      for (const [productId, quantity] of requested.entries()) {
-        const updated = await SaleRepository.updateProductQuantity(tx, productId, shopId, -quantity);
-        if (updated.count !== 1) throw new BadRequestError("Stock insuffisant");
+      for (const existingItem of existingSale.items as any[]) {
+        if (!existingItem.productId) continue;
+        const restored = existingItem.unitCost === null || existingItem.unitCost === undefined
+          ? await SaleRepository.updateProductQuantity(tx, existingItem.productId, shopId, existingItem.quantity)
+          : await StockRepository.restoreWithAverageCost(tx, existingItem.productId, shopId, existingItem.quantity, existingItem.unitCost);
+        if (restored.count !== 1) throw new BadRequestError("Opération impossible");
+        await SaleRepository.createStockMovement(tx, {
+          shopId,
+          productId: existingItem.productId,
+          userId,
+          type: "ENTRY",
+          quantity: existingItem.quantity,
+          unitCost: existingItem.unitCost ?? null,
+          note: `Modification facture ${existingSale.invoiceNumber || `#${saleId}`}`,
+        });
       }
 
-      const allProductIds = new Set([...previous.keys(), ...requested.keys()]);
-      for (const productId of allProductIds) {
-        const before = previous.get(productId) || 0;
-        const after = requested.get(productId) || 0;
-        const delta = after - before;
-        if (delta !== 0) {
-          await SaleRepository.createStockMovement(tx, {
-            shopId,
-            productId,
-            userId,
-            type: delta > 0 ? "SALE" : "ENTRY",
-            quantity: Math.abs(delta),
-            note: `Modification facture ${existingSale.invoiceNumber || `#${saleId}`}`,
-          });
-        }
+      const costedItems: Array<UpdateSaleDto["items"][number] & { unitCost: number; costTotal: number; marginAmount: number }> = [];
+      for (const item of data.items) {
+        const cost = await StockRepository.decrementWithAverageCost(tx, item.productId, shopId, item.quantity);
+        if (cost.count !== 1 || cost.unitCost === null) throw new BadRequestError("Stock insuffisant");
+        const costTotal = cost.unitCost * item.quantity;
+        costedItems.push({
+          ...item,
+          unitCost: cost.unitCost,
+          costTotal,
+          marginAmount: item.unitPrice * item.quantity - costTotal,
+        });
+        await SaleRepository.createStockMovement(tx, {
+          shopId,
+          productId: item.productId,
+          userId,
+          type: "SALE",
+          quantity: item.quantity,
+          unitCost: cost.unitCost,
+          note: `Modification facture ${existingSale.invoiceNumber || `#${saleId}`}`,
+        });
       }
 
       return SaleRepository.updateSale(tx, saleId, {
@@ -281,7 +310,7 @@ export const SaleService = {
         customerName: data.customerName,
         totalAmount,
         note: data.note,
-        items: data.items,
+        items: costedItems,
         products,
       });
     });
@@ -297,13 +326,17 @@ export const SaleService = {
     return prisma.$transaction(async (tx) => {
       for (const item of sale.items as any[]) {
         if (!item.productId) continue;
-        await SaleRepository.updateProductQuantity(tx, item.productId, shopId, item.quantity);
+        const restored = item.unitCost === null || item.unitCost === undefined
+          ? await SaleRepository.updateProductQuantity(tx, item.productId, shopId, item.quantity)
+          : await StockRepository.restoreWithAverageCost(tx, item.productId, shopId, item.quantity, item.unitCost);
+        if (restored.count !== 1) throw new BadRequestError("Opération impossible");
         await SaleRepository.createStockMovement(tx, {
           shopId,
           productId: item.productId,
           userId,
           type: "ENTRY",
           quantity: item.quantity,
+          unitCost: item.unitCost ?? null,
           note: `Annulation vente ${sale.invoiceNumber}`,
         });
       }

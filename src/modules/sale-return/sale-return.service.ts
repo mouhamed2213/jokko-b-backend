@@ -8,6 +8,8 @@ import {
 import { CashService } from "../cash/cash.service.js";
 import { PlanChecker } from "../../services/plan-checker.service.js";
 import { SaleReturnRepository } from "./sale-return.repository.js";
+import { StockRepository } from "../stock/stock.repository.js";
+
 import type { CreateSaleReturnDto } from "./sale-return.dto.js";
 
 export const SaleReturnService = {
@@ -106,8 +108,10 @@ export const SaleReturnService = {
           productId: saleItem.productId,
           productName: saleItem.productName,
           quantity: requestedItem.quantity,
-          unitPrice: saleItem.unitPrice,
+                    unitPrice: saleItem.unitPrice,
+          costAmount: saleItem.unitCost === null || saleItem.unitCost === undefined ? null : saleItem.unitCost * requestedItem.quantity,
           totalAmount,
+
         };
       });
 
@@ -132,10 +136,9 @@ export const SaleReturnService = {
       });
 
       for (const item of returnItems) {
-        const updated = await tx.product.updateMany({
-          where: { id: item.productId, shopId },
-          data: { quantity: { increment: item.quantity } },
-        });
+        const updated = item.costAmount === null || item.costAmount === undefined
+          ? await StockRepository.incrementProductQuantity(tx, item.productId, shopId, item.quantity)
+          : await StockRepository.restoreWithAverageCost(tx, item.productId, shopId, item.quantity, item.costAmount / item.quantity);
         if (updated.count !== 1) throw new BadRequestError("Opération impossible");
 
         await tx.stockMovement.create({
@@ -145,6 +148,7 @@ export const SaleReturnService = {
             userId,
             type: "RETURN",
             quantity: item.quantity,
+            unitCost: item.costAmount === null || item.costAmount === undefined ? null : item.costAmount / item.quantity,
             note: `Retour vente ${sale.invoiceNumber || `#${saleId}`}`,
           },
         });
