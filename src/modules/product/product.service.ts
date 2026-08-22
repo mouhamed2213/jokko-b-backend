@@ -1,5 +1,7 @@
+import { prisma } from "../../config/prisma.js";
+import { CategoryRepository } from "../category/category.repository.js";
 import { UploadService } from "../upload/upload.service.js";
-import { ForbiddenError, NotFoundError, UnauthorizedError } from "../../utils/errors.js";
+import { BadRequestError, ForbiddenError, NotFoundError, UnauthorizedError } from "../../utils/errors.js";
 import { getFullStorageUrl, cleanPath, validateFile } from "../../utils/file-upload.js";
 import { PlanChecker } from "../../services/plan-checker.service.js";
 import type {
@@ -10,6 +12,7 @@ import type {
   UpdateProductDto,
 } from "./product.dto.js";
 import { ProductRepository } from "./product.repository.js";
+import { parseCsv } from "../../utils/csv.js";
 
 const assertOwner = async (ownerId: number, shopId: number) => {
   const ownership = await ProductRepository.findOwnership(ownerId, shopId);
@@ -195,6 +198,81 @@ export const ProductService = {
           : null,
       },
     };
+  },
+
+  importCsv: async (ownerId: number, shopId: number, file: Express.Multer.File) => {
+    const ownership = await assertOwner(ownerId, shopId);
+    const subscription = await PlanChecker.plan(shopId, ownership.id);
+    const rows = parseCsv(file.buffer);
+    const number = (value: string, fallback?: number) => {
+      if (value === "" && fallback !== undefined) return fallback;
+      const parsed = Number(value);
+      if (!Number.isFinite(parsed) || parsed < 0) throw new BadRequestError("CSV invalide");
+      return parsed;
+    };
+
+    const products = rows.map((row, index) => ({
+      name: String(row.name || row.nom || "").trim(),
+      reference: String(row.reference || row.ref || "").trim() || null,
+      description: String(row.description || "").trim() || null,
+      categoryName: String(row.category || row.categorie || "").trim() || null,
+      quantity: number(row.quantity || row.quantite || "", 0),
+      purchasePrice: number(row.purchaseprice || row.prixachat || row.prix_achat || ""),
+      salePrice: number(row.saleprice || row.prixvente || row.prix_vente || ""),
+      alertThreshold: number(row.alertthreshold || row.seuilalerte || row.seuil_alerte || "", 5),
+      semiWholesalePrice: row.semiwholesaleprice || row.prixsemigros ? number(row.semiwholesaleprice || row.prixsemigros) : null,
+      semiWholesaleMinQty: row.semiwholesaleminqty || row.quantitesemigros ? number(row.semiwholesaleminqty || row.quantitesemigros) : null,
+      wholesalePrice: row.wholesaleprice || row.prixgros ? number(row.wholesaleprice || row.prixgros) : null,
+      wholesaleMinQty: row.wholesaleminqty || row.quantitegros ? number(row.wholesaleminqty || row.quantitegros) : null,
+    }));
+    if (products.some((product) => !product.name || product.purchasePrice === undefined || product.salePrice === undefined)) {
+      throw new BadRequestError("CSV invalide");
+    }
+    if (products.some((product) => product.reference && products.filter((item) => item.reference === product.reference).length > 1)) {
+      throw new BadRequestError("CSV invalide");
+    }
+
+    const currentProducts = await ProductRepository.countByShop(shopId);
+    const maxProducts = subscription.limits.products;
+    if (maxProducts !== null && currentProducts + products.length > maxProducts) {
+      throw new ForbiddenError("Opération non autorisée");
+    }
+
+    const conflicts = await ProductRepository.findImportConflicts(
+      shopId,
+      products.map((product) => product.name),
+      products.flatMap((product) => product.reference ? [product.reference] : []),
+    );
+    if (conflicts.length) throw new BadRequestError("CSV contient des doublons");
+
+    await prisma.$transaction(async (tx) => {
+      for (const product of products) {
+        let categoryId: number | null = null;
+        if (product.categoryName) {
+          const existing = await CategoryRepository.findByNameAndShop(tx, shopId, product.categoryName);
+          categoryId = existing?.id ?? (await CategoryRepository.createInTransaction(tx, shopId, product.categoryName)).id;
+        }
+        await tx.product.create({
+          data: {
+            shopId,
+            name: product.name,
+            reference: product.reference,
+            description: product.description,
+            categoryId,
+            quantity: product.quantity,
+            purchasePrice: product.purchasePrice,
+            salePrice: product.salePrice,
+            alertThreshold: product.alertThreshold,
+            semiWholesalePrice: product.semiWholesalePrice,
+            semiWholesaleMinQty: product.semiWholesaleMinQty,
+            wholesalePrice: product.wholesalePrice,
+            wholesaleMinQty: product.wholesaleMinQty,
+          },
+        });
+      }
+    });
+
+    return { imported: products.length };
   },
 
   validateFile,

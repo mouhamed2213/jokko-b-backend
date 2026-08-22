@@ -5,7 +5,10 @@ const categoryInclude = {
   _count: { select: { products: true } },
 } as const;
 
+type DatabaseClient = any;
+
 export const CategoryRepository = {
+
   findManyByShop: async (shopId: number) => {
     return prisma.category.findMany({
       where: { shopId },
@@ -20,6 +23,12 @@ export const CategoryRepository = {
       include: categoryInclude,
     });
   },
+
+  findByNameAndShop: async (db: DatabaseClient, shopId: number, name: string) =>
+    db.category.findFirst({ where: { shopId, name } }),
+
+  createInTransaction: async (db: DatabaseClient, shopId: number, name: string) =>
+    db.category.create({ data: { shopId, name } }),
 
   findByIdAndShop: async (id: number, shopId: number) => {
     return prisma.category.findFirst({
