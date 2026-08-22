@@ -83,4 +83,69 @@ export const ClientRepository = {
   delete: async (id: number) => {
     return prisma.client.delete({ where: { id } });
   },
+
+  findStatementByIdAndShop: async (
+    clientId: number,
+    shopId: number,
+    query: { from?: Date; to?: Date } = {},
+  ) => {
+    const createdAt = query.from || query.to
+      ? {
+          ...(query.from ? { gte: query.from } : {}),
+          ...(query.to ? { lte: query.to } : {}),
+        }
+      : undefined;
+
+    return prisma.client.findFirst({
+      where: { id: clientId, shopId },
+      include: {
+        sales: {
+          ...(createdAt ? { where: { createdAt } } : {}),
+          orderBy: { createdAt: "desc" },
+          include: {
+            items: {
+              select: {
+                id: true,
+                productName: true,
+                quantity: true,
+                unitPrice: true,
+                totalAmount: true,
+              },
+            },
+            payments: {
+              orderBy: { paidAt: "asc" },
+              select: { id: true, amount: true, note: true, paymentMethod: true, paidAt: true },
+            },
+            returns: {
+              orderBy: { createdAt: "asc" },
+              select: {
+                id: true,
+                refundAmount: true,
+                reason: true,
+                status: true,
+                createdAt: true,
+              },
+            },
+          },
+        },
+        reminders: {
+          orderBy: { createdAt: "desc" },
+          take: 20,
+          include: { user: { select: { id: true, name: true } } },
+        },
+      },
+    });
+  },
+
+  createReminder: async (
+    clientId: number,
+    shopId: number,
+    userId: number,
+    amountDue: number,
+    message: string,
+  ) =>
+    prisma.clientReminder.create({
+      data: { clientId, shopId, userId, amountDue, message, channel: "IN_APP" },
+      include: { user: { select: { id: true, name: true } } },
+    }),
 };

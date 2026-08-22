@@ -409,6 +409,7 @@ export const ModelName = {
   Category: 'Category',
   Product: 'Product',
   Client: 'Client',
+  ClientReminder: 'ClientReminder',
   Supplier: 'Supplier',
   SupplierDebt: 'SupplierDebt',
   SupplierPayment: 'SupplierPayment',
@@ -439,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "category" | "product" | "client" | "supplier" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
+    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "category" | "product" | "client" | "clientReminder" | "supplier" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1328,6 +1329,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ClientCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ClientCountAggregateOutputType> | number
+        }
+      }
+    }
+    ClientReminder: {
+      payload: Prisma.$ClientReminderPayload<ExtArgs>
+      fields: Prisma.ClientReminderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ClientReminderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ClientReminderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>
+        }
+        findFirst: {
+          args: Prisma.ClientReminderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ClientReminderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>
+        }
+        findMany: {
+          args: Prisma.ClientReminderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>[]
+        }
+        create: {
+          args: Prisma.ClientReminderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>
+        }
+        createMany: {
+          args: Prisma.ClientReminderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ClientReminderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>[]
+        }
+        delete: {
+          args: Prisma.ClientReminderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>
+        }
+        update: {
+          args: Prisma.ClientReminderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>
+        }
+        deleteMany: {
+          args: Prisma.ClientReminderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ClientReminderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ClientReminderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>[]
+        }
+        upsert: {
+          args: Prisma.ClientReminderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClientReminderPayload>
+        }
+        aggregate: {
+          args: Prisma.ClientReminderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateClientReminder>
+        }
+        groupBy: {
+          args: Prisma.ClientReminderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClientReminderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ClientReminderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClientReminderCountAggregateOutputType> | number
         }
       }
     }
@@ -2646,6 +2721,20 @@ export const ClientScalarFieldEnum = {
 export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
 
 
+export const ClientReminderScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  clientId: 'clientId',
+  userId: 'userId',
+  amountDue: 'amountDue',
+  message: 'message',
+  channel: 'channel',
+  createdAt: 'createdAt'
+} as const
+
+export type ClientReminderScalarFieldEnum = (typeof ClientReminderScalarFieldEnum)[keyof typeof ClientReminderScalarFieldEnum]
+
+
 export const SupplierScalarFieldEnum = {
   id: 'id',
   shopId: 'shopId',
@@ -3292,6 +3381,7 @@ export type GlobalOmitConfig = {
   category?: Prisma.CategoryOmit
   product?: Prisma.ProductOmit
   client?: Prisma.ClientOmit
+  clientReminder?: Prisma.ClientReminderOmit
   supplier?: Prisma.SupplierOmit
   supplierDebt?: Prisma.SupplierDebtOmit
   supplierPayment?: Prisma.SupplierPaymentOmit

@@ -1,5 +1,10 @@
 import { BadRequestError } from "../../utils/errors.js";
-import type { CreateClientDto, UpdateClientDto } from "./client.dto.js";
+import type {
+  ClientStatementQueryDto,
+  CreateClientDto,
+  CreateClientReminderDto,
+  UpdateClientDto,
+} from "./client.dto.js";
 
 const requiredText = (value: unknown, field: string): string => {
   const text = String(value ?? "").trim();
@@ -32,6 +37,22 @@ export const ClientSchemas = {
       ...(email ? { email } : {}),
       ...(address ? { address } : {}),
     };
+  },
+
+  statementQuery: (input: Record<string, unknown>): ClientStatementQueryDto => {
+    const from = input.from ? new Date(String(input.from)) : undefined;
+    const to = input.to ? new Date(String(input.to)) : undefined;
+    if ((from && Number.isNaN(from.getTime())) || (to && Number.isNaN(to.getTime()))) {
+      throw new BadRequestError("Période invalide");
+    }
+    if (from && to && from > to) throw new BadRequestError("Période invalide");
+    return { from, to };
+  },
+
+  reminder: (input: Record<string, unknown>): CreateClientReminderDto => {
+    const message = optionalText(input.message);
+    if (message && message.length > 500) throw new BadRequestError("Rappel invalide");
+    return { ...(message ? { message } : {}) };
   },
 
   update: (input: Record<string, unknown>): UpdateClientDto => {

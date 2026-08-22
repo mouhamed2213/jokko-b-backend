@@ -63,6 +63,7 @@ export const ModelName = {
   Category: 'Category',
   Product: 'Product',
   Client: 'Client',
+  ClientReminder: 'ClientReminder',
   Supplier: 'Supplier',
   SupplierDebt: 'SupplierDebt',
   SupplierPayment: 'SupplierPayment',
@@ -260,6 +261,20 @@ export const ClientScalarFieldEnum = {
 } as const
 
 export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
+
+
+export const ClientReminderScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  clientId: 'clientId',
+  userId: 'userId',
+  amountDue: 'amountDue',
+  message: 'message',
+  channel: 'channel',
+  createdAt: 'createdAt'
+} as const
+
+export type ClientReminderScalarFieldEnum = (typeof ClientReminderScalarFieldEnum)[keyof typeof ClientReminderScalarFieldEnum]
 
 
 export const SupplierScalarFieldEnum = {

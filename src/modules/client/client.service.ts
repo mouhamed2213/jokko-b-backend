@@ -1,11 +1,17 @@
 import {
   AppError,
+  BadRequestError,
   ForbiddenError,
   NotFoundError,
   UnauthorizedError,
 } from "../../utils/errors.js";
 import { PlanChecker } from "../../services/plan-checker.service.js";
-import type { CreateClientDto, UpdateClientDto } from "./client.dto.js";
+import type {
+  ClientStatementQueryDto,
+  CreateClientDto,
+  CreateClientReminderDto,
+  UpdateClientDto,
+} from "./client.dto.js";
 import { ClientRepository } from "./client.repository.js";
 
 const assertOwner = async (ownerId: number, shopId: number) => {
@@ -114,5 +120,113 @@ export const ClientService = {
     }
 
     await ClientRepository.delete(id);
+  },
+
+  getClientStatement: async (
+    ownerId: number,
+    shopId: number,
+    clientId: number,
+    query: ClientStatementQueryDto,
+  ) => {
+    const ownership = await assertOwner(ownerId, shopId);
+    const subscription = await PlanChecker.plan(shopId, ownership.id);
+    if (
+      ["EXPIRED", "SUSPENDED", "TRIAL_EXPIRED"].includes(subscription.status) ||
+      subscription.plan.code === "FREE"
+    ) {
+      throw new ForbiddenError("Opération non autorisée");
+    }
+
+    const client = await ClientRepository.findStatementByIdAndShop(clientId, shopId, query);
+    if (!client) throw new NotFoundError("Ressource introuvable");
+
+    const sales = client.sales as any[];
+    const summary = sales.reduce(
+      (totals, sale) => {
+        const refunded = (sale.returns || []).reduce(
+          (sum: number, saleReturn: any) => sum + saleReturn.refundAmount,
+          0,
+        );
+        totals.invoiced += sale.totalAmount;
+        totals.paid += sale.paidAmount;
+        totals.refunded += refunded;
+        totals.grossRemaining += sale.remaining;
+        totals.netRemaining += sale.remaining - refunded;
+        return totals;
+      },
+      { invoiced: 0, paid: 0, refunded: 0, grossRemaining: 0, netRemaining: 0 },
+    );
+
+    return {
+      client: {
+        id: client.id,
+        shopId: client.shopId,
+        name: client.name,
+        phone: client.phone,
+        email: client.email,
+        address: client.address,
+      },
+      period: { from: query.from || null, to: query.to || null },
+      summary: {
+        ...summary,
+        amountDue: Math.max(summary.netRemaining, 0),
+        creditBalance: Math.max(-summary.netRemaining, 0),
+      },
+      sales: sales.map((sale) => ({
+        id: sale.id,
+        invoiceNumber: sale.invoiceNumber,
+        customerName: sale.customerName,
+        totalAmount: sale.totalAmount,
+        paidAmount: sale.paidAmount,
+        remaining: sale.remaining,
+        status: sale.status,
+        createdAt: sale.createdAt,
+        items: sale.items,
+        payments: sale.payments,
+        returns: sale.returns,
+        netRemaining: sale.remaining - (sale.returns || []).reduce(
+          (sum: number, saleReturn: any) => sum + saleReturn.refundAmount,
+          0,
+        ),
+      })),
+      reminders: client.reminders.map((reminder: any) => ({
+        id: reminder.id,
+        amountDue: reminder.amountDue,
+        message: reminder.message,
+        channel: reminder.channel,
+        createdAt: reminder.createdAt,
+        user: reminder.user,
+      })),
+    };
+  },
+
+  createClientReminder: async (
+    ownerId: number,
+    shopId: number,
+    userId: number,
+    clientId: number,
+    data: CreateClientReminderDto,
+  ) => {
+    const statement = await ClientService.getClientStatement(ownerId, shopId, clientId, {});
+    if (statement.summary.amountDue <= 0) throw new BadRequestError("Opération impossible");
+
+    const message = data.message ||
+      `Rappel : votre solde restant est de ${statement.summary.amountDue} FCFA.`;
+    const reminder = await ClientRepository.createReminder(
+      clientId,
+      shopId,
+      userId,
+      statement.summary.amountDue,
+      message,
+    );
+
+    return {
+      id: reminder.id,
+      amountDue: reminder.amountDue,
+      message: reminder.message,
+      channel: reminder.channel,
+      createdAt: reminder.createdAt,
+      user: reminder.user,
+    };
   },
 };
