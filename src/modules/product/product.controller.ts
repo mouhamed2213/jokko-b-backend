@@ -46,7 +46,19 @@ export const ProductController = {
     }
   },
 
+    importCsv: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      const user = assertAuthenticated(req);
+      if (!req.file) return res.status(400).json({ message: "Fichier CSV requis" });
+      const result = await ProductService.importCsv(user.ownerId, user.shopId, req.file);
+      return res.status(201).json({ message: "Import produits terminé", ...result });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   createProduct: async (
+
     req: AuthRequest,
     res: Response,
     next: NextFunction,

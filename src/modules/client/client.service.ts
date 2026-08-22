@@ -1,3 +1,5 @@
+import { prisma } from "../../config/prisma.js";
+import { parseCsv } from "../../utils/csv.js";
 import {
   AppError,
   BadRequestError,
@@ -200,7 +202,46 @@ export const ClientService = {
     };
   },
 
+    importCsv: async (ownerId: number, shopId: number, file: Express.Multer.File) => {
+    const ownership = await assertOwner(ownerId, shopId);
+    const subscription = await PlanChecker.plan(shopId, ownership.id);
+    const rows = parseCsv(file.buffer);
+    const clients = rows.map((row) => ({
+      name: String(row.name || row.nom || "").trim(),
+      phone: String(row.phone || row.telephone || row.tel || "").trim(),
+      email: String(row.email || "").trim() || null,
+      address: String(row.address || row.adresse || "").trim() || null,
+    }));
+
+    if (clients.some((client) => !client.name || !client.phone)) {
+      throw new AppError("CSV invalide", 400);
+    }
+    const phones = clients.map((client) => client.phone);
+    const emails = clients.flatMap((client) => client.email ? [client.email] : []);
+    if (new Set(phones).size !== phones.length || new Set(emails).size !== emails.length) {
+      throw new AppError("CSV contient des doublons", 400);
+    }
+
+    const currentCustomers = await ClientRepository.countByShop(shopId);
+    const maxCustomers = subscription.limits.customers;
+    if (maxCustomers !== null && currentCustomers + clients.length > maxCustomers) {
+      throw new ForbiddenError("Opération non autorisée");
+    }
+
+    const conflicts = await ClientRepository.findImportConflicts(shopId, phones, emails);
+    if (conflicts.length) throw new AppError("CSV contient des doublons", 400);
+
+    await prisma.$transaction(async (tx) => {
+      for (const client of clients) {
+        await tx.client.create({ data: { shopId, ...client } });
+      }
+    });
+
+    return { imported: clients.length };
+  },
+
   createClientReminder: async (
+
     ownerId: number,
     shopId: number,
     userId: number,

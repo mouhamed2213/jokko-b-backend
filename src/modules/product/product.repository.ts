@@ -19,6 +19,22 @@ export const ProductRepository = {
     return prisma.product.count({ where: { shopId } });
   },
 
+  findImportConflicts: async (
+    shopId: number,
+    names: string[],
+    references: string[],
+  ) => prisma.product.findMany({
+    where: {
+      shopId,
+      isActive: true,
+      OR: [
+        ...(names.length ? [{ name: { in: names } }] : []),
+        ...(references.length ? [{ reference: { in: references } }] : []),
+      ],
+    },
+    select: { id: true, name: true, reference: true },
+  }),
+
   countByQuery: async (shopId: number, query: ProductListQueryDto) => {
     const where = {
       shopId,

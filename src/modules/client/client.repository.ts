@@ -54,6 +54,18 @@ export const ClientRepository = {
     return prisma.client.count({ where: { shopId } });
   },
 
+  findImportConflicts: async (shopId: number, phones: string[], emails: string[]) =>
+    prisma.client.findMany({
+      where: {
+        shopId,
+        OR: [
+          ...(phones.length ? [{ phone: { in: phones } }] : []),
+          ...(emails.length ? [{ email: { in: emails } }] : []),
+        ],
+      },
+      select: { id: true, phone: true, email: true },
+    }),
+
   create: async (shopId: number, data: CreateClientDto) => {
     return prisma.client.create({
       data: {

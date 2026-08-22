@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
-  getProducts, getProductById, createProduct,
+    getProducts, getProductById, createProduct, importProductsCsv,
+
   updateProduct, deleteProduct,
   getLowStockProducts, getOutOfStockProducts,
   getSuggestedPrice,
@@ -16,7 +17,9 @@ router.get("/low-stock", protect, authorizeRoles("ADMIN", "EMPLOYEE"), getLowSto
 router.get("/out-of-stock", protect, authorizeRoles("ADMIN", "EMPLOYEE"), getOutOfStockProducts);
 router.get("/:id/price", protect, authorizeRoles("ADMIN", "EMPLOYEE"), getSuggestedPrice);
 router.get("/:id", protect, authorizeRoles("ADMIN", "EMPLOYEE"), getProductById);
-router.post("/", protect, authorizeRoles("ADMIN"), upload.single("image"),createProduct);
+router.post("/import", protect, authorizeRoles("ADMIN"), upload.single("file"), importProductsCsv);
+router.post("/", protect, authorizeRoles("ADMIN"), upload.single("image"), createProduct);
+
 router.put("/:id", protect, authorizeRoles("ADMIN"),upload.single("image"),  updateProduct);
 router.delete("/:id", protect, authorizeRoles("ADMIN"),deleteProduct);
 
