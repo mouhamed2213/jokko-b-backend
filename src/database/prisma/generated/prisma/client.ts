@@ -157,6 +157,11 @@ export type CashRegister = Prisma.CashRegisterModel
  */
 export type CashTransaction = Prisma.CashTransactionModel
 /**
+ * Model Expense
+ * 
+ */
+export type Expense = Prisma.ExpenseModel
+/**
  * Model Payment
  * 
  */

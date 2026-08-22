@@ -78,7 +78,8 @@ export const FeatureCode = {
   EXPORT_EXCEL: 'EXPORT_EXCEL',
   EXPORT_PDF: 'EXPORT_PDF',
   API_ACCESS: 'API_ACCESS',
-  OUT_OF_STOCK_ALERT: 'OUT_OF_STOCK_ALERT'
+  OUT_OF_STOCK_ALERT: 'OUT_OF_STOCK_ALERT',
+  CASH_CONTROL: 'CASH_CONTROL'
 } as const
 
 export type FeatureCode = (typeof FeatureCode)[keyof typeof FeatureCode]
