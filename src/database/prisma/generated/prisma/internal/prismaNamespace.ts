@@ -406,6 +406,7 @@ export const ModelName = {
   PlanFeature: 'PlanFeature',
   UsageCounter: 'UsageCounter',
   User: 'User',
+  UserPermission: 'UserPermission',
   Category: 'Category',
   Product: 'Product',
   Client: 'Client',
@@ -446,7 +447,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
+    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1113,6 +1114,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserPermission: {
+      payload: Prisma.$UserPermissionPayload<ExtArgs>
+      fields: Prisma.UserPermissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserPermissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserPermissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>
+        }
+        findFirst: {
+          args: Prisma.UserPermissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserPermissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>
+        }
+        findMany: {
+          args: Prisma.UserPermissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>[]
+        }
+        create: {
+          args: Prisma.UserPermissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>
+        }
+        createMany: {
+          args: Prisma.UserPermissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserPermissionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>[]
+        }
+        delete: {
+          args: Prisma.UserPermissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>
+        }
+        update: {
+          args: Prisma.UserPermissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserPermissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserPermissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserPermissionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserPermissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPermissionPayload>
+        }
+        aggregate: {
+          args: Prisma.UserPermissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserPermission>
+        }
+        groupBy: {
+          args: Prisma.UserPermissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPermissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserPermissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPermissionCountAggregateOutputType> | number
         }
       }
     }
@@ -3123,6 +3198,18 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const UserPermissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  code: 'code',
+  allowed: 'allowed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserPermissionScalarFieldEnum = (typeof UserPermissionScalarFieldEnum)[keyof typeof UserPermissionScalarFieldEnum]
+
+
 export const CategoryScalarFieldEnum = {
   id: 'id',
   shopId: 'shopId',
@@ -3934,6 +4021,7 @@ export type GlobalOmitConfig = {
   planFeature?: Prisma.PlanFeatureOmit
   usageCounter?: Prisma.UsageCounterOmit
   user?: Prisma.UserOmit
+  userPermission?: Prisma.UserPermissionOmit
   category?: Prisma.CategoryOmit
   product?: Prisma.ProductOmit
   client?: Prisma.ClientOmit

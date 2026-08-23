@@ -22,3 +22,14 @@ export type UpdateUserDto = {
   isActive?: boolean;
   password?: string;
 };
+
+export type PermissionOverrideDto = {
+  code: string;
+  allowed: boolean;
+};
+
+export type UserPermissionsDto = {
+  userId: number;
+  role: string;
+  permissions: Array<PermissionOverrideDto & { effective: boolean }>;
+};

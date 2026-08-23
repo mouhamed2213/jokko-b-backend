@@ -65,7 +65,7 @@ export const UserController = {
   deleteUser: async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       if (!req.user) {
-        throw new UnauthorizedError("Token invalid ou à éxpiré");
+        throw new UnauthorizedError("Token invalide ou expiré");
       }
 
       const userId = UserSchemas.userId(req.params.id);
@@ -77,6 +77,36 @@ export const UserController = {
       );
 
       return res.status(200).json({ message: "Utilisateur supprimé" });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getPermissions: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      if (!req.user) throw new UnauthorizedError("Token invalide ou expiré");
+      const userId = UserSchemas.userId(req.params.id);
+      return res.status(200).json(
+        await UserService.getUserPermissions(req.user.ownerId, req.user.shopId, userId),
+      );
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  updatePermissions: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      if (!req.user) throw new UnauthorizedError("Token invalide ou expiré");
+      const userId = UserSchemas.userId(req.params.id);
+      const permissions = UserSchemas.permissions(req.body);
+      return res.status(200).json(
+        await UserService.updateUserPermissions(
+          req.user.ownerId,
+          req.user.shopId,
+          userId,
+          permissions,
+        ),
+      );
     } catch (error) {
       next(error);
     }

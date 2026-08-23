@@ -6,17 +6,18 @@ import {
 
 } from "../controllers/cash.controller.js";
 import { protect, authorizeRoles } from "../middlewares/auth.middleware.js";
+import { requirePermission } from "../middlewares/permission.middleware.js";
 
 const router = Router();
 
-router.get("/current", protect, authorizeRoles("ADMIN", "EMPLOYEE"), getCurrentCash);
-router.get("/history", protect, authorizeRoles("ADMIN", "EMPLOYEE"), getCashHistory);
-router.get("/:id", protect, authorizeRoles("ADMIN", "EMPLOYEE"), getCashById);
-router.post("/open", protect, authorizeRoles("ADMIN", "EMPLOYEE"), openCash);
-router.patch("/:id/close", protect, authorizeRoles("ADMIN", "EMPLOYEE"), closeCash);
-router.get("/:id/reconciliation", protect, authorizeRoles("ADMIN", "EMPLOYEE"), getReconciliation);
-router.post("/:id/reconciliation", protect, authorizeRoles("ADMIN", "EMPLOYEE"), reconcileCash);
+router.get("/current", protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("CASH_READ"), getCurrentCash);
+router.get("/history", protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("CASH_READ"), getCashHistory);
+router.get("/:id", protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("CASH_READ"), getCashById);
+router.post("/open", protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("CASH_WRITE"), openCash);
+router.patch("/:id/close", protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("CASH_WRITE"), closeCash);
+router.get("/:id/reconciliation", protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("CASH_RECONCILE"), getReconciliation);
+router.post("/:id/reconciliation", protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("CASH_RECONCILE"), reconcileCash);
 
-router.post("/transactions", protect, authorizeRoles("ADMIN", "EMPLOYEE"), addTransaction);
+router.post("/transactions", protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("CASH_WRITE"), addTransaction);
 
 export default router;

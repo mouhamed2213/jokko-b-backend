@@ -170,7 +170,8 @@ model User {
   saleReturns      SaleReturn[]
   expenses         Expense[]
   reconciliations  CashReconciliation[]
-  reminders        ClientReminder[]
+    reminders        ClientReminder[]
+  permissionOverrides UserPermission[]
   purchaseOrders   PurchaseOrder[]      @relation("PurchaseOrderCreator")
   purchaseReceipts PurchaseReceipt[]    @relation("PurchaseReceiptReceiver")
 
@@ -178,7 +179,23 @@ model User {
 }
 
 // ── Category ─────────────────────────────────────────────────
+model UserPermission {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  code      String
+  allowed   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, code])
+  @@index([userId, allowed])
+  @@map("user_permissions")
+}
+
 model Category {
+
   id        Int      @id @default(autoincrement())
   shopId    Int
   name      String

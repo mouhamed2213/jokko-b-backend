@@ -12,6 +12,7 @@ import type {
   UserDto,
 } from "./user.dto.js";
 import { UserRepository } from "./user.repository.js";
+import { EMPLOYEE_DEFAULT_PERMISSIONS, PERMISSION_CODES, type PermissionCode } from "./permission.constants.js";
 
 const assertOwner = async (ownerId: number, shopId: number) => {
   const ownership = await UserRepository.findOwnership(ownerId, shopId);
@@ -128,6 +129,47 @@ export const UserService = {
     }
 
     await UserRepository.delete(userId);
+  },
+
+  getUserPermissions: async (ownerId: number, shopId: number, userId: number) => {
+    await assertOwner(ownerId, shopId);
+    const user = await UserRepository.findByIdAndShop(userId, shopId);
+    if (!user) throw new NotFoundError("Utilisateur introuvable");
+    const overrides = await UserRepository.findPermissionOverrides(userId, shopId);
+    const overrideMap = new Map(overrides.map((permission) => [permission.code, permission.allowed]));
+    return {
+      userId,
+      role: user.role,
+      permissions: PERMISSION_CODES.map((code) => ({
+        code,
+        allowed: overrideMap.get(code) ?? EMPLOYEE_DEFAULT_PERMISSIONS.has(code),
+        effective: user.role === "ADMIN" ? true : overrideMap.get(code) ?? EMPLOYEE_DEFAULT_PERMISSIONS.has(code),
+      })),
+    };
+  },
+
+  updateUserPermissions: async (
+    ownerId: number,
+    shopId: number,
+    userId: number,
+    permissions: Array<{ code: PermissionCode; allowed: boolean }>,
+  ) => {
+    await assertOwner(ownerId, shopId);
+    const user = await UserRepository.findByIdAndShop(userId, shopId);
+    if (!user) throw new NotFoundError("Utilisateur introuvable");
+    await UserRepository.replacePermissionOverrides(userId, shopId, permissions);
+    return UserService.getUserPermissions(ownerId, shopId, userId);
+  },
+
+  hasPermission: async (
+    userId: number,
+    shopId: number,
+    role: string,
+    code: PermissionCode,
+  ) => {
+    if (role === "ADMIN") return true;
+    const override = await UserRepository.findPermissionOverride(userId, shopId, code);
+    return override?.allowed ?? EMPLOYEE_DEFAULT_PERMISSIONS.has(code);
   },
 
   findUser: async (email: string) => UserRepository.findByEmail(email),

@@ -36,7 +36,7 @@ export const UserRepository = {
   findByIdAndShop: async (id: number, shopId: number) => {
     return prisma.user.findFirst({
       where: { id, shopId },
-      select: { id: true, shopId: true },
+      select: { id: true, shopId: true, role: true },
     });
   },
 
@@ -72,4 +72,34 @@ export const UserRepository = {
   delete: async (id: number) => {
     return prisma.user.delete({ where: { id } });
   },
+
+  findPermissionOverrides: async (userId: number, shopId: number) =>
+    prisma.userPermission.findMany({
+      where: { userId, user: { shopId } },
+      select: { code: true, allowed: true },
+      orderBy: { code: "asc" },
+    }),
+
+  findPermissionOverride: async (userId: number, shopId: number, code: string) =>
+    prisma.userPermission.findFirst({
+      where: { userId, code, user: { shopId } },
+      select: { allowed: true },
+    }),
+
+  replacePermissionOverrides: async (
+    userId: number,
+    shopId: number,
+    permissions: Array<{ code: string; allowed: boolean }>,
+  ) =>
+    prisma.$transaction(async (tx) => {
+      await tx.userPermission.deleteMany({ where: { userId, user: { shopId } } });
+      if (permissions.length > 0) {
+        await tx.userPermission.createMany({ data: permissions.map((permission) => ({ userId, ...permission })) });
+      }
+      return tx.userPermission.findMany({
+        where: { userId, user: { shopId } },
+        select: { code: true, allowed: true },
+        orderBy: { code: "asc" },
+      });
+    }),
 };

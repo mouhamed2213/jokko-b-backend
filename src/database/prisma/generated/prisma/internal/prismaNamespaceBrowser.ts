@@ -60,6 +60,7 @@ export const ModelName = {
   PlanFeature: 'PlanFeature',
   UsageCounter: 'UsageCounter',
   User: 'User',
+  UserPermission: 'UserPermission',
   Category: 'Category',
   Product: 'Product',
   Client: 'Client',
@@ -219,6 +220,18 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserPermissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  code: 'code',
+  allowed: 'allowed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserPermissionScalarFieldEnum = (typeof UserPermissionScalarFieldEnum)[keyof typeof UserPermissionScalarFieldEnum]
 
 
 export const CategoryScalarFieldEnum = {

@@ -4,6 +4,7 @@ import type {
   UpdateUserDto,
   UserRole,
 } from "./user.dto.js";
+import { PERMISSION_CODES, type PermissionCode } from "./permission.constants.js";
 
 const requiredString = (value: unknown, field: string): string => {
   if (typeof value !== "string" || !value.trim()) {
@@ -44,6 +45,23 @@ export const UserSchemas = {
       password: requiredString(body.password, "Mot de passe"),
       role: normalizeRole(body.role) ?? "EMPLOYEE",
     };
+  },
+
+  permissions: (input: unknown): Array<{ code: PermissionCode; allowed: boolean }> => {
+    if (!input || typeof input !== "object" || Array.isArray(input)) {
+      throw new BadRequestError("Permissions invalides");
+    }
+    const permissions = (input as { permissions?: unknown }).permissions;
+    if (!Array.isArray(permissions)) throw new BadRequestError("Permissions invalides");
+    return permissions.map((permission) => {
+      if (!permission || typeof permission !== "object") throw new BadRequestError("Permissions invalides");
+      const code = (permission as { code?: unknown }).code;
+      const allowed = (permission as { allowed?: unknown }).allowed;
+      if (!PERMISSION_CODES.includes(code as PermissionCode) || typeof allowed !== "boolean") {
+        throw new BadRequestError("Permissions invalides");
+      }
+      return { code: code as PermissionCode, allowed };
+    });
   },
 
   update: (input: unknown): UpdateUserDto => {

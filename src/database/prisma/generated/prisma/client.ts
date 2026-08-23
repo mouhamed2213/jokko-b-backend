@@ -87,6 +87,11 @@ export type UsageCounter = Prisma.UsageCounterModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model UserPermission
+ * 
+ */
+export type UserPermission = Prisma.UserPermissionModel
+/**
  * Model Category
  * 
  */
