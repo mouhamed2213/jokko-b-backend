@@ -17,7 +17,7 @@ import productRoutes from "./modules/product/product.routes.js";
 import saleRoutes from "./routes/sale.routes.js";
 import saleReturnRoutes from "./modules/sale-return/sale-return.routes.js";
 import expenseRoutes from "./modules/expense/expense.routes.js";
-import shopRoutes from "./routes/shop.routes.js";
+import shopRoutes from "./modules/shop/shop.routes.js";
 import stockRoutes from "./modules/stock/stock.routes.js";
 import subscription from "./routes/subscription.routes.js";
 import superAdminRoutes from "./modules/super-admin/super-admin.routes.js";
