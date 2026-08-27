@@ -8,7 +8,9 @@
     "RUN ON DEVELOPMENT": "LOCAL SCRIPT",
     "dev": " cross-env NODE_ENV=development tsx   watch src/index.ts",
     "dev:noEmit": "tsc --noEmit  --watch",
-    "build": "tsc",
+        "build": "tsc",
+    "test:integration": "cross-env NODE_ENV=development node --import tsx --test test/**/*.integration.test.ts",
+
     "start:dev": "cross-env NODE_ENV=production node dist/index.js",
     "postinstall": " dotenv -e .env.development.local prisma generate",
     "db:generate": " dotenv -e .env.development.local prisma generate",
