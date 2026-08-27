@@ -1,6 +1,10 @@
 import { Router } from "express";
-import { upload, uploadProductImage, deleteProductImage } from "../controllers/upload.controller.js";
-import { protect, authorizeRoles } from "../middlewares/auth.middleware.js";
+import { authorizeRoles, protect } from "../../middlewares/auth.middleware.js";
+import {
+  deleteProductImage,
+  upload,
+  uploadProductImage,
+} from "./upload.controller.js";
 
 const router = Router();
 
@@ -9,14 +13,13 @@ router.post(
   protect,
   authorizeRoles("ADMIN"),
   upload.single("image"),
-  uploadProductImage
+  uploadProductImage,
 );
-
 router.delete(
   "/product-image/:filename",
   protect,
   authorizeRoles("ADMIN"),
-  deleteProductImage
+  deleteProductImage,
 );
 
 export default router;
