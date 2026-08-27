@@ -21,6 +21,8 @@ try {
       update: { name: `QA ${slug.toUpperCase()}`, ownerName: `QA ${slug}`, phone: `770000${slug.length}` },
       create: { name: `QA ${slug.toUpperCase()}`, ownerName: `QA ${slug}`, email, phone: `770000${slug.length}`, address: "Environnement de test" },
     });
+    await prisma.shop.deleteMany({ where: { primaryShopId: shop.id } });
+    await prisma.user.deleteMany({ where: { shopId: shop.id, email: { not: email } } });
     const user = await prisma.user.upsert({
       where: { email },
       update: { name: `QA ${slug}`, password: passwordHash, shopId: shop.id, role: "ADMIN", isActive: true },
