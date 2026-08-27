@@ -19,7 +19,7 @@ import saleReturnRoutes from "./modules/sale-return/sale-return.routes.js";
 import expenseRoutes from "./modules/expense/expense.routes.js";
 import shopRoutes from "./modules/shop/shop.routes.js";
 import stockRoutes from "./modules/stock/stock.routes.js";
-import subscription from "./routes/subscription.routes.js";
+import subscription from "./modules/subscription/subscription.routes.js";
 import superAdminRoutes from "./modules/super-admin/super-admin.routes.js";
 import supplierRoutes from "./modules/supplier/supplier.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
