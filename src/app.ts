@@ -6,7 +6,7 @@ import path from "path";
 import { env } from "./config/env-config.js";
 import { logger, morganStream } from "./config/logger.js";
 import { ErrorHandler } from "./middlewares/error-handler.middleware.js";
-import authRoutes from "./routes/auth.routes.js";
+import authRoutes from "./modules/auth/auth.routes.js";
 import cashRoutes from "./modules/cash/cash.routes.js";
 import categoryRoutes from "./modules/category/category.routes.js";
 import clientRoutes from "./modules/client/client.routes.js";

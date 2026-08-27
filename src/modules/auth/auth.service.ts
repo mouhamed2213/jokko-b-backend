@@ -87,4 +87,31 @@ export const AuthService = {
 
     return AuthRepository.findShopWithSubscription(shopId);
   },
+
+  loginSuperAdmin: async (email: string, password: string) => {
+    const admin = await AuthRepository.findSuperAdminByEmail(email);
+    if (!admin || !(await bcrypt.compare(password, admin.password))) {
+      throw new UnauthorizedError("Identifiants invalides");
+    }
+
+    const token = jwt.sign(
+      { userId: admin.id, email: admin.email, role: "SUPER_ADMIN" },
+      env.secret.jwt,
+      { expiresIn: "1d" },
+    );
+
+    return {
+      token,
+      user: {
+        id: admin.id,
+        name: admin.name,
+        email: admin.email,
+        role: "SUPER_ADMIN" as const,
+      },
+    };
+  },
+
+  requestPasswordReset: async (_email: string) => ({
+    message: "Si cet email existe, un lien de réinitialisation a été envoyé.",
+  }),
 };

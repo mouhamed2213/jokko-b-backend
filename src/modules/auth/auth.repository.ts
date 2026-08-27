@@ -49,4 +49,8 @@ export const AuthRepository = {
       where: { shopId },
     });
   },
+
+  findSuperAdminByEmail: async (email: string) => {
+    return prisma.superAdmin.findUnique({ where: { email } });
+  },
 };

@@ -46,4 +46,30 @@ export const AuthController = {
       next(error);
     }
   },
+
+  loginSuperAdmin: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const email = String(req.body?.email ?? "").trim();
+      const password = String(req.body?.password ?? "");
+      if (!email || !password) {
+        return res.status(400).json({ message: "Email et mot de passe obligatoires" });
+      }
+
+      const result = await AuthService.loginSuperAdmin(email, password);
+      return res.status(200).json({ message: "Connexion Super Admin réussie", ...result });
+    } catch (error) {
+      if (error instanceof UnauthorizedError) {
+        return res.status(error.statusCode).json({ message: error.message });
+      }
+      next(error);
+    }
+  },
+
+  forgotPassword: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      return res.status(200).json(await AuthService.requestPasswordReset(String(req.body?.email ?? "")));
+    } catch (error) {
+      next(error);
+    }
+  },
 };
