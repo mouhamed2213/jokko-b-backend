@@ -9,7 +9,7 @@ import { ErrorHandler } from "./middlewares/error-handler.middleware.js";
 import authRoutes from "./routes/auth.routes.js";
 import cashRoutes from "./routes/cash.routes.js";
 import categoryRoutes from "./modules/category/category.routes.js";
-import clientRoutes from "./routes/client.routes.js";
+import clientRoutes from "./modules/client/client.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
 import invoiceRoutes from "./routes/invoice.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
