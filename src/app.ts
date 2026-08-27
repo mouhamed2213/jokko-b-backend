@@ -10,7 +10,7 @@ import authRoutes from "./routes/auth.routes.js";
 import cashRoutes from "./routes/cash.routes.js";
 import categoryRoutes from "./modules/category/category.routes.js";
 import clientRoutes from "./modules/client/client.routes.js";
-import dashboardRoutes from "./routes/dashboard.routes.js";
+import dashboardRoutes from "./modules/dashboard/dashboard.routes.js";
 import invoiceRoutes from "./routes/invoice.routes.js";
 import notificationRoutes from "./modules/notification/notification.routes.js";
 import productRoutes from "./modules/product/product.routes.js";
@@ -36,12 +36,45 @@ export const createApp = () => {
   const app = express();
   app.use(express.json({ limit: "2mb" }));
   app.use(cors({ origin: env.frontendUrl, credentials: true }));
-  app.use(morgan(env.mode === "production" ? "combined" : "dev", { stream: morganStream }));
+  app.use(
+    morgan(env.mode === "production" ? "combined" : "dev", {
+      stream: morganStream,
+    }),
+  );
   app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
   app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
-  app.get("/", (_req: Request, res: Response) => res.json({ message: "Jokko Business API v1.0", status: "running" }));
-  app.use("/api/auth", authRoutes); app.use("/api/super-admin", superAdminRoutes); app.use("/api/users", userRoutes); app.use("/api/categories", categoryRoutes); app.use("/api/products", productRoutes); app.use("/api/clients", clientRoutes); app.use("/api/suppliers", supplierRoutes); app.use("/api/stock", stockRoutes); app.use("/api/purchase-orders", purchaseOrderRoutes); app.use("/api/stock-transfers", stockTransferRoutes); app.use("/api/catalog", catalogRoutes); app.use("/api/audit-logs", auditLogRoutes); app.use("/api/backups", backupRoutes); app.use("/api/margins", marginRoutes); app.use("/api/advanced-reports", advancedReportRoutes); app.use("/api/sales", saleRoutes); app.use("/api/sales", saleReturnRoutes); app.use("/api/invoices", invoiceRoutes); app.use("/api/cash", cashRoutes); app.use("/api/expenses", expenseRoutes); app.use("/api/dashboard", dashboardRoutes); app.use("/api/upload", uploadRoutes); app.use("/api/shop", shopRoutes); app.use("/api/notifications", notificationRoutes); app.use("/api/subscription", subscription);
-  app.use((req: Request, res: Response) => { logger.warn(`404 — Route non trouvée : ${req.method} ${req.originalUrl}`); res.status(404).json({ message: `Route non trouvée : ${req.originalUrl}` }); });
+  app.get("/", (_req: Request, res: Response) =>
+    res.json({ message: "Jokko Business API v1.0", status: "running" }),
+  );
+  app.use("/api/auth", authRoutes);
+  app.use("/api/super-admin", superAdminRoutes);
+  app.use("/api/users", userRoutes);
+  app.use("/api/categories", categoryRoutes);
+  app.use("/api/products", productRoutes);
+  app.use("/api/clients", clientRoutes);
+  app.use("/api/suppliers", supplierRoutes);
+  app.use("/api/stock", stockRoutes);
+  app.use("/api/purchase-orders", purchaseOrderRoutes);
+  app.use("/api/stock-transfers", stockTransferRoutes);
+  app.use("/api/catalog", catalogRoutes);
+  app.use("/api/audit-logs", auditLogRoutes);
+  app.use("/api/backups", backupRoutes);
+  app.use("/api/margins", marginRoutes);
+  app.use("/api/advanced-reports", advancedReportRoutes);
+  app.use("/api/sales", saleRoutes);
+  app.use("/api/sales", saleReturnRoutes);
+  app.use("/api/invoices", invoiceRoutes);
+  app.use("/api/cash", cashRoutes);
+  app.use("/api/expenses", expenseRoutes);
+  app.use("/api/dashboard", dashboardRoutes);
+  app.use("/api/upload", uploadRoutes);
+  app.use("/api/shop", shopRoutes);
+  app.use("/api/notifications", notificationRoutes);
+  app.use("/api/subscription", subscription);
+  app.use((req: Request, res: Response) => {
+    logger.warn(`404 — Route non trouvée : ${req.method} ${req.originalUrl}`);
+    res.status(404).json({ message: `Route non trouvée : ${req.originalUrl}` });
+  });
   app.use(ErrorHandler);
   return app;
 };
