@@ -7,4 +7,5 @@ const router = Router();
 router.use(protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("REPORTS_READ"));
 router.get("/export", BackupController.export);
 router.post("/restore-preview", BackupController.validateRestore);
+router.post("/restore", BackupController.restore);
 export default router;
