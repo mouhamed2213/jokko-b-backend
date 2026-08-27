@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { SubscriptionService } from "../../services/subscription.service.js";
+import { prisma } from "../../config/prisma.js";
 import {
   AppError,
   ConflictError,
@@ -51,29 +52,21 @@ export const UserService = {
       shopId,
       ownership.id,
     );
-    const userCount = await UserRepository.countByShop(shopId);
     const maxUsers = subscription.limits.users;
-
-    if (maxUsers !== null && userCount >= maxUsers) {
-      throw new AppError(
-        quotaMessage(subscription.plan.code, maxUsers),
-        403,
-      );
-    }
-
-    const existingUser = await UserRepository.findByEmail(data.email);
-    if (existingUser) {
-      throw new ConflictError("Cet email est déjà utilisé");
-    }
-
     const password = await bcrypt.hash(data.password, 10);
 
-    return UserRepository.create({
-      shopId,
-      name: data.name,
-      email: data.email,
-      password,
-      role: data.role ?? "EMPLOYEE",
+    return prisma.$transaction(async (tx) => {
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(${shopId})`;
+      const userCount = await tx.user.count({ where: { shopId } });
+      if (maxUsers !== null && userCount >= maxUsers) {
+        throw new AppError(quotaMessage(subscription.plan.code, maxUsers), 403);
+      }
+      const existingUser = await tx.user.findUnique({ where: { email: data.email } });
+      if (existingUser) throw new ConflictError("Cet email est déjà utilisé");
+      return tx.user.create({
+        data: { shopId, name: data.name, email: data.email, password, role: data.role ?? "EMPLOYEE" },
+        select: { id: true, name: true, email: true, role: true, isActive: true, createdAt: true },
+      });
     });
   },
 

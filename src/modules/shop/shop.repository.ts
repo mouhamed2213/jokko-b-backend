@@ -1,5 +1,6 @@
 import { prisma } from "../../config/prisma.js";
 import type { PlanType } from "../../database/prisma/generated/prisma/enums.js";
+import { AppError } from "../../utils/errors.js";
 
 export const ShopRepository = {
   findOwnership: async (ownerId: number, shopId: number) => {
@@ -138,6 +139,13 @@ export const ShopRepository = {
     endDate: Date | null;
   }) => {
     return prisma.$transaction(async (tx) => {
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(${data.primaryShopId})`;
+      const plan = await tx.plan.findUnique({ where: { code: data.planCode } });
+      if (!plan) return null;
+      const ownedShopCount = await tx.shop.count({ where: { OR: [{ id: data.primaryShopId }, { primaryShopId: data.primaryShopId }] } });
+      if (plan.maxStores !== null && ownedShopCount >= plan.maxStores) {
+        throw new AppError(`Limite de boutiques atteinte (${plan.maxStores})`, 403);
+      }
       const shop = await tx.shop.create({
         data: {
           name: data.shopName,
@@ -148,14 +156,6 @@ export const ShopRepository = {
           phone: data.phone,
         },
       });
-
-      const plan = await tx.plan.findUnique({
-        where: { code: data.planCode },
-      });
-
-      if (!plan) {
-        return null;
-      }
 
       const actor = await tx.user.create({
         data: {
