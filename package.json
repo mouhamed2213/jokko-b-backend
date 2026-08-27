@@ -13,6 +13,7 @@
     "seed:test-plans": "cross-env NODE_ENV=development tsx src/scripts/seed-plan-test-accounts.ts",
     "test:plan-matrix": "cross-env NODE_ENV=development JOKKO_PLAN_MATRIX=1 node --import tsx --test test/plan-matrix.integration.test.ts",
     "test:backup-integration": "cross-env NODE_ENV=development JOKKO_INTEGRATION=1 node --import tsx --test test/backup.integration.test.ts",
+    "test:feature-smoke": "cross-env NODE_ENV=development JOKKO_FEATURE_SMOKE=1 node --import tsx --test test/feature-smoke.integration.test.ts",
 
     "start:dev": "cross-env NODE_ENV=production node dist/index.js",
     "postinstall": " dotenv -e .env.development.local prisma generate",
