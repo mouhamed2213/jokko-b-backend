@@ -10,6 +10,7 @@
  */
 export type * from './models/SuperAdmin'
 export type * from './models/Shop'
+export type * from './models/IdempotencyRecord'
 export type * from './models/ShopOwner'
 export type * from './models/Subscription'
 export type * from './models/Plan'

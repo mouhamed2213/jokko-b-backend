@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   SuperAdmin: 'SuperAdmin',
   Shop: 'Shop',
+  IdempotencyRecord: 'IdempotencyRecord',
   ShopOwner: 'ShopOwner',
   Subscription: 'Subscription',
   Plan: 'Plan',
@@ -137,6 +138,22 @@ export const ShopScalarFieldEnum = {
 } as const
 
 export type ShopScalarFieldEnum = (typeof ShopScalarFieldEnum)[keyof typeof ShopScalarFieldEnum]
+
+
+export const IdempotencyRecordScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  shopId: 'shopId',
+  idempotencyKey: 'idempotencyKey',
+  method: 'method',
+  path: 'path',
+  statusCode: 'statusCode',
+  responseBody: 'responseBody',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IdempotencyRecordScalarFieldEnum = (typeof IdempotencyRecordScalarFieldEnum)[keyof typeof IdempotencyRecordScalarFieldEnum]
 
 
 export const ShopOwnerScalarFieldEnum = {
@@ -719,6 +736,13 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const NullableJsonNullValueInput = {

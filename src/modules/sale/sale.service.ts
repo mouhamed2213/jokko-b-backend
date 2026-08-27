@@ -4,6 +4,7 @@ import { NotificationService } from "../notification/notification.service.js";
 
 import {
   BadRequestError,
+  ConflictError,
   ForbiddenError,
   NotFoundError,
   UnauthorizedError,
@@ -235,9 +236,13 @@ export const SaleService = {
     userId: number,
     saleId: number,
     data: UpdateSaleDto,
+    expectedUpdatedAt?: string,
   ) => {
     const existingSale = await SaleRepository.findSaleByIdAndShop(saleId, shopId);
     if (!existingSale) throw new NotFoundError("Ressource introuvable");
+    if (expectedUpdatedAt && new Date(expectedUpdatedAt).getTime() !== new Date(existingSale.updatedAt).getTime()) {
+      throw new ConflictError("La vente a été modifiée depuis sa mise en cache",);
+    }
     if (existingSale.paidAmount > 0) {
       throw new ForbiddenError("Opération non autorisée");
     }

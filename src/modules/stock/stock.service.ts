@@ -2,7 +2,7 @@ import { prisma } from "../../config/prisma.js";
 import { ProcurementService } from "../procurement/procurement.service.js";
 import { NotificationService } from "../notification/notification.service.js";
 
-import { AppError, BadRequestError, NotFoundError } from "../../utils/errors.js";
+import { AppError, BadRequestError, ConflictError, NotFoundError } from "../../utils/errors.js";
 import type {
   StockEntryDto,
   StockMovementQueryDto,
@@ -15,12 +15,16 @@ export const StockService = {
     shopId: number,
     userId: number,
     data: StockEntryDto,
+    expectedUpdatedAt?: string,
   ) => {
     const product = await StockRepository.findProductByIdAndShop(
       data.productId,
       shopId,
     );
-    if (!product) throw new NotFoundError("Ressource introuvable");
+        if (!product) throw new NotFoundError("Ressource introuvable");
+    if (expectedUpdatedAt && new Date(expectedUpdatedAt).getTime() !== new Date(product.updatedAt).getTime()) {
+      throw new ConflictError("Le stock a été modifié depuis sa mise en cache");
+    }
 
     const supplier = data.supplierId
       ? await StockRepository.findSupplierByIdAndShop(data.supplierId, shopId)
@@ -96,12 +100,15 @@ export const StockService = {
     });
   },
 
-  addStockOut: async (shopId: number, userId: number, data: StockOutDto) => {
+  addStockOut: async (shopId: number, userId: number, data: StockOutDto, expectedUpdatedAt?: string) => {
     const product = await StockRepository.findProductByIdAndShop(
       data.productId,
       shopId,
     );
-    if (!product) throw new NotFoundError("Ressource introuvable");
+        if (!product) throw new NotFoundError("Ressource introuvable");
+    if (expectedUpdatedAt && new Date(expectedUpdatedAt).getTime() !== new Date(product.updatedAt).getTime()) {
+      throw new ConflictError("Le stock a été modifié depuis sa mise en cache");
+    }
 
     const result = await prisma.$transaction(async (tx) => {
       const decremented = await StockRepository.decrementProductQuantity(

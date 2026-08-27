@@ -52,6 +52,11 @@ export type SuperAdmin = Prisma.SuperAdminModel
  */
 export type Shop = Prisma.ShopModel
 /**
+ * Model IdempotencyRecord
+ * 
+ */
+export type IdempotencyRecord = Prisma.IdempotencyRecordModel
+/**
  * Model ShopOwner
  * 
  */

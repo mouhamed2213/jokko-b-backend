@@ -399,6 +399,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   SuperAdmin: 'SuperAdmin',
   Shop: 'Shop',
+  IdempotencyRecord: 'IdempotencyRecord',
   ShopOwner: 'ShopOwner',
   Subscription: 'Subscription',
   Plan: 'Plan',
@@ -452,7 +453,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "businessAuditLog" | "catalogProduct" | "catalogPriceRule" | "stockTransfer" | "stockTransferItem" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
+    modelProps: "superAdmin" | "shop" | "idempotencyRecord" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "businessAuditLog" | "catalogProduct" | "catalogPriceRule" | "stockTransfer" | "stockTransferItem" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -601,6 +602,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ShopCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ShopCountAggregateOutputType> | number
+        }
+      }
+    }
+    IdempotencyRecord: {
+      payload: Prisma.$IdempotencyRecordPayload<ExtArgs>
+      fields: Prisma.IdempotencyRecordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IdempotencyRecordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IdempotencyRecordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>
+        }
+        findFirst: {
+          args: Prisma.IdempotencyRecordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IdempotencyRecordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>
+        }
+        findMany: {
+          args: Prisma.IdempotencyRecordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>[]
+        }
+        create: {
+          args: Prisma.IdempotencyRecordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>
+        }
+        createMany: {
+          args: Prisma.IdempotencyRecordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IdempotencyRecordCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>[]
+        }
+        delete: {
+          args: Prisma.IdempotencyRecordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>
+        }
+        update: {
+          args: Prisma.IdempotencyRecordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>
+        }
+        deleteMany: {
+          args: Prisma.IdempotencyRecordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IdempotencyRecordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IdempotencyRecordUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>[]
+        }
+        upsert: {
+          args: Prisma.IdempotencyRecordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdempotencyRecordPayload>
+        }
+        aggregate: {
+          args: Prisma.IdempotencyRecordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIdempotencyRecord>
+        }
+        groupBy: {
+          args: Prisma.IdempotencyRecordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IdempotencyRecordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IdempotencyRecordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IdempotencyRecordCountAggregateOutputType> | number
         }
       }
     }
@@ -3485,6 +3560,22 @@ export const ShopScalarFieldEnum = {
 export type ShopScalarFieldEnum = (typeof ShopScalarFieldEnum)[keyof typeof ShopScalarFieldEnum]
 
 
+export const IdempotencyRecordScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  shopId: 'shopId',
+  idempotencyKey: 'idempotencyKey',
+  method: 'method',
+  path: 'path',
+  statusCode: 'statusCode',
+  responseBody: 'responseBody',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IdempotencyRecordScalarFieldEnum = (typeof IdempotencyRecordScalarFieldEnum)[keyof typeof IdempotencyRecordScalarFieldEnum]
+
+
 export const ShopOwnerScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -4067,6 +4158,13 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull
@@ -4163,6 +4261,20 @@ export type ListEnumCurrentShopTypeFieldRefInput<$PrismaModel> = FieldRefInputTy
 
 
 /**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
  * Reference to a field of type 'SubscriptionStatus'
  */
 export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus'>
@@ -4236,20 +4348,6 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-/**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -4461,6 +4559,7 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   superAdmin?: Prisma.SuperAdminOmit
   shop?: Prisma.ShopOmit
+  idempotencyRecord?: Prisma.IdempotencyRecordOmit
   shopOwner?: Prisma.ShopOwnerOmit
   subscription?: Prisma.SubscriptionOmit
   plan?: Prisma.PlanOmit

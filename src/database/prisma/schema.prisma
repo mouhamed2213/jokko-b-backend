@@ -63,6 +63,23 @@ model Shop {
   @@map("shops")
 }
 
+model IdempotencyRecord {
+  id             Int      @id @default(autoincrement())
+  ownerId        Int
+  shopId         Int?
+  idempotencyKey String
+  method         String
+  path           String
+  statusCode     Int
+  responseBody   Json
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([ownerId, idempotencyKey])
+  @@index([createdAt])
+  @@map("idempotency_records")
+}
+
 model ShopOwner {
   id           Int            @id @default(autoincrement())
   userId       Int //  shoop ownerId 

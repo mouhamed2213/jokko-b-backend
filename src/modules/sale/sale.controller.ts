@@ -65,7 +65,7 @@ export const SaleController = {
       if (!data.clientId && !data.customerName) {
         throw new BadRequestError("Client ou nom du client requis");
       }
-      const sale = await SaleService.updateSale(user.shopId, user.userId, saleId, data);
+      const sale = await SaleService.updateSale(user.shopId, user.userId, saleId, data, req.header("If-Unmodified-Since") ?? undefined);
       return res.status(200).json({ message: "Facture modifiée avec succès", sale });
     } catch (error) {
       next(error);

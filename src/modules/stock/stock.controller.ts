@@ -22,6 +22,7 @@ export const StockController = {
         user.shopId,
         user.userId,
         data,
+        req.header("If-Unmodified-Since") ?? undefined,
       );
       return res.status(201).json({
         message: "Entrée de stock enregistrée",
@@ -46,6 +47,7 @@ export const StockController = {
         user.shopId,
         user.userId,
         data,
+        req.header("If-Unmodified-Since") ?? undefined,
       );
       return res.status(201).json({
         message: "Sortie de stock enregistrée",
