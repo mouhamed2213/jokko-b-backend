@@ -8,14 +8,13 @@
     "RUN ON DEVELOPMENT": "LOCAL SCRIPT",
     "dev": " cross-env NODE_ENV=development tsx   watch src/index.ts",
     "dev:noEmit": "tsc --noEmit  --watch",
-        "build": "tsc",
+    "build": "tsc",
     "test:integration": "cross-env NODE_ENV=development node --import tsx --test test/**/*.integration.test.ts",
     "seed:test-plans": "cross-env NODE_ENV=development tsx src/scripts/seed-plan-test-accounts.ts",
     "test:plan-matrix": "cross-env NODE_ENV=development JOKKO_PLAN_MATRIX=1 node --import tsx --test test/plan-matrix.integration.test.ts",
     "test:backup-integration": "cross-env NODE_ENV=development JOKKO_INTEGRATION=1 node --import tsx --test test/backup.integration.test.ts",
     "test:feature-smoke": "cross-env NODE_ENV=development JOKKO_FEATURE_SMOKE=1 node --import tsx --test test/feature-smoke.integration.test.ts",
     "test:quota-load": "cross-env NODE_ENV=development JOKKO_QUOTA_LOAD=1 node --import tsx --test test/quota-concurrency.integration.test.ts",
-
     "start:dev": "cross-env NODE_ENV=production node dist/index.js",
     "postinstall": " dotenv -e .env.development.local prisma generate",
     "db:generate": " dotenv -e .env.development.local prisma generate",
@@ -28,7 +27,7 @@
     "db:status": "npx dotenv-cli -e .env.production.local -- npx prisma migrate status",
     "RUN ON PRODUCTION": "PRODUCTION SCRIPT",
     "prod:build": "tsc",
-    "post:deployment" : "npx prisma migrate deploy"
+    "post:deployment": "npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
@@ -44,7 +43,7 @@
     "@types/multer": "^1.4.13",
     "@types/node": "^22.19.19",
     "@types/streamifier": "^0.1.2",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "body-parser": "^2.3.0",
     "cloudinary": "^2.10.0",
     "cors": "^2.8.5",
