@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { NotificationController } from "../modules/notification/notification.controller.js";
-import { protect, authorizeRoles } from "../middlewares/auth.middleware.js";
-import { requirePermission } from "../middlewares/permission.middleware.js";
+import { NotificationController } from "./notification.controller.js";
+import { authorizeRoles, protect } from "../../middlewares/auth.middleware.js";
+import { requirePermission } from "../../middlewares/permission.middleware.js";
 
 const router = Router();
 const shopRoles = authorizeRoles("ADMIN", "EMPLOYEE");
