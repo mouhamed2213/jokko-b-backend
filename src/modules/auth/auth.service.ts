@@ -54,6 +54,7 @@ export const AuthService = {
         userId: user.id,
         shopId: user.shopId,
         plan: plan === "FREE",
+        planType: plan,
         role: user.role,
       },
       env.secret.jwt,
