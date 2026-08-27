@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { SubscriptionService } from "../../services/subscription.service.js";
+import { SubscriptionService } from "../subscription/subscription.service.js";
 import { prisma } from "../../config/prisma.js";
 import {
   AppError,

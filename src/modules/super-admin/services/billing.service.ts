@@ -4,8 +4,8 @@ import {
   PaymentType,
   PlanType,
 } from "../../../database/prisma/generated/prisma/enums.js";
-import { PaymentService } from "../../../services/payment.service.js";
-import { SubscriptionService } from "../../../services/subscription.service.js";
+import { PaymentService } from "../../payment/payment.service.js";
+import { SubscriptionService } from "../../subscription/subscription.service.js";
 import { CreatePaymentOptions } from "../../../types/index.js";
 import { NotFoundError } from "../../../utils/errors.js";
 
@@ -57,12 +57,16 @@ export const BillingService = {
       amount: amount,
     };
     
-    const payment = await PaymentService.createPayment(paymentData);
+    const payment = await PaymentService.createSubscriptionPayment(paymentData);
 
-    const updatePaymenStatus = await PaymentService.updatePayment(
+const updatedPaymentRecord = await PaymentService.updateSubscriptionPayment(
       payment.id,
-      "SUCCESS",
+      { status: "SUCCESS" },
     );
+    const updatePaymenStatus = {
+      update: updatedPaymentRecord.status,
+      updateDate: updatedPaymentRecord.updatedAt,
+    };
 
     
     // ok ? update Subscription

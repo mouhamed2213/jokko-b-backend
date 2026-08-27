@@ -47,6 +47,33 @@ export const SubscriptionRepository = {
     });
   },
 
+  renew: async (
+    subscriptionId: number,
+    shopOwnerId: number,
+    planId: number,
+    startDate: Date,
+    endDate: Date,
+  ) => {
+    return prisma.subscription.update({
+      where: { id: subscriptionId, shopOwnerId },
+      data: {
+        planId,
+        status: "ACTIVE",
+        startDate,
+        endDate,
+      },
+      include: {
+        plan: {
+          include: {
+            planFeature: {
+              include: { feature: true },
+            },
+          },
+        },
+      },
+    });
+  },
+
   findOwnerContext: async (ownerId: number) => {
     return prisma.user.findUnique({
       where: { id: ownerId },

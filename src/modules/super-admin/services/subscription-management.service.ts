@@ -1,8 +1,8 @@
 import { prisma } from "../../../config/prisma.js";
 import { PaymentStatus, SubscriptionStatus } from "../../../database/prisma/generated/prisma/enums.js";
 import { NotFoundError, ForbiddenError } from "../../../utils/errors.js";
-import { SubscriptionService } from "../../../services/subscription.service.js";
-import { PaymentService } from "../../../services/payment.service.js";
+import { SubscriptionService } from "../../subscription/subscription.service.js";
+import { PaymentService } from "../../payment/payment.service.js";
 
 export const SubscriptionManagementService = {
   /**
@@ -38,12 +38,17 @@ export const SubscriptionManagementService = {
 
     // If new plan is FREE, special handling (end trial, no payment)
     if (newPlan.code === "FREE") {
-      const freeSub = await SubscriptionService.downgradeToFree(currentSub as any, shopOwner.userId);
+      const freeSub = await SubscriptionService.downgradeToFree(
+        currentSub.id,
+        shopId,
+        shopOwner.userId,
+        currentSub.status,
+      );
       return { subscription: freeSub, payment: null };
     }
 
     // Create Payment record (status SUCCESS, manual payment)
-    const payment = await PaymentService.createPayment({
+    const payment = await PaymentService.createSubscriptionPayment({
       shopOwnerId: shopOwner.id,
       subscriptionId: currentSub.id,
       planId: newPlan.id,
@@ -54,7 +59,7 @@ export const SubscriptionManagementService = {
     });
 
     // Mark payment as SUCCESS (manual payment handled outside)
-    await PaymentService.updatePayment(payment.id, "SUCCESS");
+    await PaymentService.updateSubscriptionPayment(payment.id, { status: "SUCCESS" });
 
     // Update subscription via renewal service
     const updatedSub = await SubscriptionService.renewal(

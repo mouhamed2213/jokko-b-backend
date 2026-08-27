@@ -1,4 +1,5 @@
 import { Prisma } from "../../database/prisma/generated/prisma/client.js";
+import { dateManagement } from "../../helpers/dates.js";
 import {
   ForbiddenError,
   NotFoundError,
@@ -85,6 +86,42 @@ export const SubscriptionService = {
     }
 
     return toSubscriptionDto(subscription);
+  },
+
+  downgradeToFree: async (
+    subscriptionId: number,
+    shopId: number,
+    shopOwnerId: number,
+    currentStatus: string,
+  ) => {
+    const freePlan = await SubscriptionRepository.findFreePlan();
+    if (!freePlan) {
+      throw new NotFoundError("Free plan not found");
+    }
+
+    const status = currentStatus === "TRIAL" ? "TRIAL_EXPIRED" : "EXPIRED";
+    return SubscriptionRepository.downgradeToFree(
+      subscriptionId,
+      shopId,
+      shopOwnerId,
+      freePlan.id,
+      status,
+    );
+  },
+
+  renewal: async (
+    subscriptionId: number,
+    shopOwnerId: number,
+    selectedPlanId: number,
+  ) => {
+    const dates = dateManagement();
+    return SubscriptionRepository.renew(
+      subscriptionId,
+      shopOwnerId,
+      selectedPlanId,
+      dates.startDate,
+      dates.endSubscriptionSate,
+    );
   },
 
   assertCanCreateSecondaryShop: async (

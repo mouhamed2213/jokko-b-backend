@@ -3,7 +3,7 @@ import {
   PlanType,
 } from "../database/prisma/generated/prisma/enums.js";
 import { NotFoundError } from "../utils/errors.js";
-import { SubscriptionService } from "./subscription.service.js";
+import { SubscriptionService } from "../modules/subscription/subscription.service.js";
 
 export type SubscriptionDTO = {
   id: number;
