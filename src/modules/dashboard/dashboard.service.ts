@@ -5,7 +5,7 @@ import { DashboardRepository } from "./dashboard.repository.js";
 export const DashboardService = {
   getStats: async (shopId: number, ownerId: number): Promise<DashboardStatsDto> => {
     const subscription = await PlanChecker.plan(shopId, ownerId);
-    const hasAdvancedDashboard = subscription.plan.code !== "FREE";
+    const hasAdvancedDashboard = ["PRO", "PREMIUM"].includes(subscription.plan.code);
 
     const now = new Date();
     const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
