@@ -23,7 +23,7 @@ import subscription from "./routes/subscription.routes.js";
 import superAdminRoutes from "./modules/super-admin/super-admin.routes.js";
 import supplierRoutes from "./modules/supplier/supplier.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
-import userRoutes from "./routes/user.routes.js";
+import userRoutes from "./modules/user/user.routes.js";
 import purchaseOrderRoutes from "./modules/purchase-order/purchase-order.routes.js";
 import stockTransferRoutes from "./modules/stock-transfer/stock-transfer.routes.js";
 import catalogRoutes from "./modules/catalog/catalog.routes.js";
