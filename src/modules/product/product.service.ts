@@ -3,7 +3,7 @@ import { CategoryRepository } from "../category/category.repository.js";
 import { UploadService } from "../upload/upload.service.js";
 import { BadRequestError, ForbiddenError, NotFoundError, UnauthorizedError } from "../../utils/errors.js";
 import { getFullStorageUrl, cleanPath, validateFile } from "../../utils/file-upload.js";
-import { PlanChecker } from "../../services/plan-checker.service.js";
+import { PlanChecker } from "../subscription/plan-checker.service.js";
 import type {
   CreateProductDto,
   ProductListQueryDto,

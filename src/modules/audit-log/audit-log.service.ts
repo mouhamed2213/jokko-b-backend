@@ -1,5 +1,5 @@
 import { prisma } from "../../config/prisma.js";
-import { PlanChecker } from "../../services/plan-checker.service.js";
+import { PlanChecker } from "../subscription/plan-checker.service.js";
 import { ForbiddenError } from "../../utils/errors.js";
 
 const assertPremium = async (ownerId: number, shopId: number) => {

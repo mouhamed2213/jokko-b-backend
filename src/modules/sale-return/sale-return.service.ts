@@ -6,7 +6,7 @@ import {
   UnauthorizedError,
 } from "../../utils/errors.js";
 import { CashService } from "../cash/cash.service.js";
-import { PlanChecker } from "../../services/plan-checker.service.js";
+import { PlanChecker } from "../subscription/plan-checker.service.js";
 import { SaleReturnRepository } from "./sale-return.repository.js";
 import { StockRepository } from "../stock/stock.repository.js";
 

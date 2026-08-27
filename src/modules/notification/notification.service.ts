@@ -1,5 +1,5 @@
 import { ForbiddenError } from "../../utils/errors.js";
-import { PlanChecker } from "../../services/plan-checker.service.js";
+import { PlanChecker } from "../subscription/plan-checker.service.js";
 import { NotificationRepository } from "./notification.repository.js";
 import { NotificationSchemas } from "./notification.schemas.js";
 import type {

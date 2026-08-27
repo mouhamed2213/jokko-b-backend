@@ -1,4 +1,4 @@
-import { PlanChecker } from "../../services/plan-checker.service.js";
+import { PlanChecker } from "../subscription/plan-checker.service.js";
 import { ForbiddenError } from "../../utils/errors.js";
 import type { AdvancedReport, AdvancedReportQueryDto } from "./advanced-report.dto.js";
 import { AdvancedReportRepository } from "./advanced-report.repository.js";

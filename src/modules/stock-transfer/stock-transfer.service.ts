@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { prisma } from "../../config/prisma.js";
-import { PlanChecker } from "../../services/plan-checker.service.js";
+import { PlanChecker } from "../subscription/plan-checker.service.js";
 import { BadRequestError, ForbiddenError, NotFoundError } from "../../utils/errors.js";
 import type { CreateStockTransferDto, StockTransferListQueryDto } from "./stock-transfer.dto.js";
 import { StockTransferRepository } from "./stock-transfer.repository.js";

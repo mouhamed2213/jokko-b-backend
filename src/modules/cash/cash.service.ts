@@ -1,6 +1,6 @@
 import { prisma } from "../../config/prisma.js";
 import { BadRequestError, ForbiddenError, NotFoundError, UnauthorizedError } from "../../utils/errors.js";
-import { PlanChecker } from "../../services/plan-checker.service.js";
+import { PlanChecker } from "../subscription/plan-checker.service.js";
 import type {
   CashHistoryQueryDto,
   CashRecordInput,
