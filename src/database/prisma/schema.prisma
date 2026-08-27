@@ -21,37 +21,39 @@ model SuperAdmin {
 
 // ── Shop ─────────────────────────────────────────────────────
 model Shop {
-  id               Int                  @id @default(autoincrement())
-  name             String
-  ownerName        String
-  email            String               @unique
-  phone            String
-  address          String?
-  logoUrl          String?
-  primaryShopId    Int?
-  primaryShop      Shop?                @relation("ShopHierarchy", fields: [primaryShopId], references: [id])
-  secondaryShops   Shop[]               @relation("ShopHierarchy")
-  status           String               @default("ACTIVE")
-  currentShop      CurrentShopType      @default(PRIMARY)
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
-  users            User[]
-  products         Product[]
-  categories       Category[]
-  clients          Client[]
-  suppliers        Supplier[]
-  sales            Sale[]
-  stockMovements   StockMovement[]
-  cashRegisters    CashRegister[]
-  subscriptions    Subscription[]
-  saleReturns      SaleReturn[]
-  expenses         Expense[]
-  reconciliations  CashReconciliation[]
-  clientReminders  ClientReminder[]
+  id                      Int                     @id @default(autoincrement())
+  name                    String
+  ownerName               String
+  email                   String                  @unique
+  phone                   String
+  address                 String?
+  logoUrl                 String?
+  primaryShopId           Int?
+  primaryShop             Shop?                   @relation("ShopHierarchy", fields: [primaryShopId], references: [id])
+  secondaryShops          Shop[]                  @relation("ShopHierarchy")
+  status                  String                  @default("ACTIVE")
+  currentShop             CurrentShopType         @default(PRIMARY)
+  createdAt               DateTime                @default(now())
+  updatedAt               DateTime                @updatedAt
+  users                   User[]
+  products                Product[]
+  categories              Category[]
+  clients                 Client[]
+  suppliers               Supplier[]
+  sales                   Sale[]
+  stockMovements          StockMovement[]
+  cashRegisters           CashRegister[]
+  subscriptions           Subscription[]
+  saleReturns             SaleReturn[]
+  expenses                Expense[]
+  reconciliations         CashReconciliation[]
+  clientReminders         ClientReminder[]
   notificationPreferences NotificationPreference?
-  notifications Notification[]
-  purchaseOrders   PurchaseOrder[]
-  purchaseReceipts PurchaseReceipt[]
+  notifications           Notification[]
+  purchaseOrders          PurchaseOrder[]
+  purchaseReceipts        PurchaseReceipt[]
+  outgoingTransfers       StockTransfer[]         @relation("TransferSourceShop")
+  incomingTransfers       StockTransfer[]         @relation("TransferDestinationShop")
 
   usageCounter UsageCounter[]
   owners       ShopOwner[]
@@ -161,19 +163,20 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  shop             Shop                 @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  cashRegisters    CashRegister[]
-  stockMovements   StockMovement[]
-  sales            Sale[]
-  userCounts       Int                  @default(0)
-  ownedShops       ShopOwner[]
-  saleReturns      SaleReturn[]
-  expenses         Expense[]
-  reconciliations  CashReconciliation[]
-    reminders        ClientReminder[]
+  shop                Shop                 @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  cashRegisters       CashRegister[]
+  stockMovements      StockMovement[]
+  sales               Sale[]
+  userCounts          Int                  @default(0)
+  ownedShops          ShopOwner[]
+  saleReturns         SaleReturn[]
+  expenses            Expense[]
+  reconciliations     CashReconciliation[]
+  reminders           ClientReminder[]
   permissionOverrides UserPermission[]
-  purchaseOrders   PurchaseOrder[]      @relation("PurchaseOrderCreator")
-  purchaseReceipts PurchaseReceipt[]    @relation("PurchaseReceiptReceiver")
+  purchaseOrders      PurchaseOrder[]      @relation("PurchaseOrderCreator")
+  purchaseReceipts    PurchaseReceipt[]    @relation("PurchaseReceiptReceiver")
+  createdTransfers    StockTransfer[]      @relation("TransferCreator")
 
   @@map("users")
 }
@@ -195,7 +198,6 @@ model UserPermission {
 }
 
 model Category {
-
   id        Int      @id @default(autoincrement())
   shopId    Int
   name      String
@@ -235,6 +237,8 @@ model Product {
   returnItems          SaleReturnItem[]
   purchaseOrderItems   PurchaseOrderItem[]
   purchaseReceiptItems PurchaseReceiptItem[]
+  transferItems        StockTransferItem[]   @relation("TransferSourceProduct")
+  transferDestinations StockTransferItem[]   @relation("TransferDestinationProduct")
 
   @@map("products")
 }
@@ -276,25 +280,25 @@ model ClientReminder {
 }
 
 model NotificationPreference {
-  id                         Int      @id @default(autoincrement())
-  shopId                     Int      @unique
-  enabled                    Boolean  @default(true)
-  lowStockEnabled            Boolean  @default(true)
-  outOfStockEnabled          Boolean  @default(true)
-  dormantProductEnabled      Boolean  @default(true)
-  clientDebtEnabled          Boolean  @default(true)
-  supplierDebtEnabled        Boolean  @default(true)
-  subscriptionExpiryEnabled  Boolean  @default(true)
-  marginEnabled              Boolean  @default(true)
-  cashDiscrepancyEnabled     Boolean  @default(true)
-  dormantDays                Int      @default(30)
-  subscriptionExpiryDays     Int      @default(7)
-  clientDebtThreshold        Float    @default(100000)
-  supplierDebtThreshold      Float    @default(100000)
-  marginRateThreshold        Float    @default(0)
-  marginPeriodDays           Int      @default(30)
-  createdAt                  DateTime @default(now())
-  updatedAt                  DateTime @updatedAt
+  id                        Int      @id @default(autoincrement())
+  shopId                    Int      @unique
+  enabled                   Boolean  @default(true)
+  lowStockEnabled           Boolean  @default(true)
+  outOfStockEnabled         Boolean  @default(true)
+  dormantProductEnabled     Boolean  @default(true)
+  clientDebtEnabled         Boolean  @default(true)
+  supplierDebtEnabled       Boolean  @default(true)
+  subscriptionExpiryEnabled Boolean  @default(true)
+  marginEnabled             Boolean  @default(true)
+  cashDiscrepancyEnabled    Boolean  @default(true)
+  dormantDays               Int      @default(30)
+  subscriptionExpiryDays    Int      @default(7)
+  clientDebtThreshold       Float    @default(100000)
+  supplierDebtThreshold     Float    @default(100000)
+  marginRateThreshold       Float    @default(0)
+  marginPeriodDays          Int      @default(30)
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
 
   shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
 
@@ -302,20 +306,20 @@ model NotificationPreference {
 }
 
 model Notification {
-  id                Int      @id @default(autoincrement())
-  shopId            Int
-  type              String
-  severity          String   @default("INFO")
-  title             String
-  message           String
-  entityType        String?
-  entityId          Int?
-  deduplicationKey  String
-  metadata          Json?
-  readAt            DateTime?
-  resolvedAt        DateTime?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id               Int       @id @default(autoincrement())
+  shopId           Int
+  type             String
+  severity         String    @default("INFO")
+  title            String
+  message          String
+  entityType       String?
+  entityId         Int?
+  deduplicationKey String
+  metadata         Json?
+  readAt           DateTime?
+  resolvedAt       DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 
   shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
 
@@ -478,6 +482,46 @@ model StockMovement {
 }
 
 // ── Sale ──────────────────────────────────────────────────────
+model StockTransfer {
+  id                Int       @id @default(autoincrement())
+  sourceShopId      Int
+  destinationShopId Int
+  createdById       Int?
+  reference         String    @unique
+  status            String    @default("DRAFT")
+  note              String?
+  shippedAt         DateTime?
+  receivedAt        DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  sourceShop      Shop                @relation("TransferSourceShop", fields: [sourceShopId], references: [id], onDelete: Cascade)
+  destinationShop Shop                @relation("TransferDestinationShop", fields: [destinationShopId], references: [id], onDelete: Cascade)
+  createdBy       User?               @relation("TransferCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  items           StockTransferItem[]
+
+  @@index([sourceShopId, status])
+  @@index([destinationShopId, status])
+  @@map("stock_transfers")
+}
+
+model StockTransferItem {
+  id                   Int      @id @default(autoincrement())
+  transferId           Int
+  sourceProductId      Int
+  destinationProductId Int
+  productName          String
+  quantity             Int
+  createdAt            DateTime @default(now())
+
+  transfer           StockTransfer @relation(fields: [transferId], references: [id], onDelete: Cascade)
+  sourceProduct      Product       @relation("TransferSourceProduct", fields: [sourceProductId], references: [id], onDelete: Cascade)
+  destinationProduct Product       @relation("TransferDestinationProduct", fields: [destinationProductId], references: [id], onDelete: Cascade)
+
+  @@unique([transferId, sourceProductId])
+  @@map("stock_transfer_items")
+}
+
 model Sale {
   id            Int      @id @default(autoincrement())
   shopId        Int

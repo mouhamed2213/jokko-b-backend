@@ -162,6 +162,16 @@ export type SupplierPayment = Prisma.SupplierPaymentModel
  */
 export type StockMovement = Prisma.StockMovementModel
 /**
+ * Model StockTransfer
+ * 
+ */
+export type StockTransfer = Prisma.StockTransferModel
+/**
+ * Model StockTransferItem
+ * 
+ */
+export type StockTransferItem = Prisma.StockTransferItemModel
+/**
  * Model Sale
  * 
  */

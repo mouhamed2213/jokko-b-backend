@@ -75,6 +75,8 @@ export const ModelName = {
   SupplierDebt: 'SupplierDebt',
   SupplierPayment: 'SupplierPayment',
   StockMovement: 'StockMovement',
+  StockTransfer: 'StockTransfer',
+  StockTransferItem: 'StockTransferItem',
   Sale: 'Sale',
   SaleItem: 'SaleItem',
   SalePayment: 'SalePayment',
@@ -453,6 +455,36 @@ export const StockMovementScalarFieldEnum = {
 } as const
 
 export type StockMovementScalarFieldEnum = (typeof StockMovementScalarFieldEnum)[keyof typeof StockMovementScalarFieldEnum]
+
+
+export const StockTransferScalarFieldEnum = {
+  id: 'id',
+  sourceShopId: 'sourceShopId',
+  destinationShopId: 'destinationShopId',
+  createdById: 'createdById',
+  reference: 'reference',
+  status: 'status',
+  note: 'note',
+  shippedAt: 'shippedAt',
+  receivedAt: 'receivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StockTransferScalarFieldEnum = (typeof StockTransferScalarFieldEnum)[keyof typeof StockTransferScalarFieldEnum]
+
+
+export const StockTransferItemScalarFieldEnum = {
+  id: 'id',
+  transferId: 'transferId',
+  sourceProductId: 'sourceProductId',
+  destinationProductId: 'destinationProductId',
+  productName: 'productName',
+  quantity: 'quantity',
+  createdAt: 'createdAt'
+} as const
+
+export type StockTransferItemScalarFieldEnum = (typeof StockTransferItemScalarFieldEnum)[keyof typeof StockTransferItemScalarFieldEnum]
 
 
 export const SaleScalarFieldEnum = {

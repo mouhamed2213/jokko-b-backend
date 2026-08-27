@@ -421,6 +421,8 @@ export const ModelName = {
   SupplierDebt: 'SupplierDebt',
   SupplierPayment: 'SupplierPayment',
   StockMovement: 'StockMovement',
+  StockTransfer: 'StockTransfer',
+  StockTransferItem: 'StockTransferItem',
   Sale: 'Sale',
   SaleItem: 'SaleItem',
   SalePayment: 'SalePayment',
@@ -447,7 +449,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
+    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "stockTransfer" | "stockTransferItem" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2227,6 +2229,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    StockTransfer: {
+      payload: Prisma.$StockTransferPayload<ExtArgs>
+      fields: Prisma.StockTransferFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StockTransferFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StockTransferFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>
+        }
+        findFirst: {
+          args: Prisma.StockTransferFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StockTransferFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>
+        }
+        findMany: {
+          args: Prisma.StockTransferFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>[]
+        }
+        create: {
+          args: Prisma.StockTransferCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>
+        }
+        createMany: {
+          args: Prisma.StockTransferCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StockTransferCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>[]
+        }
+        delete: {
+          args: Prisma.StockTransferDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>
+        }
+        update: {
+          args: Prisma.StockTransferUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>
+        }
+        deleteMany: {
+          args: Prisma.StockTransferDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StockTransferUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StockTransferUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>[]
+        }
+        upsert: {
+          args: Prisma.StockTransferUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferPayload>
+        }
+        aggregate: {
+          args: Prisma.StockTransferAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStockTransfer>
+        }
+        groupBy: {
+          args: Prisma.StockTransferGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StockTransferGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StockTransferCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StockTransferCountAggregateOutputType> | number
+        }
+      }
+    }
+    StockTransferItem: {
+      payload: Prisma.$StockTransferItemPayload<ExtArgs>
+      fields: Prisma.StockTransferItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StockTransferItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StockTransferItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>
+        }
+        findFirst: {
+          args: Prisma.StockTransferItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StockTransferItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>
+        }
+        findMany: {
+          args: Prisma.StockTransferItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>[]
+        }
+        create: {
+          args: Prisma.StockTransferItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>
+        }
+        createMany: {
+          args: Prisma.StockTransferItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StockTransferItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>[]
+        }
+        delete: {
+          args: Prisma.StockTransferItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>
+        }
+        update: {
+          args: Prisma.StockTransferItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.StockTransferItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StockTransferItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StockTransferItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.StockTransferItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockTransferItemPayload>
+        }
+        aggregate: {
+          args: Prisma.StockTransferItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStockTransferItem>
+        }
+        groupBy: {
+          args: Prisma.StockTransferItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StockTransferItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StockTransferItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StockTransferItemCountAggregateOutputType> | number
+        }
+      }
+    }
     Sale: {
       payload: Prisma.$SalePayload<ExtArgs>
       fields: Prisma.SaleFieldRefs
@@ -3431,6 +3581,36 @@ export const StockMovementScalarFieldEnum = {
 export type StockMovementScalarFieldEnum = (typeof StockMovementScalarFieldEnum)[keyof typeof StockMovementScalarFieldEnum]
 
 
+export const StockTransferScalarFieldEnum = {
+  id: 'id',
+  sourceShopId: 'sourceShopId',
+  destinationShopId: 'destinationShopId',
+  createdById: 'createdById',
+  reference: 'reference',
+  status: 'status',
+  note: 'note',
+  shippedAt: 'shippedAt',
+  receivedAt: 'receivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StockTransferScalarFieldEnum = (typeof StockTransferScalarFieldEnum)[keyof typeof StockTransferScalarFieldEnum]
+
+
+export const StockTransferItemScalarFieldEnum = {
+  id: 'id',
+  transferId: 'transferId',
+  sourceProductId: 'sourceProductId',
+  destinationProductId: 'destinationProductId',
+  productName: 'productName',
+  quantity: 'quantity',
+  createdAt: 'createdAt'
+} as const
+
+export type StockTransferItemScalarFieldEnum = (typeof StockTransferItemScalarFieldEnum)[keyof typeof StockTransferItemScalarFieldEnum]
+
+
 export const SaleScalarFieldEnum = {
   id: 'id',
   shopId: 'shopId',
@@ -4036,6 +4216,8 @@ export type GlobalOmitConfig = {
   supplierDebt?: Prisma.SupplierDebtOmit
   supplierPayment?: Prisma.SupplierPaymentOmit
   stockMovement?: Prisma.StockMovementOmit
+  stockTransfer?: Prisma.StockTransferOmit
+  stockTransferItem?: Prisma.StockTransferItemOmit
   sale?: Prisma.SaleOmit
   saleItem?: Prisma.SaleItemOmit
   salePayment?: Prisma.SalePaymentOmit
