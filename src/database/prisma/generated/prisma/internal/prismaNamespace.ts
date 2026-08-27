@@ -421,6 +421,8 @@ export const ModelName = {
   SupplierDebt: 'SupplierDebt',
   SupplierPayment: 'SupplierPayment',
   StockMovement: 'StockMovement',
+  CatalogProduct: 'CatalogProduct',
+  CatalogPriceRule: 'CatalogPriceRule',
   StockTransfer: 'StockTransfer',
   StockTransferItem: 'StockTransferItem',
   Sale: 'Sale',
@@ -449,7 +451,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "stockTransfer" | "stockTransferItem" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
+    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "catalogProduct" | "catalogPriceRule" | "stockTransfer" | "stockTransferItem" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2229,6 +2231,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CatalogProduct: {
+      payload: Prisma.$CatalogProductPayload<ExtArgs>
+      fields: Prisma.CatalogProductFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CatalogProductFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CatalogProductFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>
+        }
+        findFirst: {
+          args: Prisma.CatalogProductFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CatalogProductFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>
+        }
+        findMany: {
+          args: Prisma.CatalogProductFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>[]
+        }
+        create: {
+          args: Prisma.CatalogProductCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>
+        }
+        createMany: {
+          args: Prisma.CatalogProductCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CatalogProductCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>[]
+        }
+        delete: {
+          args: Prisma.CatalogProductDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>
+        }
+        update: {
+          args: Prisma.CatalogProductUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>
+        }
+        deleteMany: {
+          args: Prisma.CatalogProductDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CatalogProductUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CatalogProductUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>[]
+        }
+        upsert: {
+          args: Prisma.CatalogProductUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogProductPayload>
+        }
+        aggregate: {
+          args: Prisma.CatalogProductAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCatalogProduct>
+        }
+        groupBy: {
+          args: Prisma.CatalogProductGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CatalogProductGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CatalogProductCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CatalogProductCountAggregateOutputType> | number
+        }
+      }
+    }
+    CatalogPriceRule: {
+      payload: Prisma.$CatalogPriceRulePayload<ExtArgs>
+      fields: Prisma.CatalogPriceRuleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CatalogPriceRuleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CatalogPriceRuleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>
+        }
+        findFirst: {
+          args: Prisma.CatalogPriceRuleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CatalogPriceRuleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>
+        }
+        findMany: {
+          args: Prisma.CatalogPriceRuleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>[]
+        }
+        create: {
+          args: Prisma.CatalogPriceRuleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>
+        }
+        createMany: {
+          args: Prisma.CatalogPriceRuleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CatalogPriceRuleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>[]
+        }
+        delete: {
+          args: Prisma.CatalogPriceRuleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>
+        }
+        update: {
+          args: Prisma.CatalogPriceRuleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>
+        }
+        deleteMany: {
+          args: Prisma.CatalogPriceRuleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CatalogPriceRuleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CatalogPriceRuleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>[]
+        }
+        upsert: {
+          args: Prisma.CatalogPriceRuleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CatalogPriceRulePayload>
+        }
+        aggregate: {
+          args: Prisma.CatalogPriceRuleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCatalogPriceRule>
+        }
+        groupBy: {
+          args: Prisma.CatalogPriceRuleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CatalogPriceRuleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CatalogPriceRuleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CatalogPriceRuleCountAggregateOutputType> | number
+        }
+      }
+    }
     StockTransfer: {
       payload: Prisma.$StockTransferPayload<ExtArgs>
       fields: Prisma.StockTransferFieldRefs
@@ -3581,6 +3731,34 @@ export const StockMovementScalarFieldEnum = {
 export type StockMovementScalarFieldEnum = (typeof StockMovementScalarFieldEnum)[keyof typeof StockMovementScalarFieldEnum]
 
 
+export const CatalogProductScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  reference: 'reference',
+  name: 'name',
+  description: 'description',
+  purchasePrice: 'purchasePrice',
+  baseSalePrice: 'baseSalePrice',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CatalogProductScalarFieldEnum = (typeof CatalogProductScalarFieldEnum)[keyof typeof CatalogProductScalarFieldEnum]
+
+
+export const CatalogPriceRuleScalarFieldEnum = {
+  id: 'id',
+  catalogProductId: 'catalogProductId',
+  shopId: 'shopId',
+  salePrice: 'salePrice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CatalogPriceRuleScalarFieldEnum = (typeof CatalogPriceRuleScalarFieldEnum)[keyof typeof CatalogPriceRuleScalarFieldEnum]
+
+
 export const StockTransferScalarFieldEnum = {
   id: 'id',
   sourceShopId: 'sourceShopId',
@@ -4216,6 +4394,8 @@ export type GlobalOmitConfig = {
   supplierDebt?: Prisma.SupplierDebtOmit
   supplierPayment?: Prisma.SupplierPaymentOmit
   stockMovement?: Prisma.StockMovementOmit
+  catalogProduct?: Prisma.CatalogProductOmit
+  catalogPriceRule?: Prisma.CatalogPriceRuleOmit
   stockTransfer?: Prisma.StockTransferOmit
   stockTransferItem?: Prisma.StockTransferItemOmit
   sale?: Prisma.SaleOmit

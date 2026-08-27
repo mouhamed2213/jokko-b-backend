@@ -138,6 +138,16 @@ export type SupplierPayment = Prisma.SupplierPaymentModel
  */
 export type StockMovement = Prisma.StockMovementModel
 /**
+ * Model CatalogProduct
+ * 
+ */
+export type CatalogProduct = Prisma.CatalogProductModel
+/**
+ * Model CatalogPriceRule
+ * 
+ */
+export type CatalogPriceRule = Prisma.CatalogPriceRuleModel
+/**
  * Model StockTransfer
  * 
  */

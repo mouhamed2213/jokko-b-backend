@@ -75,6 +75,8 @@ export const ModelName = {
   SupplierDebt: 'SupplierDebt',
   SupplierPayment: 'SupplierPayment',
   StockMovement: 'StockMovement',
+  CatalogProduct: 'CatalogProduct',
+  CatalogPriceRule: 'CatalogPriceRule',
   StockTransfer: 'StockTransfer',
   StockTransferItem: 'StockTransferItem',
   Sale: 'Sale',
@@ -455,6 +457,34 @@ export const StockMovementScalarFieldEnum = {
 } as const
 
 export type StockMovementScalarFieldEnum = (typeof StockMovementScalarFieldEnum)[keyof typeof StockMovementScalarFieldEnum]
+
+
+export const CatalogProductScalarFieldEnum = {
+  id: 'id',
+  ownerId: 'ownerId',
+  reference: 'reference',
+  name: 'name',
+  description: 'description',
+  purchasePrice: 'purchasePrice',
+  baseSalePrice: 'baseSalePrice',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CatalogProductScalarFieldEnum = (typeof CatalogProductScalarFieldEnum)[keyof typeof CatalogProductScalarFieldEnum]
+
+
+export const CatalogPriceRuleScalarFieldEnum = {
+  id: 'id',
+  catalogProductId: 'catalogProductId',
+  shopId: 'shopId',
+  salePrice: 'salePrice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CatalogPriceRuleScalarFieldEnum = (typeof CatalogPriceRuleScalarFieldEnum)[keyof typeof CatalogPriceRuleScalarFieldEnum]
 
 
 export const StockTransferScalarFieldEnum = {

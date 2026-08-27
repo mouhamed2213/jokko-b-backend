@@ -54,6 +54,7 @@ model Shop {
   purchaseReceipts        PurchaseReceipt[]
   outgoingTransfers       StockTransfer[]         @relation("TransferSourceShop")
   incomingTransfers       StockTransfer[]         @relation("TransferDestinationShop")
+  catalogPriceRules       CatalogPriceRule[]
 
   usageCounter UsageCounter[]
   owners       ShopOwner[]
@@ -177,6 +178,7 @@ model User {
   purchaseOrders      PurchaseOrder[]      @relation("PurchaseOrderCreator")
   purchaseReceipts    PurchaseReceipt[]    @relation("PurchaseReceiptReceiver")
   createdTransfers    StockTransfer[]      @relation("TransferCreator")
+  catalogProducts     CatalogProduct[]
 
   @@map("users")
 }
@@ -482,6 +484,42 @@ model StockMovement {
 }
 
 // ── Sale ──────────────────────────────────────────────────────
+model CatalogProduct {
+  id            Int      @id @default(autoincrement())
+  ownerId       Int
+  reference     String
+  name          String
+  description   String?
+  purchasePrice Float
+  baseSalePrice Float
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  owner  User               @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  prices CatalogPriceRule[]
+
+  @@unique([ownerId, reference])
+  @@index([ownerId, isActive])
+  @@map("catalog_products")
+}
+
+model CatalogPriceRule {
+  id               Int      @id @default(autoincrement())
+  catalogProductId Int
+  shopId           Int
+  salePrice        Float
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  catalogProduct CatalogProduct @relation(fields: [catalogProductId], references: [id], onDelete: Cascade)
+  shop           Shop           @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@unique([catalogProductId, shopId])
+  @@index([shopId])
+  @@map("catalog_price_rules")
+}
+
 model StockTransfer {
   id                Int       @id @default(autoincrement())
   sourceShopId      Int
