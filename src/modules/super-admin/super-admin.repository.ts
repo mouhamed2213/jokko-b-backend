@@ -225,6 +225,10 @@ export const SuperAdminRepository = {
       include: { plan: true, shop: { select: { id: true, name: true } } },
     }),
 
+  listPlans: () => prisma.plan.findMany({ orderBy: { price: "asc" }, select: { id: true, code: true, name: true, price: true, maxUsers: true, maxProducts: true, maxCustomers: true, maxSalesPerMonth: true, maxStores: true } }),
+
+  listGlobalAudit: () => prisma.auditLog.findMany({ orderBy: { createdAt: "desc" }, take: 100, select: { id: true, actorId: true, actorName: true, action: true, targetType: true, targetId: true, details: true, createdAt: true } }),
+
   platformStats: async (now: Date, expiryLimit: Date) => {
     const [
       totalShops,

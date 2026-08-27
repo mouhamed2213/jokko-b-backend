@@ -122,6 +122,10 @@ export const SuperAdminService = {
     };
   },
 
+  listPlans: async () => SuperAdminRepository.listPlans(),
+
+  listGlobalAudit: async () => SuperAdminRepository.listGlobalAudit(),
+
   getPlatformStats: async () => {
     const now = new Date();
     const expiryLimit = new Date(now);

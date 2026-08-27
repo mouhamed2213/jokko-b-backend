@@ -6,7 +6,9 @@ const router = Router();
 
 router.use(protectSuperAdmin);
 
-router.get("/stats", SuperAdminController.getStats);
+router.get("/stats", SuperAdminController.getPlatformStats);
+router.get("/plans", SuperAdminController.getPlans);
+router.get("/audit", SuperAdminController.getGlobalAudit);
 router.get("/shops", SuperAdminController.listShops);
 router.get("/shops/:id", SuperAdminController.getShopDetail);
 router.patch("/shops/:shopId/status", SuperAdminController.updateShopStatus);

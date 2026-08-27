@@ -14,7 +14,21 @@ const assertSuperAdmin = (req: AuthRequest) => {
 };
 
 export const SuperAdminController = {
-  getStats: async (req: AuthRequest, res: Response, next: NextFunction) => {
+  getPlans: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      assertSuperAdmin(req);
+      return res.status(200).json(await SuperAdminService.listPlans());
+    } catch (error) { next(error); }
+  },
+
+  getGlobalAudit: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      assertSuperAdmin(req);
+      return res.status(200).json(await SuperAdminService.listGlobalAudit());
+    } catch (error) { next(error); }
+  },
+
+  getPlatformStats: async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       assertSuperAdmin(req);
       return res.status(200).json(await SuperAdminService.getPlatformStats());
