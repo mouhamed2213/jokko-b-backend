@@ -13,7 +13,7 @@ import clientRoutes from "./modules/client/client.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
 import invoiceRoutes from "./routes/invoice.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
-import productRoutes from "./routes/product.routes.js";
+import productRoutes from "./modules/product/product.routes.js";
 import saleRoutes from "./routes/sale.routes.js";
 import saleReturnRoutes from "./modules/sale-return/sale-return.routes.js";
 import expenseRoutes from "./modules/expense/expense.routes.js";
