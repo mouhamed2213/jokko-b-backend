@@ -6,4 +6,5 @@ import { BackupController } from "./backup.controller.js";
 const router = Router();
 router.use(protect, authorizeRoles("ADMIN", "EMPLOYEE"), requirePermission("REPORTS_READ"));
 router.get("/export", BackupController.export);
+router.post("/restore-preview", BackupController.validateRestore);
 export default router;
