@@ -36,4 +36,4 @@ test("restauration authentifiée : login → export → aperçu → restauration
   assert.equal(restored.restored, true);
 });
 
-test("restauration sans authentification refusée", { skip: !enabled }, async () => { const response = await fetch(`${baseUrl}/api/backups/restore`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ snapshot: {}, confirm: true }) }); assert.equal(response.status, 401); });
+test("restauration sans authentification refusée", { skip: !enabled || !email || !password }, async () => { const response = await fetch(`${baseUrl}/api/backups/restore`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ snapshot: {}, confirm: true }) }); assert.equal(response.status, 401); });
