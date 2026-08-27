@@ -15,6 +15,16 @@ export const AdvancedReportController = {
     }
   },
 
+  consolidated: async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      if (!req.user) throw new UnauthorizedError("Token invalide ou expiré");
+      const query = AdvancedReportSchemas.query(req.query as Record<string, unknown>);
+      return res.status(200).json(await AdvancedReportService.getConsolidatedReport(req.user.ownerId, req.user.shopId, query));
+    } catch (error) {
+      next(error);
+    }
+  },
+
   exportCsv: async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
       if (!req.user) throw new UnauthorizedError("Token invalide ou expiré");
