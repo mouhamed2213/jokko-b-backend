@@ -3,7 +3,13 @@ import { prisma } from "../../config/prisma.js";
 export const SubscriptionRepository = {
   findCurrentByOwnerAndShop: async (shopOwnerId: number, shopId: number) => {
     return prisma.subscription.findFirst({
-      where: { shopOwnerId, shopId },
+      where: {
+        shopId,
+        OR: [
+          { shopOwnerId },
+          { shopOwner: { userId: shopOwnerId } },
+        ],
+      },
       include: {
         plan: {
           include: {
