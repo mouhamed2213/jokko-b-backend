@@ -29,6 +29,7 @@ import userRoutes from "./routes/user.routes.js";
 import purchaseOrderRoutes from "./modules/purchase-order/purchase-order.routes.js";
 import stockTransferRoutes from "./modules/stock-transfer/stock-transfer.routes.js";
 import catalogRoutes from "./modules/catalog/catalog.routes.js";
+import auditLogRoutes from "./modules/audit-log/audit-log.routes.js";
 import marginRoutes from "./modules/margin/margin.routes.js";
 import advancedReportRoutes from "./modules/advanced-report/advanced-report.routes.js";
 import { NotificationScheduler } from "./modules/notification/notification.scheduler.js";
@@ -73,6 +74,7 @@ app.use("/api/stock", stockRoutes);
 app.use("/api/purchase-orders", purchaseOrderRoutes);
 app.use("/api/stock-transfers", stockTransferRoutes);
 app.use("/api/catalog", catalogRoutes);
+app.use("/api/audit-logs", auditLogRoutes);
 app.use("/api/margins", marginRoutes);
 app.use("/api/advanced-reports", advancedReportRoutes);
 

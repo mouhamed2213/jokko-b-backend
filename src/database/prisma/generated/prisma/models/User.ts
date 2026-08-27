@@ -278,6 +278,7 @@ export type UserWhereInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptListRelationFilter
   createdTransfers?: Prisma.StockTransferListRelationFilter
   catalogProducts?: Prisma.CatalogProductListRelationFilter
+  businessAuditLogs?: Prisma.BusinessAuditLogListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -305,6 +306,7 @@ export type UserOrderByWithRelationInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptOrderByRelationAggregateInput
   createdTransfers?: Prisma.StockTransferOrderByRelationAggregateInput
   catalogProducts?: Prisma.CatalogProductOrderByRelationAggregateInput
+  businessAuditLogs?: Prisma.BusinessAuditLogOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -335,6 +337,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   purchaseReceipts?: Prisma.PurchaseReceiptListRelationFilter
   createdTransfers?: Prisma.StockTransferListRelationFilter
   catalogProducts?: Prisma.CatalogProductListRelationFilter
+  businessAuditLogs?: Prisma.BusinessAuditLogListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -394,6 +397,7 @@ export type UserCreateInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -420,6 +424,7 @@ export type UserUncheckedCreateInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserUpdateInput = {
@@ -445,6 +450,7 @@ export type UserUpdateInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -471,6 +477,7 @@ export type UserUncheckedUpdateInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -719,6 +726,22 @@ export type UserUpdateOneWithoutStockMovementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockMovementsInput, Prisma.UserUpdateWithoutStockMovementsInput>, Prisma.UserUncheckedUpdateWithoutStockMovementsInput>
 }
 
+export type UserCreateNestedOneWithoutBusinessAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBusinessAuditLogsInput, Prisma.UserUncheckedCreateWithoutBusinessAuditLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBusinessAuditLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutBusinessAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBusinessAuditLogsInput, Prisma.UserUncheckedCreateWithoutBusinessAuditLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBusinessAuditLogsInput
+  upsert?: Prisma.UserUpsertWithoutBusinessAuditLogsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBusinessAuditLogsInput, Prisma.UserUpdateWithoutBusinessAuditLogsInput>, Prisma.UserUncheckedUpdateWithoutBusinessAuditLogsInput>
+}
+
 export type UserCreateNestedOneWithoutCatalogProductsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCatalogProductsInput, Prisma.UserUncheckedCreateWithoutCatalogProductsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCatalogProductsInput
@@ -851,6 +874,7 @@ export type UserCreateWithoutShopInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutShopInput = {
@@ -876,6 +900,7 @@ export type UserUncheckedCreateWithoutShopInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutShopInput = {
@@ -942,6 +967,7 @@ export type UserCreateWithoutOwnedShopsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutOwnedShopsInput = {
@@ -967,6 +993,7 @@ export type UserUncheckedCreateWithoutOwnedShopsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutOwnedShopsInput = {
@@ -1007,6 +1034,7 @@ export type UserUpdateWithoutOwnedShopsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedShopsInput = {
@@ -1032,6 +1060,7 @@ export type UserUncheckedUpdateWithoutOwnedShopsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutPermissionOverridesInput = {
@@ -1056,6 +1085,7 @@ export type UserCreateWithoutPermissionOverridesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPermissionOverridesInput = {
@@ -1081,6 +1111,7 @@ export type UserUncheckedCreateWithoutPermissionOverridesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPermissionOverridesInput = {
@@ -1121,6 +1152,7 @@ export type UserUpdateWithoutPermissionOverridesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionOverridesInput = {
@@ -1146,6 +1178,7 @@ export type UserUncheckedUpdateWithoutPermissionOverridesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutRemindersInput = {
@@ -1170,6 +1203,7 @@ export type UserCreateWithoutRemindersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutRemindersInput = {
@@ -1195,6 +1229,7 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutRemindersInput = {
@@ -1235,6 +1270,7 @@ export type UserUpdateWithoutRemindersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemindersInput = {
@@ -1260,6 +1296,7 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutPurchaseOrdersInput = {
@@ -1284,6 +1321,7 @@ export type UserCreateWithoutPurchaseOrdersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -1309,6 +1347,7 @@ export type UserUncheckedCreateWithoutPurchaseOrdersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -1349,6 +1388,7 @@ export type UserUpdateWithoutPurchaseOrdersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -1374,6 +1414,7 @@ export type UserUncheckedUpdateWithoutPurchaseOrdersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutPurchaseReceiptsInput = {
@@ -1398,6 +1439,7 @@ export type UserCreateWithoutPurchaseReceiptsInput = {
   purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutPurchaseReceiptsInput = {
@@ -1423,6 +1465,7 @@ export type UserUncheckedCreateWithoutPurchaseReceiptsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutPurchaseReceiptsInput = {
@@ -1463,6 +1506,7 @@ export type UserUpdateWithoutPurchaseReceiptsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPurchaseReceiptsInput = {
@@ -1488,6 +1532,7 @@ export type UserUncheckedUpdateWithoutPurchaseReceiptsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutStockMovementsInput = {
@@ -1512,6 +1557,7 @@ export type UserCreateWithoutStockMovementsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutStockMovementsInput = {
@@ -1537,6 +1583,7 @@ export type UserUncheckedCreateWithoutStockMovementsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutStockMovementsInput = {
@@ -1577,6 +1624,7 @@ export type UserUpdateWithoutStockMovementsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStockMovementsInput = {
@@ -1591,6 +1639,125 @@ export type UserUncheckedUpdateWithoutStockMovementsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userCounts?: Prisma.IntFieldUpdateOperationsInput | number
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutUserNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
+  ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  reconciliations?: Prisma.CashReconciliationUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ClientReminderUncheckedUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
+  createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
+  catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
+}
+
+export type UserCreateWithoutBusinessAuditLogsInput = {
+  name: string
+  email: string
+  password: string
+  role?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userCounts?: number
+  shop: Prisma.ShopCreateNestedOneWithoutUsersInput
+  cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutUserInput
+  sales?: Prisma.SaleCreateNestedManyWithoutUserInput
+  ownedShops?: Prisma.ShopOwnerCreateNestedManyWithoutUserInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  reconciliations?: Prisma.CashReconciliationCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ClientReminderCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
+  purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
+  createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
+  catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+}
+
+export type UserUncheckedCreateWithoutBusinessAuditLogsInput = {
+  id?: number
+  shopId: number
+  name: string
+  email: string
+  password: string
+  role?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  userCounts?: number
+  cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutUserInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutUserInput
+  ownedShops?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutUserInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  reconciliations?: Prisma.CashReconciliationUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ClientReminderUncheckedCreateNestedManyWithoutUserInput
+  permissionOverrides?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
+  createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
+  catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type UserCreateOrConnectWithoutBusinessAuditLogsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBusinessAuditLogsInput, Prisma.UserUncheckedCreateWithoutBusinessAuditLogsInput>
+}
+
+export type UserUpsertWithoutBusinessAuditLogsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBusinessAuditLogsInput, Prisma.UserUncheckedUpdateWithoutBusinessAuditLogsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBusinessAuditLogsInput, Prisma.UserUncheckedCreateWithoutBusinessAuditLogsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBusinessAuditLogsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBusinessAuditLogsInput, Prisma.UserUncheckedUpdateWithoutBusinessAuditLogsInput>
+}
+
+export type UserUpdateWithoutBusinessAuditLogsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userCounts?: Prisma.IntFieldUpdateOperationsInput | number
+  shop?: Prisma.ShopUpdateOneRequiredWithoutUsersNestedInput
+  cashRegisters?: Prisma.CashRegisterUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutUserNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutUserNestedInput
+  ownedShops?: Prisma.ShopOwnerUpdateManyWithoutUserNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  reconciliations?: Prisma.CashReconciliationUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ClientReminderUpdateManyWithoutUserNestedInput
+  permissionOverrides?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
+  purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
+  createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
+  catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBusinessAuditLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  shopId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userCounts?: Prisma.IntFieldUpdateOperationsInput | number
+  cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutUserNestedInput
   sales?: Prisma.SaleUncheckedUpdateManyWithoutUserNestedInput
   ownedShops?: Prisma.ShopOwnerUncheckedUpdateManyWithoutUserNestedInput
   saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutUserNestedInput
@@ -1626,6 +1793,7 @@ export type UserCreateWithoutCatalogProductsInput = {
   purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutCatalogProductsInput = {
@@ -1651,6 +1819,7 @@ export type UserUncheckedCreateWithoutCatalogProductsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutCatalogProductsInput = {
@@ -1691,6 +1860,7 @@ export type UserUpdateWithoutCatalogProductsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCatalogProductsInput = {
@@ -1716,6 +1886,7 @@ export type UserUncheckedUpdateWithoutCatalogProductsInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutCreatedTransfersInput = {
@@ -1740,6 +1911,7 @@ export type UserCreateWithoutCreatedTransfersInput = {
   purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutCreatedByInput
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutCreatedTransfersInput = {
@@ -1765,6 +1937,7 @@ export type UserUncheckedCreateWithoutCreatedTransfersInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutCreatedByInput
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutCreatedTransfersInput = {
@@ -1805,6 +1978,7 @@ export type UserUpdateWithoutCreatedTransfersInput = {
   purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutCreatedByNestedInput
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedTransfersInput = {
@@ -1830,6 +2004,7 @@ export type UserUncheckedUpdateWithoutCreatedTransfersInput = {
   purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutCreatedByNestedInput
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutSalesInput = {
@@ -1854,6 +2029,7 @@ export type UserCreateWithoutSalesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutSalesInput = {
@@ -1879,6 +2055,7 @@ export type UserUncheckedCreateWithoutSalesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutSalesInput = {
@@ -1919,6 +2096,7 @@ export type UserUpdateWithoutSalesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSalesInput = {
@@ -1944,6 +2122,7 @@ export type UserUncheckedUpdateWithoutSalesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutSaleReturnsInput = {
@@ -1968,6 +2147,7 @@ export type UserCreateWithoutSaleReturnsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutSaleReturnsInput = {
@@ -1993,6 +2173,7 @@ export type UserUncheckedCreateWithoutSaleReturnsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutSaleReturnsInput = {
@@ -2033,6 +2214,7 @@ export type UserUpdateWithoutSaleReturnsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSaleReturnsInput = {
@@ -2058,6 +2240,7 @@ export type UserUncheckedUpdateWithoutSaleReturnsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutCashRegistersInput = {
@@ -2082,6 +2265,7 @@ export type UserCreateWithoutCashRegistersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutCashRegistersInput = {
@@ -2107,6 +2291,7 @@ export type UserUncheckedCreateWithoutCashRegistersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutCashRegistersInput = {
@@ -2147,6 +2332,7 @@ export type UserUpdateWithoutCashRegistersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCashRegistersInput = {
@@ -2172,6 +2358,7 @@ export type UserUncheckedUpdateWithoutCashRegistersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutReconciliationsInput = {
@@ -2196,6 +2383,7 @@ export type UserCreateWithoutReconciliationsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutReconciliationsInput = {
@@ -2221,6 +2409,7 @@ export type UserUncheckedCreateWithoutReconciliationsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutReconciliationsInput = {
@@ -2261,6 +2450,7 @@ export type UserUpdateWithoutReconciliationsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReconciliationsInput = {
@@ -2286,6 +2476,7 @@ export type UserUncheckedUpdateWithoutReconciliationsInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateWithoutExpensesInput = {
@@ -2310,6 +2501,7 @@ export type UserCreateWithoutExpensesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutActorInput
 }
 
 export type UserUncheckedCreateWithoutExpensesInput = {
@@ -2335,6 +2527,7 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutUserInput
   createdTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutCreatedByInput
   catalogProducts?: Prisma.CatalogProductUncheckedCreateNestedManyWithoutOwnerInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutActorInput
 }
 
 export type UserCreateOrConnectWithoutExpensesInput = {
@@ -2375,6 +2568,7 @@ export type UserUpdateWithoutExpensesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExpensesInput = {
@@ -2400,6 +2594,7 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserCreateManyShopInput = {
@@ -2436,6 +2631,7 @@ export type UserUpdateWithoutShopInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutShopInput = {
@@ -2461,6 +2657,7 @@ export type UserUncheckedUpdateWithoutShopInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutUserNestedInput
   createdTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutCreatedByNestedInput
   catalogProducts?: Prisma.CatalogProductUncheckedUpdateManyWithoutOwnerNestedInput
+  businessAuditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutActorNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutShopInput = {
@@ -2494,6 +2691,7 @@ export type UserCountOutputType = {
   purchaseReceipts: number
   createdTransfers: number
   catalogProducts: number
+  businessAuditLogs: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2510,6 +2708,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   purchaseReceipts?: boolean | UserCountOutputTypeCountPurchaseReceiptsArgs
   createdTransfers?: boolean | UserCountOutputTypeCountCreatedTransfersArgs
   catalogProducts?: boolean | UserCountOutputTypeCountCatalogProductsArgs
+  businessAuditLogs?: boolean | UserCountOutputTypeCountBusinessAuditLogsArgs
 }
 
 /**
@@ -2613,6 +2812,13 @@ export type UserCountOutputTypeCountCatalogProductsArgs<ExtArgs extends runtime.
   where?: Prisma.CatalogProductWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBusinessAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BusinessAuditLogWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2639,6 +2845,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   purchaseReceipts?: boolean | Prisma.User$purchaseReceiptsArgs<ExtArgs>
   createdTransfers?: boolean | Prisma.User$createdTransfersArgs<ExtArgs>
   catalogProducts?: boolean | Prisma.User$catalogProductsArgs<ExtArgs>
+  businessAuditLogs?: boolean | Prisma.User$businessAuditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2699,6 +2906,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   purchaseReceipts?: boolean | Prisma.User$purchaseReceiptsArgs<ExtArgs>
   createdTransfers?: boolean | Prisma.User$createdTransfersArgs<ExtArgs>
   catalogProducts?: boolean | Prisma.User$catalogProductsArgs<ExtArgs>
+  businessAuditLogs?: boolean | Prisma.User$businessAuditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2725,6 +2933,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     purchaseReceipts: Prisma.$PurchaseReceiptPayload<ExtArgs>[]
     createdTransfers: Prisma.$StockTransferPayload<ExtArgs>[]
     catalogProducts: Prisma.$CatalogProductPayload<ExtArgs>[]
+    businessAuditLogs: Prisma.$BusinessAuditLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -3145,6 +3354,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   purchaseReceipts<T extends Prisma.User$purchaseReceiptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$purchaseReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdTransfers<T extends Prisma.User$createdTransfersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTransfersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   catalogProducts<T extends Prisma.User$catalogProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$catalogProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CatalogProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  businessAuditLogs<T extends Prisma.User$businessAuditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$businessAuditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessAuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3894,6 +4104,30 @@ export type User$catalogProductsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.CatalogProductScalarFieldEnum | Prisma.CatalogProductScalarFieldEnum[]
+}
+
+/**
+ * User.businessAuditLogs
+ */
+export type User$businessAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BusinessAuditLog
+   */
+  select?: Prisma.BusinessAuditLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BusinessAuditLog
+   */
+  omit?: Prisma.BusinessAuditLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BusinessAuditLogInclude<ExtArgs> | null
+  where?: Prisma.BusinessAuditLogWhereInput
+  orderBy?: Prisma.BusinessAuditLogOrderByWithRelationInput | Prisma.BusinessAuditLogOrderByWithRelationInput[]
+  cursor?: Prisma.BusinessAuditLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BusinessAuditLogScalarFieldEnum | Prisma.BusinessAuditLogScalarFieldEnum[]
 }
 
 /**

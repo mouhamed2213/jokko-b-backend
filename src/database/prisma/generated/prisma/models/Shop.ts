@@ -298,6 +298,7 @@ export type ShopWhereInput = {
   outgoingTransfers?: Prisma.StockTransferListRelationFilter
   incomingTransfers?: Prisma.StockTransferListRelationFilter
   catalogPriceRules?: Prisma.CatalogPriceRuleListRelationFilter
+  auditLogs?: Prisma.BusinessAuditLogListRelationFilter
   usageCounter?: Prisma.UsageCounterListRelationFilter
   owners?: Prisma.ShopOwnerListRelationFilter
 }
@@ -337,6 +338,7 @@ export type ShopOrderByWithRelationInput = {
   outgoingTransfers?: Prisma.StockTransferOrderByRelationAggregateInput
   incomingTransfers?: Prisma.StockTransferOrderByRelationAggregateInput
   catalogPriceRules?: Prisma.CatalogPriceRuleOrderByRelationAggregateInput
+  auditLogs?: Prisma.BusinessAuditLogOrderByRelationAggregateInput
   usageCounter?: Prisma.UsageCounterOrderByRelationAggregateInput
   owners?: Prisma.ShopOwnerOrderByRelationAggregateInput
 }
@@ -379,6 +381,7 @@ export type ShopWhereUniqueInput = Prisma.AtLeast<{
   outgoingTransfers?: Prisma.StockTransferListRelationFilter
   incomingTransfers?: Prisma.StockTransferListRelationFilter
   catalogPriceRules?: Prisma.CatalogPriceRuleListRelationFilter
+  auditLogs?: Prisma.BusinessAuditLogListRelationFilter
   usageCounter?: Prisma.UsageCounterListRelationFilter
   owners?: Prisma.ShopOwnerListRelationFilter
 }, "id" | "email">
@@ -454,6 +457,7 @@ export type ShopCreateInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -492,6 +496,7 @@ export type ShopUncheckedCreateInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -529,6 +534,7 @@ export type ShopUpdateInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -567,6 +573,7 @@ export type ShopUncheckedUpdateInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -959,6 +966,20 @@ export type ShopUpdateOneRequiredWithoutStockMovementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ShopUpdateToOneWithWhereWithoutStockMovementsInput, Prisma.ShopUpdateWithoutStockMovementsInput>, Prisma.ShopUncheckedUpdateWithoutStockMovementsInput>
 }
 
+export type ShopCreateNestedOneWithoutAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.ShopCreateWithoutAuditLogsInput, Prisma.ShopUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.ShopCreateOrConnectWithoutAuditLogsInput
+  connect?: Prisma.ShopWhereUniqueInput
+}
+
+export type ShopUpdateOneRequiredWithoutAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.ShopCreateWithoutAuditLogsInput, Prisma.ShopUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.ShopCreateOrConnectWithoutAuditLogsInput
+  upsert?: Prisma.ShopUpsertWithoutAuditLogsInput
+  connect?: Prisma.ShopWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ShopUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.ShopUpdateWithoutAuditLogsInput>, Prisma.ShopUncheckedUpdateWithoutAuditLogsInput>
+}
+
 export type ShopCreateNestedOneWithoutCatalogPriceRulesInput = {
   create?: Prisma.XOR<Prisma.ShopCreateWithoutCatalogPriceRulesInput, Prisma.ShopUncheckedCreateWithoutCatalogPriceRulesInput>
   connectOrCreate?: Prisma.ShopCreateOrConnectWithoutCatalogPriceRulesInput
@@ -1103,6 +1124,7 @@ export type ShopCreateWithoutSecondaryShopsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1140,6 +1162,7 @@ export type ShopUncheckedCreateWithoutSecondaryShopsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1181,6 +1204,7 @@ export type ShopCreateWithoutPrimaryShopInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1218,6 +1242,7 @@ export type ShopUncheckedCreateWithoutPrimaryShopInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1275,6 +1300,7 @@ export type ShopUpdateWithoutSecondaryShopsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1312,6 +1338,7 @@ export type ShopUncheckedUpdateWithoutSecondaryShopsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -1383,6 +1410,7 @@ export type ShopCreateWithoutOwnersInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
 }
 
@@ -1420,6 +1448,7 @@ export type ShopUncheckedCreateWithoutOwnersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
 }
 
@@ -1472,6 +1501,7 @@ export type ShopUpdateWithoutOwnersInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
 }
 
@@ -1509,6 +1539,7 @@ export type ShopUncheckedUpdateWithoutOwnersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
 }
 
@@ -1544,6 +1575,7 @@ export type ShopCreateWithoutSubscriptionsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1581,6 +1613,7 @@ export type ShopUncheckedCreateWithoutSubscriptionsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1633,6 +1666,7 @@ export type ShopUpdateWithoutSubscriptionsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1670,6 +1704,7 @@ export type ShopUncheckedUpdateWithoutSubscriptionsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -1707,6 +1742,7 @@ export type ShopCreateWithoutUsageCounterInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
 
@@ -1744,6 +1780,7 @@ export type ShopUncheckedCreateWithoutUsageCounterInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
 
@@ -1796,6 +1833,7 @@ export type ShopUpdateWithoutUsageCounterInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
 
@@ -1833,6 +1871,7 @@ export type ShopUncheckedUpdateWithoutUsageCounterInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
 
@@ -1868,6 +1907,7 @@ export type ShopCreateWithoutUsersInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -1905,6 +1945,7 @@ export type ShopUncheckedCreateWithoutUsersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -1957,6 +1998,7 @@ export type ShopUpdateWithoutUsersInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -1994,6 +2036,7 @@ export type ShopUncheckedUpdateWithoutUsersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2030,6 +2073,7 @@ export type ShopCreateWithoutCategoriesInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2067,6 +2111,7 @@ export type ShopUncheckedCreateWithoutCategoriesInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2119,6 +2164,7 @@ export type ShopUpdateWithoutCategoriesInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2156,6 +2202,7 @@ export type ShopUncheckedUpdateWithoutCategoriesInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2192,6 +2239,7 @@ export type ShopCreateWithoutProductsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2229,6 +2277,7 @@ export type ShopUncheckedCreateWithoutProductsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2281,6 +2330,7 @@ export type ShopUpdateWithoutProductsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2318,6 +2368,7 @@ export type ShopUncheckedUpdateWithoutProductsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2354,6 +2405,7 @@ export type ShopCreateWithoutClientsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2391,6 +2443,7 @@ export type ShopUncheckedCreateWithoutClientsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2443,6 +2496,7 @@ export type ShopUpdateWithoutClientsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2480,6 +2534,7 @@ export type ShopUncheckedUpdateWithoutClientsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2516,6 +2571,7 @@ export type ShopCreateWithoutClientRemindersInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2553,6 +2609,7 @@ export type ShopUncheckedCreateWithoutClientRemindersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2605,6 +2662,7 @@ export type ShopUpdateWithoutClientRemindersInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2642,6 +2700,7 @@ export type ShopUncheckedUpdateWithoutClientRemindersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2678,6 +2737,7 @@ export type ShopCreateWithoutNotificationPreferencesInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2715,6 +2775,7 @@ export type ShopUncheckedCreateWithoutNotificationPreferencesInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2767,6 +2828,7 @@ export type ShopUpdateWithoutNotificationPreferencesInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2804,6 +2866,7 @@ export type ShopUncheckedUpdateWithoutNotificationPreferencesInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -2840,6 +2903,7 @@ export type ShopCreateWithoutNotificationsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -2877,6 +2941,7 @@ export type ShopUncheckedCreateWithoutNotificationsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -2929,6 +2994,7 @@ export type ShopUpdateWithoutNotificationsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -2966,6 +3032,7 @@ export type ShopUncheckedUpdateWithoutNotificationsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -3002,6 +3069,7 @@ export type ShopCreateWithoutSuppliersInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -3039,6 +3107,7 @@ export type ShopUncheckedCreateWithoutSuppliersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -3091,6 +3160,7 @@ export type ShopUpdateWithoutSuppliersInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -3128,6 +3198,7 @@ export type ShopUncheckedUpdateWithoutSuppliersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -3164,6 +3235,7 @@ export type ShopCreateWithoutPurchaseOrdersInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -3201,6 +3273,7 @@ export type ShopUncheckedCreateWithoutPurchaseOrdersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -3253,6 +3326,7 @@ export type ShopUpdateWithoutPurchaseOrdersInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -3290,6 +3364,7 @@ export type ShopUncheckedUpdateWithoutPurchaseOrdersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -3326,6 +3401,7 @@ export type ShopCreateWithoutPurchaseReceiptsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -3363,6 +3439,7 @@ export type ShopUncheckedCreateWithoutPurchaseReceiptsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -3415,6 +3492,7 @@ export type ShopUpdateWithoutPurchaseReceiptsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -3452,6 +3530,7 @@ export type ShopUncheckedUpdateWithoutPurchaseReceiptsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -3488,6 +3567,7 @@ export type ShopCreateWithoutStockMovementsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -3525,6 +3605,7 @@ export type ShopUncheckedCreateWithoutStockMovementsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -3577,6 +3658,7 @@ export type ShopUpdateWithoutStockMovementsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -3601,6 +3683,173 @@ export type ShopUncheckedUpdateWithoutStockMovementsInput = {
   clients?: Prisma.ClientUncheckedUpdateManyWithoutShopNestedInput
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutShopNestedInput
   sales?: Prisma.SaleUncheckedUpdateManyWithoutShopNestedInput
+  cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutShopNestedInput
+  reconciliations?: Prisma.CashReconciliationUncheckedUpdateManyWithoutShopNestedInput
+  clientReminders?: Prisma.ClientReminderUncheckedUpdateManyWithoutShopNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutShopNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutShopNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedUpdateManyWithoutShopNestedInput
+  purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutShopNestedInput
+  outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
+  incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
+  catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
+  usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
+  owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
+}
+
+export type ShopCreateWithoutAuditLogsInput = {
+  name: string
+  ownerName: string
+  email: string
+  phone: string
+  address?: string | null
+  logoUrl?: string | null
+  status?: string
+  currentShop?: $Enums.CurrentShopType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  primaryShop?: Prisma.ShopCreateNestedOneWithoutSecondaryShopsInput
+  secondaryShops?: Prisma.ShopCreateNestedManyWithoutPrimaryShopInput
+  users?: Prisma.UserCreateNestedManyWithoutShopInput
+  products?: Prisma.ProductCreateNestedManyWithoutShopInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutShopInput
+  clients?: Prisma.ClientCreateNestedManyWithoutShopInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutShopInput
+  sales?: Prisma.SaleCreateNestedManyWithoutShopInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutShopInput
+  cashRegisters?: Prisma.CashRegisterCreateNestedManyWithoutShopInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnCreateNestedManyWithoutShopInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutShopInput
+  reconciliations?: Prisma.CashReconciliationCreateNestedManyWithoutShopInput
+  clientReminders?: Prisma.ClientReminderCreateNestedManyWithoutShopInput
+  notificationPreferences?: Prisma.NotificationPreferenceCreateNestedOneWithoutShopInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutShopInput
+  purchaseOrders?: Prisma.PurchaseOrderCreateNestedManyWithoutShopInput
+  purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutShopInput
+  outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
+  incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
+  catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
+  owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
+}
+
+export type ShopUncheckedCreateWithoutAuditLogsInput = {
+  id?: number
+  name: string
+  ownerName: string
+  email: string
+  phone: string
+  address?: string | null
+  logoUrl?: string | null
+  primaryShopId?: number | null
+  status?: string
+  currentShop?: $Enums.CurrentShopType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  secondaryShops?: Prisma.ShopUncheckedCreateNestedManyWithoutPrimaryShopInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutShopInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutShopInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutShopInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutShopInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutShopInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutShopInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutShopInput
+  cashRegisters?: Prisma.CashRegisterUncheckedCreateNestedManyWithoutShopInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutShopInput
+  saleReturns?: Prisma.SaleReturnUncheckedCreateNestedManyWithoutShopInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutShopInput
+  reconciliations?: Prisma.CashReconciliationUncheckedCreateNestedManyWithoutShopInput
+  clientReminders?: Prisma.ClientReminderUncheckedCreateNestedManyWithoutShopInput
+  notificationPreferences?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutShopInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutShopInput
+  purchaseOrders?: Prisma.PurchaseOrderUncheckedCreateNestedManyWithoutShopInput
+  purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutShopInput
+  outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
+  incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
+  catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
+  owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
+}
+
+export type ShopCreateOrConnectWithoutAuditLogsInput = {
+  where: Prisma.ShopWhereUniqueInput
+  create: Prisma.XOR<Prisma.ShopCreateWithoutAuditLogsInput, Prisma.ShopUncheckedCreateWithoutAuditLogsInput>
+}
+
+export type ShopUpsertWithoutAuditLogsInput = {
+  update: Prisma.XOR<Prisma.ShopUpdateWithoutAuditLogsInput, Prisma.ShopUncheckedUpdateWithoutAuditLogsInput>
+  create: Prisma.XOR<Prisma.ShopCreateWithoutAuditLogsInput, Prisma.ShopUncheckedCreateWithoutAuditLogsInput>
+  where?: Prisma.ShopWhereInput
+}
+
+export type ShopUpdateToOneWithWhereWithoutAuditLogsInput = {
+  where?: Prisma.ShopWhereInput
+  data: Prisma.XOR<Prisma.ShopUpdateWithoutAuditLogsInput, Prisma.ShopUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type ShopUpdateWithoutAuditLogsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  currentShop?: Prisma.EnumCurrentShopTypeFieldUpdateOperationsInput | $Enums.CurrentShopType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  primaryShop?: Prisma.ShopUpdateOneWithoutSecondaryShopsNestedInput
+  secondaryShops?: Prisma.ShopUpdateManyWithoutPrimaryShopNestedInput
+  users?: Prisma.UserUpdateManyWithoutShopNestedInput
+  products?: Prisma.ProductUpdateManyWithoutShopNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutShopNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutShopNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutShopNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutShopNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutShopNestedInput
+  cashRegisters?: Prisma.CashRegisterUpdateManyWithoutShopNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutShopNestedInput
+  saleReturns?: Prisma.SaleReturnUpdateManyWithoutShopNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutShopNestedInput
+  reconciliations?: Prisma.CashReconciliationUpdateManyWithoutShopNestedInput
+  clientReminders?: Prisma.ClientReminderUpdateManyWithoutShopNestedInput
+  notificationPreferences?: Prisma.NotificationPreferenceUpdateOneWithoutShopNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutShopNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderUpdateManyWithoutShopNestedInput
+  purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutShopNestedInput
+  outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
+  incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
+  catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
+  owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
+}
+
+export type ShopUncheckedUpdateWithoutAuditLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryShopId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  currentShop?: Prisma.EnumCurrentShopTypeFieldUpdateOperationsInput | $Enums.CurrentShopType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  secondaryShops?: Prisma.ShopUncheckedUpdateManyWithoutPrimaryShopNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutShopNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutShopNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutShopNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutShopNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutShopNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutShopNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutShopNestedInput
   cashRegisters?: Prisma.CashRegisterUncheckedUpdateManyWithoutShopNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutShopNestedInput
   saleReturns?: Prisma.SaleReturnUncheckedUpdateManyWithoutShopNestedInput
@@ -3650,6 +3899,7 @@ export type ShopCreateWithoutCatalogPriceRulesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutShopInput
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -3687,6 +3937,7 @@ export type ShopUncheckedCreateWithoutCatalogPriceRulesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutShopInput
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -3739,6 +3990,7 @@ export type ShopUpdateWithoutCatalogPriceRulesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutShopNestedInput
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -3776,6 +4028,7 @@ export type ShopUncheckedUpdateWithoutCatalogPriceRulesInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutShopNestedInput
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -3812,6 +4065,7 @@ export type ShopCreateWithoutOutgoingTransfersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -3849,6 +4103,7 @@ export type ShopUncheckedCreateWithoutOutgoingTransfersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -3890,6 +4145,7 @@ export type ShopCreateWithoutIncomingTransfersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptCreateNestedManyWithoutShopInput
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -3927,6 +4183,7 @@ export type ShopUncheckedCreateWithoutIncomingTransfersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedCreateNestedManyWithoutShopInput
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -3979,6 +4236,7 @@ export type ShopUpdateWithoutOutgoingTransfersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -4016,6 +4274,7 @@ export type ShopUncheckedUpdateWithoutOutgoingTransfersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -4063,6 +4322,7 @@ export type ShopUpdateWithoutIncomingTransfersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUpdateManyWithoutShopNestedInput
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -4100,6 +4360,7 @@ export type ShopUncheckedUpdateWithoutIncomingTransfersInput = {
   purchaseReceipts?: Prisma.PurchaseReceiptUncheckedUpdateManyWithoutShopNestedInput
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -4136,6 +4397,7 @@ export type ShopCreateWithoutSalesInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -4173,6 +4435,7 @@ export type ShopUncheckedCreateWithoutSalesInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -4225,6 +4488,7 @@ export type ShopUpdateWithoutSalesInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -4262,6 +4526,7 @@ export type ShopUncheckedUpdateWithoutSalesInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -4298,6 +4563,7 @@ export type ShopCreateWithoutSaleReturnsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -4335,6 +4601,7 @@ export type ShopUncheckedCreateWithoutSaleReturnsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -4387,6 +4654,7 @@ export type ShopUpdateWithoutSaleReturnsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -4424,6 +4692,7 @@ export type ShopUncheckedUpdateWithoutSaleReturnsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -4460,6 +4729,7 @@ export type ShopCreateWithoutCashRegistersInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -4497,6 +4767,7 @@ export type ShopUncheckedCreateWithoutCashRegistersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -4549,6 +4820,7 @@ export type ShopUpdateWithoutCashRegistersInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -4586,6 +4858,7 @@ export type ShopUncheckedUpdateWithoutCashRegistersInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -4622,6 +4895,7 @@ export type ShopCreateWithoutReconciliationsInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -4659,6 +4933,7 @@ export type ShopUncheckedCreateWithoutReconciliationsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -4711,6 +4986,7 @@ export type ShopUpdateWithoutReconciliationsInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -4748,6 +5024,7 @@ export type ShopUncheckedUpdateWithoutReconciliationsInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -4784,6 +5061,7 @@ export type ShopCreateWithoutExpensesInput = {
   outgoingTransfers?: Prisma.StockTransferCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerCreateNestedManyWithoutShopInput
 }
@@ -4821,6 +5099,7 @@ export type ShopUncheckedCreateWithoutExpensesInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutSourceShopInput
   incomingTransfers?: Prisma.StockTransferUncheckedCreateNestedManyWithoutDestinationShopInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedCreateNestedManyWithoutShopInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedCreateNestedManyWithoutShopInput
   usageCounter?: Prisma.UsageCounterUncheckedCreateNestedManyWithoutShopInput
   owners?: Prisma.ShopOwnerUncheckedCreateNestedManyWithoutShopInput
 }
@@ -4873,6 +5152,7 @@ export type ShopUpdateWithoutExpensesInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -4910,6 +5190,7 @@ export type ShopUncheckedUpdateWithoutExpensesInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -4960,6 +5241,7 @@ export type ShopUpdateWithoutPrimaryShopInput = {
   outgoingTransfers?: Prisma.StockTransferUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUpdateManyWithoutShopNestedInput
 }
@@ -4997,6 +5279,7 @@ export type ShopUncheckedUpdateWithoutPrimaryShopInput = {
   outgoingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutSourceShopNestedInput
   incomingTransfers?: Prisma.StockTransferUncheckedUpdateManyWithoutDestinationShopNestedInput
   catalogPriceRules?: Prisma.CatalogPriceRuleUncheckedUpdateManyWithoutShopNestedInput
+  auditLogs?: Prisma.BusinessAuditLogUncheckedUpdateManyWithoutShopNestedInput
   usageCounter?: Prisma.UsageCounterUncheckedUpdateManyWithoutShopNestedInput
   owners?: Prisma.ShopOwnerUncheckedUpdateManyWithoutShopNestedInput
 }
@@ -5041,6 +5324,7 @@ export type ShopCountOutputType = {
   outgoingTransfers: number
   incomingTransfers: number
   catalogPriceRules: number
+  auditLogs: number
   usageCounter: number
   owners: number
 }
@@ -5066,6 +5350,7 @@ export type ShopCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   outgoingTransfers?: boolean | ShopCountOutputTypeCountOutgoingTransfersArgs
   incomingTransfers?: boolean | ShopCountOutputTypeCountIncomingTransfersArgs
   catalogPriceRules?: boolean | ShopCountOutputTypeCountCatalogPriceRulesArgs
+  auditLogs?: boolean | ShopCountOutputTypeCountAuditLogsArgs
   usageCounter?: boolean | ShopCountOutputTypeCountUsageCounterArgs
   owners?: boolean | ShopCountOutputTypeCountOwnersArgs
 }
@@ -5223,6 +5508,13 @@ export type ShopCountOutputTypeCountCatalogPriceRulesArgs<ExtArgs extends runtim
 /**
  * ShopCountOutputType without action
  */
+export type ShopCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BusinessAuditLogWhereInput
+}
+
+/**
+ * ShopCountOutputType without action
+ */
 export type ShopCountOutputTypeCountUsageCounterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UsageCounterWhereInput
 }
@@ -5270,6 +5562,7 @@ export type ShopSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   outgoingTransfers?: boolean | Prisma.Shop$outgoingTransfersArgs<ExtArgs>
   incomingTransfers?: boolean | Prisma.Shop$incomingTransfersArgs<ExtArgs>
   catalogPriceRules?: boolean | Prisma.Shop$catalogPriceRulesArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.Shop$auditLogsArgs<ExtArgs>
   usageCounter?: boolean | Prisma.Shop$usageCounterArgs<ExtArgs>
   owners?: boolean | Prisma.Shop$ownersArgs<ExtArgs>
   _count?: boolean | Prisma.ShopCountOutputTypeDefaultArgs<ExtArgs>
@@ -5346,6 +5639,7 @@ export type ShopInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   outgoingTransfers?: boolean | Prisma.Shop$outgoingTransfersArgs<ExtArgs>
   incomingTransfers?: boolean | Prisma.Shop$incomingTransfersArgs<ExtArgs>
   catalogPriceRules?: boolean | Prisma.Shop$catalogPriceRulesArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.Shop$auditLogsArgs<ExtArgs>
   usageCounter?: boolean | Prisma.Shop$usageCounterArgs<ExtArgs>
   owners?: boolean | Prisma.Shop$ownersArgs<ExtArgs>
   _count?: boolean | Prisma.ShopCountOutputTypeDefaultArgs<ExtArgs>
@@ -5382,6 +5676,7 @@ export type $ShopPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     outgoingTransfers: Prisma.$StockTransferPayload<ExtArgs>[]
     incomingTransfers: Prisma.$StockTransferPayload<ExtArgs>[]
     catalogPriceRules: Prisma.$CatalogPriceRulePayload<ExtArgs>[]
+    auditLogs: Prisma.$BusinessAuditLogPayload<ExtArgs>[]
     usageCounter: Prisma.$UsageCounterPayload<ExtArgs>[]
     owners: Prisma.$ShopOwnerPayload<ExtArgs>[]
   }
@@ -5814,6 +6109,7 @@ export interface Prisma__ShopClient<T, Null = never, ExtArgs extends runtime.Typ
   outgoingTransfers<T extends Prisma.Shop$outgoingTransfersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$outgoingTransfersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   incomingTransfers<T extends Prisma.Shop$incomingTransfersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$incomingTransfersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   catalogPriceRules<T extends Prisma.Shop$catalogPriceRulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$catalogPriceRulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CatalogPriceRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  auditLogs<T extends Prisma.Shop$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BusinessAuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usageCounter<T extends Prisma.Shop$usageCounterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$usageCounterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsageCounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   owners<T extends Prisma.Shop$ownersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Shop$ownersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShopOwnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -6773,6 +7069,30 @@ export type Shop$catalogPriceRulesArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.CatalogPriceRuleScalarFieldEnum | Prisma.CatalogPriceRuleScalarFieldEnum[]
+}
+
+/**
+ * Shop.auditLogs
+ */
+export type Shop$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BusinessAuditLog
+   */
+  select?: Prisma.BusinessAuditLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BusinessAuditLog
+   */
+  omit?: Prisma.BusinessAuditLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BusinessAuditLogInclude<ExtArgs> | null
+  where?: Prisma.BusinessAuditLogWhereInput
+  orderBy?: Prisma.BusinessAuditLogOrderByWithRelationInput | Prisma.BusinessAuditLogOrderByWithRelationInput[]
+  cursor?: Prisma.BusinessAuditLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BusinessAuditLogScalarFieldEnum | Prisma.BusinessAuditLogScalarFieldEnum[]
 }
 
 /**

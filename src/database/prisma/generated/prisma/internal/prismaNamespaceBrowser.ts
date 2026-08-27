@@ -75,6 +75,7 @@ export const ModelName = {
   SupplierDebt: 'SupplierDebt',
   SupplierPayment: 'SupplierPayment',
   StockMovement: 'StockMovement',
+  BusinessAuditLog: 'BusinessAuditLog',
   CatalogProduct: 'CatalogProduct',
   CatalogPriceRule: 'CatalogPriceRule',
   StockTransfer: 'StockTransfer',
@@ -457,6 +458,20 @@ export const StockMovementScalarFieldEnum = {
 } as const
 
 export type StockMovementScalarFieldEnum = (typeof StockMovementScalarFieldEnum)[keyof typeof StockMovementScalarFieldEnum]
+
+
+export const BusinessAuditLogScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  actorId: 'actorId',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type BusinessAuditLogScalarFieldEnum = (typeof BusinessAuditLogScalarFieldEnum)[keyof typeof BusinessAuditLogScalarFieldEnum]
 
 
 export const CatalogProductScalarFieldEnum = {

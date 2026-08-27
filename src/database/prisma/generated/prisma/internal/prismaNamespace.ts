@@ -421,6 +421,7 @@ export const ModelName = {
   SupplierDebt: 'SupplierDebt',
   SupplierPayment: 'SupplierPayment',
   StockMovement: 'StockMovement',
+  BusinessAuditLog: 'BusinessAuditLog',
   CatalogProduct: 'CatalogProduct',
   CatalogPriceRule: 'CatalogPriceRule',
   StockTransfer: 'StockTransfer',
@@ -451,7 +452,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "catalogProduct" | "catalogPriceRule" | "stockTransfer" | "stockTransferItem" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
+    modelProps: "superAdmin" | "shop" | "shopOwner" | "subscription" | "plan" | "feature" | "planFeature" | "usageCounter" | "user" | "userPermission" | "category" | "product" | "client" | "clientReminder" | "notificationPreference" | "notification" | "supplier" | "purchaseOrder" | "purchaseOrderItem" | "purchaseReceipt" | "purchaseReceiptItem" | "supplierDebt" | "supplierPayment" | "stockMovement" | "businessAuditLog" | "catalogProduct" | "catalogPriceRule" | "stockTransfer" | "stockTransferItem" | "sale" | "saleItem" | "salePayment" | "saleReturn" | "saleReturnItem" | "cashRegister" | "cashReconciliation" | "cashTransaction" | "expense" | "payment" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2231,6 +2232,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BusinessAuditLog: {
+      payload: Prisma.$BusinessAuditLogPayload<ExtArgs>
+      fields: Prisma.BusinessAuditLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BusinessAuditLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BusinessAuditLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>
+        }
+        findFirst: {
+          args: Prisma.BusinessAuditLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BusinessAuditLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>
+        }
+        findMany: {
+          args: Prisma.BusinessAuditLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>[]
+        }
+        create: {
+          args: Prisma.BusinessAuditLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>
+        }
+        createMany: {
+          args: Prisma.BusinessAuditLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BusinessAuditLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>[]
+        }
+        delete: {
+          args: Prisma.BusinessAuditLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>
+        }
+        update: {
+          args: Prisma.BusinessAuditLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.BusinessAuditLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BusinessAuditLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BusinessAuditLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.BusinessAuditLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BusinessAuditLogPayload>
+        }
+        aggregate: {
+          args: Prisma.BusinessAuditLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBusinessAuditLog>
+        }
+        groupBy: {
+          args: Prisma.BusinessAuditLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessAuditLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BusinessAuditLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BusinessAuditLogCountAggregateOutputType> | number
+        }
+      }
+    }
     CatalogProduct: {
       payload: Prisma.$CatalogProductPayload<ExtArgs>
       fields: Prisma.CatalogProductFieldRefs
@@ -3731,6 +3806,20 @@ export const StockMovementScalarFieldEnum = {
 export type StockMovementScalarFieldEnum = (typeof StockMovementScalarFieldEnum)[keyof typeof StockMovementScalarFieldEnum]
 
 
+export const BusinessAuditLogScalarFieldEnum = {
+  id: 'id',
+  shopId: 'shopId',
+  actorId: 'actorId',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type BusinessAuditLogScalarFieldEnum = (typeof BusinessAuditLogScalarFieldEnum)[keyof typeof BusinessAuditLogScalarFieldEnum]
+
+
 export const CatalogProductScalarFieldEnum = {
   id: 'id',
   ownerId: 'ownerId',
@@ -4394,6 +4483,7 @@ export type GlobalOmitConfig = {
   supplierDebt?: Prisma.SupplierDebtOmit
   supplierPayment?: Prisma.SupplierPaymentOmit
   stockMovement?: Prisma.StockMovementOmit
+  businessAuditLog?: Prisma.BusinessAuditLogOmit
   catalogProduct?: Prisma.CatalogProductOmit
   catalogPriceRule?: Prisma.CatalogPriceRuleOmit
   stockTransfer?: Prisma.StockTransferOmit

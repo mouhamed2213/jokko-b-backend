@@ -162,6 +162,11 @@ export type SupplierPayment = Prisma.SupplierPaymentModel
  */
 export type StockMovement = Prisma.StockMovementModel
 /**
+ * Model BusinessAuditLog
+ * 
+ */
+export type BusinessAuditLog = Prisma.BusinessAuditLogModel
+/**
  * Model CatalogProduct
  * 
  */

@@ -55,6 +55,7 @@ model Shop {
   outgoingTransfers       StockTransfer[]         @relation("TransferSourceShop")
   incomingTransfers       StockTransfer[]         @relation("TransferDestinationShop")
   catalogPriceRules       CatalogPriceRule[]
+  auditLogs               BusinessAuditLog[]
 
   usageCounter UsageCounter[]
   owners       ShopOwner[]
@@ -179,6 +180,7 @@ model User {
   purchaseReceipts    PurchaseReceipt[]    @relation("PurchaseReceiptReceiver")
   createdTransfers    StockTransfer[]      @relation("TransferCreator")
   catalogProducts     CatalogProduct[]
+  businessAuditLogs   BusinessAuditLog[]
 
   @@map("users")
 }
@@ -484,6 +486,24 @@ model StockMovement {
 }
 
 // ── Sale ──────────────────────────────────────────────────────
+model BusinessAuditLog {
+  id         Int      @id @default(autoincrement())
+  shopId     Int
+  actorId    Int?
+  action     String
+  entityType String
+  entityId   Int?
+  details    Json?
+  createdAt  DateTime @default(now())
+
+  shop  Shop  @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([shopId, createdAt])
+  @@index([shopId, action, createdAt])
+  @@map("business_audit_logs")
+}
+
 model CatalogProduct {
   id            Int      @id @default(autoincrement())
   ownerId       Int

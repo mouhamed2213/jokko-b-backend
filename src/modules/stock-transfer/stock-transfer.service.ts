@@ -13,6 +13,7 @@ const assertPremiumFeature = async (ownerId: number, shopId: number) => {
 };
 
 const reference = () => `TR-${Date.now()}-${randomUUID().slice(0, 8).toUpperCase()}`;
+const audit = (shopId: number, actorId: number, action: string, entityId: number, details?: object) => prisma.businessAuditLog.create({ data: { shopId, actorId, action, entityType: "StockTransfer", entityId, details } });
 
 export const StockTransferService = {
   list: async (ownerId: number, shopId: number, query: StockTransferListQueryDto) => {
@@ -64,7 +65,7 @@ export const StockTransferService = {
       }
       resolvedItems.push({ sourceProductId: source.id, destinationProductId: destination.id, quantity: item.quantity, productName: source.name });
     }
-    return StockTransferRepository.create({
+    const transfer = await StockTransferRepository.create({
       sourceShopId: shopId,
       destinationShopId: data.destinationShopId,
       createdById: userId,
@@ -72,6 +73,8 @@ export const StockTransferService = {
       note: data.note,
       items: resolvedItems,
     });
+    await audit(shopId, userId, "CREATE_STOCK_TRANSFER", transfer.id, { destinationShopId: data.destinationShopId, itemCount: data.items.length });
+    return transfer;
   },
 
   ship: async (ownerId: number, shopId: number, id: number) => {
@@ -87,6 +90,7 @@ export const StockTransferService = {
       }
       await db.stockTransfer.update({ where: { id }, data: { status: "SHIPPED", shippedAt: new Date() } });
     });
+    await audit(shopId, ownerId, "SHIP_STOCK_TRANSFER", id);
     return StockTransferRepository.findById(id);
   },
 
@@ -102,6 +106,7 @@ export const StockTransferService = {
       }
       await db.stockTransfer.update({ where: { id }, data: { status: "RECEIVED", receivedAt: new Date() } });
     });
+    await audit(shopId, ownerId, "RECEIVE_STOCK_TRANSFER", id);
     return StockTransferRepository.findById(id);
   },
 
@@ -110,6 +115,8 @@ export const StockTransferService = {
     const transfer = await StockTransferRepository.findById(id);
     if (!transfer || transfer.sourceShopId !== shopId) throw new NotFoundError("Transfert introuvable");
     if (transfer.status !== "DRAFT") throw new BadRequestError("Seul un transfert brouillon peut être annulé");
-    return prisma.stockTransfer.update({ where: { id }, data: { status: "CANCELLED" }, include: { items: true } });
+    const cancelled = await prisma.stockTransfer.update({ where: { id }, data: { status: "CANCELLED" }, include: { items: true } });
+    await audit(shopId, ownerId, "CANCEL_STOCK_TRANSFER", id);
+    return cancelled;
   },
 };
