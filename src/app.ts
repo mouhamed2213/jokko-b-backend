@@ -35,7 +35,16 @@ import advancedReportRoutes from "./modules/advanced-report/advanced-report.rout
 export const createApp = () => {
   const app = express();
   app.use(express.json({ limit: "2mb" }));
-  app.use(cors({ origin: env.frontendUrl, credentials: true }));
+  app.use(cors({
+    credentials: true,
+    origin: (origin, callback) => {
+      if (!origin || env.corsOrigins.length === 0 || env.corsOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(new Error("CORS origin not allowed"));
+    },
+  }));
   app.use(
     morgan(env.mode === "production" ? "combined" : "dev", {
       stream: morganStream,
@@ -45,6 +54,9 @@ export const createApp = () => {
   app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
   app.get("/", (_req: Request, res: Response) =>
     res.json({ message: "Jokko Business API v1.0", status: "running" }),
+  );
+  app.get("/api/health", (_req: Request, res: Response) =>
+    res.status(200).json({ status: "ok", service: "jokko-business-api" }),
   );
   app.use("/api/auth", authRoutes);
   app.use("/api/super-admin", superAdminRoutes);
