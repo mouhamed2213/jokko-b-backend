@@ -132,10 +132,7 @@ export const ClientService = {
   ) => {
     const ownership = await assertOwner(ownerId, shopId);
     const subscription = await PlanChecker.plan(shopId, ownership.id);
-    if (
-      ["EXPIRED", "SUSPENDED", "TRIAL_EXPIRED"].includes(subscription.status) ||
-      subscription.plan.code === "FREE"
-    ) {
+    if (["EXPIRED", "SUSPENDED", "TRIAL_EXPIRED"].includes(subscription.status)) {
       throw new ForbiddenError("Opération non autorisée");
     }
 
